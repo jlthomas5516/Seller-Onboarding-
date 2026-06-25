@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CipherHealth — AE Onboarding Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Merriweather:ital,opsz,wght@0,18..144,400;0,18..144,500;1,18..144,400;1,18..144,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F2F1F9; --cream-alt:#E9E7F5; --cream-deep:#DEDAF0; --paper:#FFFFFF;
+  --ink:#2D2660; --ink-2:#3A3450; --ink-3:#4A4458; --ink-4:#8580A0;
+  --aubergine:#5B4FB5; --aubergine-dim:#6E63C0; --rust:#00B4A4; --taupe:#8580A0;
+  --teal:#00B4A4; --chartreuse:#B5CC2E; --amber:#E8A020; --violet:#5B4FB5; --anchor:#2D2660;
+  --hairline:#E0DCF0; --hairline-soft:#ECEAF7;
+  --maxw:1180px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:84px}
+body{margin:0; background:var(--cream); color:var(--ink);
+  font-family:'Inter',system-ui,sans-serif; font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;}
+.display{font-family:'Inter',system-ui,sans-serif; font-optical-sizing:auto; letter-spacing:-0.015em; line-height:1.08;}
+.mono{font-family:'Inter',system-ui,sans-serif;}
+.micro{font-family:'Inter',system-ui,sans-serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-4);}
+a{color:var(--aubergine); text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0}
+p{margin:0 0 1rem 0}
+
+/* layout */
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px}
+.shell{display:grid; grid-template-columns:236px 1fr; gap:0; max-width:1320px; margin:0 auto}
+
+/* top bar */
+.topbar{position:sticky; top:0; z-index:60; background:rgba(250,247,242,0.92);
+  backdrop-filter:saturate(150%) blur(10px); -webkit-backdrop-filter:saturate(150%) blur(10px);
+  border-bottom:1px solid var(--hairline-soft);}
+.topbar .row{display:flex; align-items:center; justify-content:space-between; height:60px; max-width:1320px; margin:0 auto; padding:0 28px}
+.brandlock{display:flex; align-items:center; gap:11px}
+.mark{width:26px; height:26px; border-radius:6px; background:var(--aubergine); color:#fff;
+  display:grid; place-items:center; font-family:'Inter',system-ui,sans-serif; font-weight:600; font-size:16px}
+.brandlock b{font-family:'Inter',system-ui,sans-serif; font-weight:600; font-size:18px; letter-spacing:-0.01em}
+.brandlock span{color:var(--ink-4); font-size:13px; border-left:1px solid var(--hairline); padding-left:11px; margin-left:3px}
+.tag{font-family:'Inter',system-ui,sans-serif; font-size:10px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--rust); border:1px solid var(--rust); border-radius:100px; padding:4px 10px}
+
+/* side nav */
+.sidenav{position:sticky; top:60px; align-self:start; height:calc(100vh - 60px); overflow-y:auto;
+  border-right:1px solid var(--hairline-soft); padding:30px 20px 40px 28px}
+.sidenav .lead{font-family:'Inter',system-ui,sans-serif; font-size:10px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-4); margin:0 0 14px}
+.sidenav a{display:flex; gap:11px; align-items:baseline; padding:7px 0; color:var(--ink-3); font-size:14.5px; line-height:1.35; border:none}
+.sidenav a:hover{color:var(--aubergine); text-decoration:none}
+.sidenav a .n{font-family:'Inter',system-ui,sans-serif; font-size:11px; color:var(--ink-4); width:20px; flex:none}
+.sidenav a.is-active{color:var(--ink); font-weight:600}
+.sidenav a.is-active .n{color:var(--rust)}
+.sidenav .grp{margin-top:22px}
+
+main{min-width:0; padding-bottom:90px}
+section{scroll-margin-top:76px; padding:64px 0 8px; border-top:1px solid var(--hairline-soft)}
+section:first-of-type{border-top:none}
+.eyebrow{display:flex; align-items:center; gap:12px; margin-bottom:18px}
+.eyebrow .num{font-family:'Inter',system-ui,sans-serif; font-size:13px; color:var(--rust)}
+.eyebrow .lbl{font-family:'Inter',system-ui,sans-serif; font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:var(--ink-4)}
+.eyebrow .line{height:1px; background:var(--hairline); flex:1}
+h2.sec{font-size:34px; font-weight:500; margin-bottom:14px; max-width:20ch}
+.lede{font-size:19px; color:var(--ink-2); max-width:62ch; margin-bottom:26px}
+
+/* hero */
+.hero{padding:74px 0 58px; border-top:none}
+.hero .kicker{font-family:'Inter',system-ui,sans-serif; font-size:12px; letter-spacing:0.2em; text-transform:uppercase; color:var(--rust); margin-bottom:22px}
+.hero h1{font-size:clamp(40px,6vw,68px); font-weight:600; margin-bottom:8px}
+.hero h1 em{font-family:'Merriweather',Georgia,serif; font-weight:500; font-style:italic; letter-spacing:-0.01em; color:var(--violet)}
+.hero .sub{font-size:21px; color:var(--ink-2); max-width:54ch; margin:20px 0 30px}
+.pos{background:var(--ink); color:var(--cream); border-radius:16px; padding:30px 32px; max-width:760px}
+.pos .micro{color:#B9B2E0}
+.pos p{font-family:'Inter',system-ui,sans-serif; font-size:22px; line-height:1.42; margin:10px 0 0; font-weight:400}
+.pos p b{color:var(--teal); font-weight:600}
+.herometa{display:flex; flex-wrap:wrap; gap:10px; margin-top:24px}
+.chip{font-size:13px; background:var(--paper); border:1px solid var(--hairline); border-radius:100px; padding:7px 15px; color:var(--ink-2)}
+.chip b{color:var(--rust)}
+
+/* moat stats */
+.statband{display:grid; grid-template-columns:repeat(4,1fr); gap:0; border:1px solid var(--hairline); border-radius:14px; overflow:hidden; background:var(--paper); margin:22px 0 6px}
+.statband div{padding:22px 20px; border-right:1px solid var(--hairline-soft)}
+.statband div:last-child{border-right:none}
+.statband .v{font-family:'Inter',system-ui,sans-serif; font-size:30px; color:var(--aubergine); line-height:1}
+.statband .k{font-size:13px; color:var(--ink-3); margin-top:8px}
+
+/* generic cards */
+.cards{display:grid; gap:16px; margin:8px 0 6px}
+.c2{grid-template-columns:1fr 1fr}
+.c3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--paper); border:1px solid var(--hairline); border-radius:14px; padding:22px 22px}
+.card h3{font-family:'Inter',system-ui,sans-serif; font-size:20px; font-weight:500; margin-bottom:8px}
+.card h3 .pin{font-family:'Inter',system-ui,sans-serif; font-size:11px; color:var(--rust); display:block; letter-spacing:0.12em; text-transform:uppercase; margin-bottom:5px; font-weight:500}
+.card p{font-size:15px; color:var(--ink-2); margin-bottom:0}
+.card ul{margin:10px 0 0; padding-left:18px}
+.card li{font-size:14.5px; color:var(--ink-2); margin-bottom:6px}
+.kv{font-size:14px; color:var(--ink-3)}
+.kv b{color:var(--ink)}
+
+/* attribute hierarchy */
+.attr{display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:center; background:var(--paper); border:1px solid var(--hairline); border-radius:12px; padding:18px 22px; margin-bottom:10px}
+.attr .ord{font-family:'Inter',system-ui,sans-serif; font-size:30px; color:var(--cream-deep)}
+.attr h3{font-family:'Inter',system-ui,sans-serif; font-weight:500; font-size:19px}
+.attr p{font-size:14.5px; color:var(--ink-3); margin:4px 0 0}
+.attr .role{font-family:'Inter',system-ui,sans-serif; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--rust); white-space:nowrap; text-align:right}
+@media(max-width:640px){.attr{grid-template-columns:auto 1fr} .attr .role{grid-column:2; text-align:left}}
+
+/* continuum */
+.continuum{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--hairline); border-radius:14px; overflow:hidden; margin:6px 0}
+.continuum .ph{padding:20px 22px; border-right:1px solid var(--hairline-soft); background:var(--paper)}
+.continuum .ph:last-child{border-right:none}
+.continuum .ph .micro{color:var(--rust); margin-bottom:8px}
+.continuum .ph b{display:block; font-family:'Inter',system-ui,sans-serif; font-weight:500; font-size:17px; margin-bottom:6px}
+.continuum .ph span{font-size:13.5px; color:var(--ink-3)}
+
+/* proof repository */
+.filterbar{display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 18px}
+.fbtn{font-family:'Inter',system-ui,sans-serif; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+  background:var(--paper); border:1px solid var(--hairline); border-radius:100px; padding:8px 14px; cursor:pointer; color:var(--ink-3)}
+.fbtn:hover{border-color:var(--aubergine-dim); color:var(--aubergine)}
+.fbtn.on{background:var(--aubergine); color:#fff; border-color:var(--aubergine)}
+.prooflist{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.proof{background:var(--paper); border:1px solid var(--hairline); border-radius:12px; padding:18px 18px; display:flex; flex-direction:column}
+.proof .stat{font-family:'Inter',system-ui,sans-serif; font-size:27px; color:var(--rust); line-height:1.05}
+.proof .ctx{font-size:13.5px; color:var(--ink-2); margin:8px 0 12px; flex:1}
+.proof .cust{font-family:'Inter',system-ui,sans-serif; font-size:11px; letter-spacing:0.06em; color:var(--ink-4); border-top:1px solid var(--hairline-soft); padding-top:10px}
+.proof .cat{font-family:'Inter',system-ui,sans-serif; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--aubergine-dim); margin-bottom:8px}
+
+/* plays */
+.play{background:var(--paper); border:1px solid var(--hairline); border-radius:14px; padding:0; overflow:hidden; margin-bottom:14px}
+.play summary{list-style:none; cursor:pointer; padding:20px 22px; display:flex; align-items:center; gap:14px}
+.play summary::-webkit-details-marker{display:none}
+.play summary .t{font-family:'Inter',system-ui,sans-serif; font-size:19px; font-weight:500; flex:1}
+.play summary .when{font-size:13px; color:var(--ink-4); display:none}
+@media(min-width:760px){.play summary .when{display:block}}
+.play summary .caret{transition:transform .2s; color:var(--ink-4)}
+.play[open] summary .caret{transform:rotate(90deg)}
+.play .body{padding:2px 22px 22px; border-top:1px solid var(--hairline-soft)}
+.play .body .grid{display:grid; grid-template-columns:1fr 1fr; gap:18px 28px; margin-top:16px}
+.play .body .grid .micro{margin-bottom:6px; color:var(--aubergine-dim)}
+.play .body .grid p{font-size:14.5px; color:var(--ink-2)}
+@media(max-width:640px){.play .body .grid{grid-template-columns:1fr}}
+
+/* personas */
+.persona{background:var(--paper); border:1px solid var(--hairline); border-radius:14px; padding:22px}
+.persona .role{font-family:'Inter',system-ui,sans-serif; font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:var(--rust)}
+.persona h3{font-family:'Inter',system-ui,sans-serif; font-size:21px; font-weight:500; margin:5px 0 12px}
+.persona .blk{margin-bottom:11px}
+.persona .blk .micro{color:var(--ink-4); margin-bottom:3px}
+.persona .blk p,.persona .blk li{font-size:14px; color:var(--ink-2); margin:0}
+.persona .blk ul{margin:0; padding-left:17px}
+.persona .blk li{margin-bottom:3px}
+.persona .obj{background:var(--cream-alt); border-radius:9px; padding:11px 13px; font-size:13.5px}
+.persona .obj b{color:var(--rust)}
+
+/* calculator */
+.calc{display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--hairline); border-radius:16px; overflow:hidden; background:var(--paper)}
+.calc .inputs{padding:26px 26px; border-right:1px solid var(--hairline-soft)}
+.calc .out{padding:26px 26px; background:var(--ink); color:var(--cream)}
+.field{margin-bottom:16px}
+.field label{display:block; font-size:13px; color:var(--ink-3); margin-bottom:6px}
+.field input{width:100%; font-family:'Inter',system-ui,sans-serif; font-size:16px; padding:10px 12px; border:1px solid var(--hairline); border-radius:8px; background:var(--cream); color:var(--ink)}
+.field input:focus{outline:2px solid var(--aubergine-dim); outline-offset:1px; border-color:var(--aubergine)}
+.out .micro{color:#B9B2E0}
+.out .big{font-family:'Inter',system-ui,sans-serif; font-size:44px; color:#fff; line-height:1.05; margin:6px 0 2px}
+.out .big.rust{color:#B5CC2E}
+.out .row2{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:22px; border-top:1px solid rgba(255,255,255,0.14); padding-top:18px}
+.out .row2 .v{font-family:'Inter',system-ui,sans-serif; font-size:24px; color:#fff}
+.out .row2 .k{font-size:12.5px; color:#c9bcd6; margin-top:3px}
+@media(max-width:640px){.calc{grid-template-columns:1fr} .calc .inputs{border-right:none; border-bottom:1px solid var(--hairline-soft)}}
+
+/* course table */
+.week{margin-bottom:22px}
+.week h3{font-family:'Inter',system-ui,sans-serif; font-size:22px; font-weight:500; margin-bottom:4px}
+.week .wsub{font-size:14px; color:var(--ink-3); margin-bottom:14px}
+.daygrid{display:grid; grid-template-columns:repeat(5,1fr); gap:10px}
+.day{background:var(--paper); border:1px solid var(--hairline); border-radius:12px; padding:15px 14px}
+.day .d{font-family:'Inter',system-ui,sans-serif; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--rust); margin-bottom:7px}
+.day .th{font-family:'Inter',system-ui,sans-serif; font-size:16px; font-weight:500; margin-bottom:8px; line-height:1.2}
+.day ul{margin:0; padding-left:15px}
+.day li{font-size:12.5px; color:var(--ink-2); margin-bottom:4px; line-height:1.35}
+@media(max-width:900px){.daygrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.daygrid{grid-template-columns:1fr}}
+
+/* misc */
+.note{font-size:13px; color:var(--ink-4); border-left:2px solid var(--hairline); padding:4px 0 4px 14px; margin:14px 0}
+.cta{display:inline-block; background:var(--aubergine); color:#fff; padding:11px 20px; border-radius:9px; font-size:15px; font-weight:500; margin-top:6px}
+.cta:hover{background:var(--aubergine-dim); text-decoration:none}
+.foot{border-top:1px solid var(--hairline-soft); margin-top:40px; padding:30px 0 10px; color:var(--ink-4); font-size:13px}
+@media(max-width:980px){
+  .shell{grid-template-columns:1fr}
+  .sidenav{display:none}
+  .statband{grid-template-columns:repeat(2,1fr)}
+  .c2,.c3{grid-template-columns:1fr}
+  .prooflist{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){.prooflist{grid-template-columns:1fr} .statband{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important; transition:none!important}}
+:focus-visible{outline:2px solid var(--aubergine); outline-offset:2px}
+.brandlock a{display:flex;align-items:center;gap:11px;color:inherit}.brandlock a:hover{text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="row">
+    <div class="brandlock">
+      <a href="index.html"><span class="mark">C</span><b>CipherHealth</b><span>AE Academy</span></a>
+    </div>
+    <span class="tag">Internal · Confidential</span>
+  </div>
+</div>
+
+<div class="shell">
+  <nav class="sidenav" aria-label="Module index">
+    <p class="lead">The Library</p>
+    <a href="#m0"><span class="n">00</span> Who We Are / What We Do</a>
+    <a href="#m1"><span class="n">01</span> Strategic Discovery</a>
+    <a href="#m2"><span class="n">02</span> Customer Stories</a>
+    <a href="#m3"><span class="n">03</span> Solution Plays</a>
+    <a href="#m4"><span class="n">04</span> Ideal Customer Profile</a>
+    <a href="#m5"><span class="n">05</span> Persona Map</a>
+    <a href="#m6"><span class="n">06</span> Clinical Advisory &amp; Teams</a>
+    <a href="#m7"><span class="n">07</span> ROI Tools</a>
+    <a href="#m8"><span class="n">08</span> Challenger Selling</a>
+    <a href="#m9"><span class="n">09</span> Epic &amp; EHR Integration</a>
+    <a href="#m10"><span class="n">10</span> The 2026 Pitch</a>
+    <a href="#m11"><span class="n">11</span> Competing with Epic</a>
+    <div class="grp">
+      <p class="lead">Full playbooks</p>
+      <a href="playbooks/01.html"><span class="n">01</span> Positioning & Company</a>
+      <a href="playbooks/02.html"><span class="n">02</span> Discovery</a>
+      <a href="playbooks/03.html"><span class="n">03</span> Customer Proof</a>
+      <a href="playbooks/04.html"><span class="n">04</span> Solution Plays</a>
+      <a href="playbooks/05.html"><span class="n">05</span> Buyer: ICP & Personas</a>
+      <a href="playbooks/06.html"><span class="n">06</span> Clinical Advisory & Support</a>
+      <a href="playbooks/07.html"><span class="n">07</span> ROI & Value Case</a>
+      <a href="playbooks/08.html"><span class="n">08</span> Clinical Program Plays</a>
+      <a href="playbooks/09.html"><span class="n">09</span> Challenger Selling</a>
+      <a href="playbooks/10.html"><span class="n">10</span> Epic & EHR Integration</a>
+      <a href="playbooks/11.html"><span class="n">11</span> The 2026 Pitch</a>
+      <a href="playbooks/12.html"><span class="n">12</span> Competing with Epic</a>
+    </div>
+    <div class="grp">
+      <p class="lead">Ramp</p>
+      <a href="#course"><span class="n">▶</span> The AE Ramp (flexible)</a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="wrap">
+
+      <!-- HERO -->
+      <header class="hero" id="top">
+        <div class="kicker">AE Onboarding · 2026 · Speed Through Simplicity</div>
+        <h1 class="display">Sell the <em>infrastructure</em>,<br>not the feature.</h1>
+        <p class="sub">Everything a new CipherHealth account executive needs to carry a conversation with a health-system C-suite — the story, the proof, the plays, and the people behind you.</p>
+        <div class="pos">
+          <div class="micro">The position — memorize it</div>
+          <p>CipherHealth is the only <b>care coordination infrastructure</b> with AI purpose-built for healthcare, embedded in clinically validated workflows, and powered by <b>15+ years of outcomes data</b> that no competitor can replicate.</p>
+        </div>
+        <div class="herometa">
+          <span class="chip">Methodology: <b>Challenger</b> — diagnose, reframe, teach</span>
+          <span class="chip">Open with <b>proof</b>, not product</span>
+          <span class="chip">Land ~<b>$75K</b> → expand to <b>$250–400K</b></span>
+        </div>
+      </header>
+
+      <!-- 00 FOUNDATION -->
+      <section id="m0">
+        <div class="eyebrow"><span class="num">00</span><span class="lbl">Foundation</span><span class="line"></span></div>
+        <h2 class="sec display">Who we are, and what we actually do</h2>
+        <p class="lede">Since 2009, CipherHealth has helped define the patient-engagement category. Today we sell one thing: the coordination layer that makes the care a health system already promised actually happen — every shift, every unit, every patient.</p>
+
+        <div class="cards c3">
+          <div class="card"><h3 class="display">CipherOutreach</h3><p>Proactive, multi-channel, multi-language engagement across the full pre- and post-encounter window — appointment prep, care-gap and population programs, post-discharge follow-up, and Conversational AI with live transfer to a nurse.</p></div>
+          <div class="card"><h3 class="display">CipherRounds</h3><p>Digital patient, staff, and location rounding with real-time service recovery, safety capture, staff recognition, and ambient listening that keeps documentation off the nurse.</p></div>
+          <div class="card"><h3 class="display">The Platform</h3><p>Bidirectional Epic/Cerner/Meditech integration, enterprise security (HITRUST, SOC 2 Type 2, HIPAA, TX-RAMP), AI Solutions, and analytics that tie every touchpoint to HCAHPS, readmissions, and PROMs.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 12px">The four attributes — a hierarchy, not a feature list</h3>
+        <div class="attr"><div class="ord">01</div><div><h3>AI purpose-built for healthcare</h3><p>Embedded in the workflows they already run. No new login, no syncing. Longitudinal and context-aware — runs on EMR, interaction, and experience data together.</p></div><div class="role">The position · door opener</div></div>
+        <div class="attr"><div class="ord">02</div><div><h3>Product depth &amp; clinical expertise</h3><p>15+ years of scripts and escalation paths built by frontline nurses. Clinical programs, not templates. Clinical partnership, not a services add-on.</p></div><div class="role">What makes it credible · the closer</div></div>
+        <div class="attr"><div class="ord">03</div><div><h3>Data no one else has</h3><p>1B+ real patient encounters across hundreds of systems, turned into a replicable playbook. Evidence — not recommendations. You cannot buy 15 years.</p></div><div class="role">What makes it defensible · the moat</div></div>
+        <div class="attr"><div class="ord">04</div><div><h3>Full continuum of care</h3><p>Pre-admission through post-discharge, plus the care team around it. We hold both Outreach and Rounding data — no other vendor sits in all three phases.</p></div><div class="role">The full picture · no one else sees this</div></div>
+
+        <div class="statband">
+          <div><div class="v">1B+</div><div class="k">Patient encounters</div></div>
+          <div><div class="v">200M+</div><div class="k">Interactions tracked start→resolution</div></div>
+          <div><div class="v">17M</div><div class="k">Documented patient saves</div></div>
+          <div><div class="v">15+</div><div class="k">Years of outcomes data</div></div>
+        </div>
+        <p class="note">Leave the room saying this: “AI built for healthcare, clinical programs refined over 15 years, and the outcomes data to back every recommendation. No other vendor has all three.”</p>
+      </section>
+
+      <!-- 01 DISCOVERY -->
+      <section id="m1">
+        <div class="eyebrow"><span class="num">01</span><span class="lbl">Strategic Discovery</span><span class="line"></span></div>
+        <h2 class="sec display">Questions that diagnose before they pitch</h2>
+        <p class="lede">The arc never changes: understand the process → find the friction → establish urgency → earn the next step. Open with a proof point tied to their exact pressure, then ask. Control of the conversation comes from better questions, not a better demo.</p>
+
+        <div class="cards c2">
+          <div class="card"><h3 class="display"><span class="pin">The core seven</span>Run this in order</h3>
+            <ul>
+              <li><b>Process:</b> Walk me through how care coordination works today — rounding, discharge, post-discharge follow-up.</li>
+              <li><b>Friction:</b> Where does it tend to break down or get hard to do consistently?</li>
+              <li><b>Friction:</b> How much still relies on manual work, staff memory, or individual consistency?</li>
+              <li><b>Friction:</b> Are you focused mainly on high-risk patients today, or trying to cover broader populations?</li>
+              <li><b>Urgency:</b> What's getting the most leadership attention — readmissions, staffing, throughput, experience, reimbursement, TEAM?</li>
+              <li><b>Urgency:</b> Is there a specific initiative or mandate driving this conversation?</li>
+              <li><b>Next step:</b> It sounds like there's opportunity around [pain] — does it make sense to bring in a workflow specialist to show how peers approach it?</li>
+            </ul>
+          </div>
+          <div class="card"><h3 class="display"><span class="pin">Challenger layer</span>Reframe &amp; teach</h3>
+            <ul>
+              <li>“Most systems can <b>document</b> care. Far fewer can <b>execute</b> it. Where does intent turn into action breaking down for you?”</li>
+              <li>“What does a missed post-discharge follow-up actually cost you — in readmission risk, in penalty exposure, in staff time?”</li>
+              <li>“If you looked across every facility, would the workflow execute the same way? What varies?”</li>
+              <li>“Where would reducing administrative burden create the biggest clinical impact?”</li>
+              <li>“What's the cost of waiting on the EHR roadmap versus solving this now?”</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:26px 0 12px">Ask the question that matches the seat</h3>
+        <div class="cards c3">
+          <div class="card"><p class="kv"><b>CNO / CNIO</b> — “How confident are you that every discharged patient gets the intended follow-up — and how would you know if they didn't?”</p></div>
+          <div class="card"><p class="kv"><b>CFO</b> — “Where are you carrying penalty exposure or leaving TCM / appointment revenue on the table today?”</p></div>
+          <div class="card"><p class="kv"><b>CIO</b> — “How much IT lift do new patient-communication programs take today, and how does that compete with your roadmap?”</p></div>
+          <div class="card"><p class="kv"><b>CMO</b> — “How are you closing care gaps and confirming discharge comprehension across the medical staff?”</p></div>
+          <div class="card"><p class="kv"><b>COO</b> — “Where do throughput and service recovery slow down because issues surface too late?”</p></div>
+          <div class="card"><p class="kv"><b>CEO</b> — “Three years out, what has to be true about how this system coordinates care — and what's blocking it now?”</p></div>
+        </div>
+        <p class="note">Source playbooks refreshed into this module: SDR Discovery Framework (5–7), TEAM/CSM Discovery Toolkit, and the Strategic Deal Management imperatives.</p>
+      </section>
+
+      <!-- 02 STORIES -->
+      <section id="m2">
+        <div class="eyebrow"><span class="num">02</span><span class="lbl">Customer Stories</span><span class="line"></span></div>
+        <h2 class="sec display">The proof library, organized by what they care about</h2>
+        <p class="lede">Filter to the outcome your prospect leads with. Every number below is a real, customer-observed result — lead with the one that maps to their CMS cohort or their boardroom pressure, then earn the right to talk product.</p>
+
+        <div class="filterbar" role="tablist">
+          <button class="fbtn on" data-f="all">All</button>
+          <button class="fbtn" data-f="readmit">Readmissions &amp; financial</button>
+          <button class="fbtn" data-f="hcahps">Experience / HCAHPS</button>
+          <button class="fbtn" data-f="safety">Safety &amp; harm</button>
+          <button class="fbtn" data-f="staff">Staff capacity</button>
+          <button class="fbtn" data-f="access">Access &amp; no-shows</button>
+        </div>
+
+        <div class="prooflist" id="prooflist">
+          <!-- readmissions -->
+          <div class="proof" data-c="readmit"><div class="cat">Readmissions · Financial</div><div class="stat">$15M</div><div class="ctx">Savings from a post-discharge follow-up program — “greater patient satisfaction, lower readmissions, significant financial impact.”</div><div class="cust">Intermountain Health</div></div>
+          <div class="proof" data-c="readmit"><div class="cat">Readmissions · Financial</div><div class="stat">41%</div><div class="ctx">Drop in 30-day readmissions (14.2% → 8.36%); ~$2M impact; 39K patients reached.</div><div class="cust">Intermountain Health</div></div>
+          <div class="proof" data-c="readmit"><div class="cat">Readmissions · Pediatric</div><div class="stat">36%</div><div class="ctx">Decrease in pediatric readmissions; $6.9M annual savings; 2,700+ inpatient days avoided.</div><div class="cust">Seattle Children's</div></div>
+          <div class="proof" data-c="readmit"><div class="cat">Readmissions</div><div class="stat">32%</div><div class="ctx">Decrease in overall readmissions; ~3,300 prevented annually.</div><div class="cust">Community Health Network</div></div>
+          <div class="proof" data-c="readmit"><div class="cat">Readmissions · CHF</div><div class="stat">13.1%</div><div class="ctx">Decrease in CHF 30-day readmissions in the first two months of a High-Risk outreach program.</div><div class="cust">NorCal Health System</div></div>
+          <div class="proof" data-c="readmit"><div class="cat">Readmissions</div><div class="stat">3.4×</div><div class="ctx">Patients less likely to be readmitted when reached with automated follow-up.</div><div class="cust">Sentara Healthcare</div></div>
+          <div class="proof" data-c="readmit"><div class="cat">Revenue</div><div class="stat">$31.1M</div><div class="ctx">Added appointment revenue from automated reminders.</div><div class="cust">Community Health Network</div></div>
+          <!-- hcahps -->
+          <div class="proof" data-c="hcahps"><div class="cat">Experience · HCAHPS</div><div class="stat">99th</div><div class="ctx">Percentile in key HCAHPS domains after redesigning the rounding program.</div><div class="cust">Lenox Hill (Northwell)</div></div>
+          <div class="proof" data-c="hcahps"><div class="cat">Experience</div><div class="stat">+389%</div><div class="ctx">Improvement in RN responsiveness.</div><div class="cust">Lenox Hill (Northwell)</div></div>
+          <div class="proof" data-c="hcahps"><div class="cat">Experience</div><div class="stat">6th→51st</div><div class="ctx">Likelihood-to-Recommend percentile improvement.</div><div class="cust">Prisma Health</div></div>
+          <div class="proof" data-c="hcahps"><div class="cat">Experience</div><div class="stat">+35 pts</div><div class="ctx">Likelihood-to-Recommend at the largest ED over two years.</div><div class="cust">Prisma Health</div></div>
+          <div class="proof" data-c="hcahps"><div class="cat">Experience</div><div class="stat">18th→74th</div><div class="ctx">Percentile in under a year; 8.5% top-box gain.</div><div class="cust">EvergreenHealth</div></div>
+          <div class="proof" data-c="hcahps"><div class="cat">Experience</div><div class="stat">+36%</div><div class="ctx">Increase in top-box scores with nurse-leader rounding.</div><div class="cust">Providence</div></div>
+          <div class="proof" data-c="hcahps"><div class="cat">Experience</div><div class="stat">+11 pts</div><div class="ctx">“Teams worked together” — reached 80% “Very Good.”</div><div class="cust">Hartford HealthCare</div></div>
+          <!-- safety -->
+          <div class="proof" data-c="safety"><div class="cat">Safety</div><div class="stat">41/12/20%</div><div class="ctx">HAI / HAPI / Falls reduction; 80+ zero-harm awards.</div><div class="cust">ChristianaCare</div></div>
+          <div class="proof" data-c="safety"><div class="cat">Safety · Falls</div><div class="stat">78% / 85%</div><div class="ctx">Total falls / falls-with-injury reduction.</div><div class="cust">Mid-Atlantic Hospital</div></div>
+          <div class="proof" data-c="safety"><div class="cat">Safety · HAI</div><div class="stat">30%+</div><div class="ctx">Drop in CAUTI and CLABSI rates with patient rounding.</div><div class="cust">Northern VA Trauma Center</div></div>
+          <!-- staff -->
+          <div class="proof" data-c="staff"><div class="cat">Staff capacity</div><div class="stat">$82→$2</div><div class="ctx">Per-call cost with automation — roughly 40× cheaper.</div><div class="cust">UCSF Health</div></div>
+          <div class="proof" data-c="staff"><div class="cat">Staff capacity</div><div class="stat">~8×</div><div class="ctx">Capacity expansion with a 92% reach rate.</div><div class="cust">UCSF Health</div></div>
+          <div class="proof" data-c="staff"><div class="cat">Staff capacity</div><div class="stat">42%</div><div class="ctx">Drop in burnout; 30,000 leader rounds per year.</div><div class="cust">Norton Healthcare</div></div>
+          <div class="proof" data-c="staff"><div class="cat">Staff retention</div><div class="stat">39%</div><div class="ctx">Drop in staff turnover with &gt;90% rounding (9.2% vs 15%).</div><div class="cust">Regional Medical Center</div></div>
+          <div class="proof" data-c="staff"><div class="cat">Staff capacity</div><div class="stat">0.5 hr/day</div><div class="ctx">Saved per nurse via rounding workflows.</div><div class="cust">Site-wide</div></div>
+          <!-- access -->
+          <div class="proof" data-c="access"><div class="cat">Access</div><div class="stat">48%</div><div class="ctx">Less likely to miss an appointment when engaged; ~$1.9M backfill value.</div><div class="cust">Eskenazi Health</div></div>
+          <div class="proof" data-c="access"><div class="cat">Access · Med cost</div><div class="stat">$120</div><div class="ctx">Average savings per patient on prescription costs.</div><div class="cust">Prisma Health</div></div>
+          <div class="proof" data-c="access"><div class="cat">Access</div><div class="stat">+$4M</div><div class="ctx">Increase in visit revenue; 34,000 preventive care-gap appointments scheduled.</div><div class="cust">California-based FQHC</div></div>
+          <div class="proof" data-c="access"><div class="cat">Access</div><div class="stat">15%</div><div class="ctx">Drop in no-show rates with automated reminders.</div><div class="cust">Site-wide</div></div>
+        </div>
+        <p class="note">Use named customers as references only when cleared. Outcomes are de-identified and public/marketing-approved — never attach patient-level detail.</p>
+      </section>
+
+      <!-- 03 PLAYS -->
+      <section id="m3">
+        <div class="eyebrow"><span class="num">03</span><span class="lbl">Solution Plays</span><span class="line"></span></div>
+        <h2 class="sec display">Seven plays, each with a trigger and a close</h2>
+        <p class="lede">Expand a play when discovery surfaces its trigger. Every play follows the same spine: the trigger you heard, the pain underneath it, the message that reframes it, the proof that lands it, and the objection you'll meet.</p>
+
+        <details class="play"><summary><span class="t">Post-Discharge &amp; Readmissions</span><span class="when">Trigger: penalties, TEAM, high-risk cohorts</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Manual call-down can't scale; high-risk patients fall through transitions; CMS penalty exposure is rising.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>Outreach that runs the clinical pathway, not a blast — condition-specific check-ins, escalation, and live nurse transfer in the order their committees designed.</p></div>
+            <div><div class="micro">Proof</div><p>Intermountain $15M saved &amp; 41% readmission drop; Community Health Network 32%.</p></div>
+            <div><div class="micro">Objection</div><p>“Our nurses already call.” → 250 clinical hours returned per 1,000 discharges; reach 96% of patients vs. ~40% on the portal.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">Patient Experience &amp; Rounding</span><span class="when">Trigger: HCAHPS pressure, service recovery</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Paper rounding, inconsistent coverage, issues surfacing after discharge when it's too late to recover.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>Map every interaction to a specific HCAHPS domain; route negative feedback to the right owner in minutes for real-time recovery.</p></div>
+            <div><div class="micro">Proof</div><p>Lenox Hill 99th percentile &amp; +389% RN responsiveness; Providence +36% top-box.</p></div>
+            <div><div class="micro">Objection</div><p>“We already survey.” → Surveys tell you what happened; rounding lets you fix it at the bedside before it scores.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">Platform Consolidation</span><span class="when">Trigger: vendor sprawl, integration fatigue</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Point solutions per workflow; duplicate data entry; IT stretched maintaining many integrations.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>One coordination layer across outreach, rounding, and access — one-to-many integration model, one analytics hub, one security posture.</p></div>
+            <div><div class="micro">Proof</div><p>HITRUST, SOC 2 Type 2, HIPAA, TX-RAMP; bidirectional Epic/Cerner/Meditech deploying in weeks.</p></div>
+            <div><div class="micro">Objection</div><p>“Rip-and-replace is risky.” → Land on one workflow, expand on proven outcomes; you keep your EHR as the system of record.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">AI Purpose-Built for Healthcare</span><span class="when">Trigger: AI mandate, Chief AI Officer involved</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Pressure to “do AI” without adding risk, new logins, or clinical-decision liability.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>AI embedded in workflows they already run — longitudinal memory across the journey, governed and security-reviewed at every deployment. Not a decision-support tool; not trained on customer interaction data.</p></div>
+            <div><div class="micro">Proof</div><p>15 years of real interaction data as the foundation; Conversational AI with live transfer when urgency is detected.</p></div>
+            <div><div class="micro">Objection</div><p>“How does it actually work?” → Plain governance story: data residency, CMEK, no secondary training use, customer-validated reviews.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">ACO / Value-Based Care</span><span class="when">Trigger: MSSP, CIN, shared-savings, REACH sunset</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Shared-savings entities own outcomes but lack the execution layer to reach attributed lives at scale.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>The VBC entity is a backdoor into the system: coordination that closes gaps and prevents avoidable utilization across attributed populations — where the patient-experience buyer can't block you.</p></div>
+            <div><div class="micro">Proof</div><p>Population health outreach for high-risk cohorts; care-gap closure; the readmission economics calculator in Module 07.</p></div>
+            <div><div class="micro">Objection</div><p>“We get this from our EHR / ACO platform.” → Those manage attribution and reporting; we execute the patient contact that moves the metric.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">CipherHealth vs. the “free” EHR</span><span class="when">Trigger: “We're an Epic-first shop”</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Belief that Epic covers outreach; rigidity causes missed reach and ineffective programs; “free” hides staff and IT cost.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>70%+ of our customers — 350+ hospitals — are Epic shops. We enhance Epic; we don't replace it. Don't delay patient care for a future roadmap.</p></div>
+            <div><div class="micro">Proof</div><p>&lt;25 IT hours to deploy a new outreach program; reach 96% of patients vs. ~40% via portal; 32% readmission reduction.</p></div>
+            <div><div class="micro">Objection</div><p>“Epic is free.” → What does the free tool cost in missed outcomes, delayed launch, and IT/staff overhead? Run the ROI calculator together.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">Staff Capacity &amp; Retention</span><span class="when">Trigger: burnout, vacancy, nurse workload</span><span class="caret">›</span></summary>
+          <div class="body"><div class="grid">
+            <div><div class="micro">Pain</div><p>Stretched teams compensating for workflows that don't scale; documentation burden; turnover cost.</p></div>
+            <div><div class="micro">Reframe / teach</div><p>We're a workforce extender — automation plus staff rounding, recognition, and ambient listening that gives nurses time back.</p></div>
+            <div><div class="micro">Proof</div><p>UCSF $82→$2 per call &amp; ~8× capacity; Norton 42% burnout drop; turnover 9.2% vs 15% with &gt;90% rounding.</p></div>
+            <div><div class="micro">Objection</div><p>“This adds to nurse workload.” → It removes manual call-down and post-round documentation; 0.5 hr/day back per nurse.</p></div>
+          </div></div>
+        </details>
+
+        <h3 class="display" style="font-size:19px;margin:34px 0 6px">The 2026 GTM solution plays — TCM, TEAM, ED PDO</h3>
+        <p class="note" style="margin-bottom:16px">For 2026 we lead with three programs — each clears the bar of clear economic value, proven outcomes, minimal net-new lift, and strong differentiation vs. the EHR. Quality &amp; Safety stays a strong supplemental play. <b>Cheat sheet —</b> TCM: CPT 99495 / 99496, 2-business-day contact + med rec, ~$200+/patient. TEAM: CMS mandatory bundle, 2026–2030, ~700 hospitals / 188 CBSAs, five surgical episodes, 30-day accountability. HAC Reduction Program: 1% Medicare cut for the worst-performing quartile. All three lead plays run a Day 2 / 9 / 16 &amp; 23 / 30 cadence with HL7/Flowsheet integration and a 4–8 week implementation.</p>
+
+        <details class="play"><summary><span class="t">TCM — Transitional Care Management</span><span class="when">Driver: readmission risk + unbilled TCM revenue</span><span class="caret">›</span></summary>
+          <div class="body">
+            <p><b>What it is.</b> A reimbursable Medicare service for the 30 days after discharge. CPT 99495 (face-to-face visit within 14 days) and 99496 (within 7 days) both require interactive contact within 2 business days of discharge plus medication reconciliation. Done right it cuts readmissions and captures revenue most systems leave on the table.</p>
+          <div class="grid">
+            <div><div class="micro">Why it matters now</div><p>Every eligible discharge that misses the 2-business-day contact is both a readmission risk and unbilled revenue — and few systems hit that window manually at scale. (Rates are set annually by the Medicare PFS; keep dollars approximate.)</p></div>
+            <div><div class="micro">How we run it</div><p>Automated outreach fires inside the 2-business-day window on every qualifying discharge, runs the check-in and med-rec prompts, transfers anyone who needs a clinician to a live nurse, and schedules the 7- or 14-day visit — building the documented contact trail billing requires.</p></div>
+            <div><div class="micro">Proof</div><p>Intermountain $15M saved &amp; 41% readmission drop; reach 96% of patients vs. ~40% on the portal; 250 clinical hours back per 1,000 discharges.</p></div>
+            <div><div class="micro">Discovery</div><p>“What share of discharges get a live touch within two business days?” · “Are you billing TCM — and if not, what's blocking the 2-day contact and med-rec documentation?”</p></div>
+            <div><div class="micro">Objection</div><p>“Our clinics already call.” → At what reach and with what documentation? We automate the 2-day contact, capture the med-rec trail, and route only the patients who need a nurse.</p></div>
+            <div><div class="micro">Cadence &amp; integration</div><p>Five touches — Day 2 (status, Rx obtained, fall risk, SDOH), Day 9, Day 16 &amp; 23, Day 30 (program satisfaction). Inbound HL7-ADT; outbound HL7-ORU to Epic Flowsheets + HL7-MDM. 4–8 week implementation. Assets in flight: webpage, sell sheet, case study, reference video, ROI calculator, discovery guide.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">TEAM — Transforming Episode Accountability Model</span><span class="when">Driver: CMS mandatory bundle, 2026–2030</span><span class="caret">›</span></summary>
+          <div class="body">
+            <p><b>What it is.</b> CMS's mandatory, episode-based payment model — ~700 acute-care hospitals across 188 CBSAs, running 2026–2030. For Original Medicare patients undergoing one of five surgical procedures (joint replacement, hip/femur fracture, spinal fusion, CABG, major bowel), the hospital is accountable for cost and quality from surgery through 30 days post-discharge, including SNF, home health, and follow-up. It also requires connecting patients to primary care.</p>
+          <div class="grid">
+            <div><div class="micro">Why it matters now</div><p>If a hospital is in a mandatory CBSA, the 30-day post-surgical window is now a P&amp;L line. One avoidable readmission in a TEAM episode costs ~$14,000; episode spend runs ~$28K (joint) to ~$50K (CABG).</p></div>
+            <div><div class="micro">How we run it</div><p>We own the 30-day episode follow-up: condition-specific check-ins on the surgical cohorts, escalation and live nurse transfer when recovery slips, SNF/home-health transition support, and the required primary-care connection.</p></div>
+            <div><div class="micro">Proof</div><p>Post-discharge programs cutting readmissions 32–41% (Intermountain, Community Health Network); 3.4× lower readmission likelihood with automated follow-up (Sentara).</p></div>
+            <div><div class="micro">Discovery</div><p>“Are any of your CBSAs in the mandatory TEAM cohort?” · “Which of the five episodes is highest-volume?” · “How are you managing the 30-day window and the primary-care connection today?”</p></div>
+            <div><div class="micro">Objection</div><p>“Our surgeons and post-acute team handle recovery.” → TEAM holds the hospital accountable across settings you don't control. We give you eyes on the patient for the full 30 days.</p></div>
+            <div><div class="micro">Cadence &amp; integration</div><p>Same Day 2 / 9 / 16 &amp; 23 / 30 rhythm, tuned to surgical recovery (pain, surgical site, PT, physician handoff). Episode-specific topics for LEJR, SHFFT, spinal fusion, CABG, and major bowel. No mandated script. Eligibility via HL7 or flat file; results flow back to Epic via Flowsheet. 4–8 week implementation.</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">ED Outreach — Post-Emergency-Department Follow-Up</span><span class="when">Driver: avoidable ED returns + high-risk capture</span><span class="caret">›</span></summary>
+          <div class="body">
+            <p><b>What it is.</b> Structured follow-up 24–72 hours after an ED discharge. Unlike inpatient, an ED discharge usually has no scheduled follow-up and no reliable PCP handoff — driving avoidable return visits and admissions. An avoidable-utilization and high-risk-capture play that also surfaces social barriers.</p>
+          <div class="grid">
+            <div><div class="micro">Why it matters now</div><p>The ED is the front door for avoidable utilization. A 72-hour bounce-back is costly and often preventable with one timely contact — and many of these patients never reach primary care.</p></div>
+            <div><div class="micro">How we run it</div><p>Automated outreach within 24–72 hours screens for red-flag symptoms and aftercare comprehension, confirms the prescription was filled, books PCP/specialist follow-up, screens for SDOH, and transfers anyone deteriorating to a live nurse.</p></div>
+            <div><div class="micro">Proof</div><p>~$2 per automated call vs. ~$82 manual (UCSF) makes ED-volume outreach affordable; reach 96% vs. ~40% portal; +35-point LTR at Prisma's largest ED over two years.</p></div>
+            <div><div class="micro">Discovery</div><p>“What happens in the 72 hours after an ED discharge today?” · “What's your 72-hour ED return rate, and do you know who didn't follow up?”</p></div>
+            <div><div class="micro">Objection</div><p>“ED patients are one-and-done.” → No follow-up is exactly why they come back. One automated touch catches deterioration and routes the high-risk few to a nurse.</p></div>
+            <div><div class="micro">Story-led — the Margaret move</div><p>Margaret, 72: ED for chest pain, discharged with 3 Rx + a cardiology follow-up, back in 2 days — couldn't afford 2 Rx, didn't know the follow-up was required. She's your 38%. Outcomes: +45 NPS · +22.7 nurse communication · 30%↓ readmits · ~$7K per prevented return, ~$3.6M/yr. Three questions that sell it: “What happens in the first 72 hours after they leave?” · “How do you know if a patient didn't understand discharge instructions?” · “What would it mean to intervene before the bounce-back?” The line: “We're not replacing what your team does — we're protecting it.”</p></div>
+          </div></div>
+        </details>
+
+        <details class="play"><summary><span class="t">Quality &amp; Safety Bundle — supplemental play</span><span class="when">Driver: HAC Reduction Program 1% penalty</span><span class="caret">›</span></summary>
+          <div class="body">
+            <p><b>What it is.</b> Proactive, purposeful patient and location rounding to catch risk before it becomes a harm event — CAUTI, CLABSI, falls (especially with injury), and pressure injuries (HAPI). Tied to the CMS HAC Reduction Program (1% Medicare cut for the worst quartile), Value-Based Purchasing, and Leapfrog.</p>
+          <div class="grid">
+            <div><div class="micro">Why it matters now</div><p>HACs are both a safety failure and a direct penalty, plus reputational exposure through Leapfrog and Star ratings. Paper rounding is inconsistent and surfaces issues too late.</p></div>
+            <div><div class="micro">How we run it</div><p>Digital patient and location rounding standardizes the safety checks (line necessity, skin, fall risk, environment), routes any negative signal to the right owner in minutes, and uses ambient listening to keep documentation off the nurse.</p></div>
+            <div><div class="micro">Proof</div><p>ChristianaCare 41% / 12% / 20% HAI / HAPI / Falls and 80+ zero-harm awards; Mid-Atlantic 78% / 85% falls / falls-with-injury; Northern VA 30%+ CAUTI &amp; CLABSI.</p></div>
+            <div><div class="micro">Discovery</div><p>“Where do you stand on the HAC Reduction Program — at risk of the 1% penalty?” · “How consistent is safety rounding across units, and how fast does a flag reach the right person?”</p></div>
+            <div><div class="micro">Objection</div><p>“We already round.” → On paper, inconsistently? Digital rounding makes it standard across every unit and routes risks for real-time recovery.</p></div>
+          </div></div>
+        </details>
+      </section>
+
+      <!-- 04 ICP -->
+      <section id="m4">
+        <div class="eyebrow"><span class="num">04</span><span class="lbl">Ideal Customer Profile</span><span class="line"></span></div>
+        <h2 class="sec display">Who we win with — and who we don't</h2>
+        <p class="lede">We sell to health systems where coordination at scale is a board-level pressure. The strongest fits feel the pain across multiple facilities and have an executive owner for an outcome we move.</p>
+
+        <div class="cards c2">
+          <div class="card"><h3 class="display"><span class="pin">Firmographics</span>The fit</h3>
+            <ul>
+              <li>U.S. health systems &amp; hospitals — <b>NAICS 622110</b> (General Medical &amp; Surgical Hospitals), not the broad “Healthcare Services” filter.</li>
+              <li><b>Epic-first is a fit, not a blocker</b> — 70%+ of customers / 350+ hospitals run Epic.</li>
+              <li>Multi-facility systems, children's hospitals, rural/FQHC, post-acute, physician groups, and increasingly <b>ACOs / CINs / MSSP</b> participants.</li>
+              <li>An executive owner for readmissions, HCAHPS, staffing, throughput, access, or TCM/revenue capture.</li>
+            </ul>
+          </div>
+          <div class="card"><h3 class="display"><span class="pin">Buying pattern</span>Land &amp; expand</h3>
+            <ul>
+              <li>Typical new land ~<b>$75K</b> (single workflow), enterprise deals <b>$250–400K</b> bolting programs together.</li>
+              <li>Sales cycle ~<b>9–12 months</b>; multi-threaded across clinical, IT, finance, and experience.</li>
+              <li>Start on the most acute pain, expand on proven outcomes (Outreach-only and Rounding-only bases are prime cross-sell).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="cards c2" style="margin-top:14px">
+          <div class="card"><h3 class="display"><span class="pin">Watch-outs</span>Weaker fit</h3>
+            <ul>
+              <li>Single small clinics with no scale pain and no executive owner.</li>
+              <li>Pure self-service buyers unwilling to staff or sponsor a program.</li>
+              <li>Accounts where no measurable outcome is on the line this fiscal year.</li>
+            </ul>
+          </div>
+          <div class="card"><h3 class="display"><span class="pin">CRM note</span>Fix the ACO relic</h3>
+            <p>ACO/CIN legal entities of existing hospital customers may be tagged “Does Not Meet ICP” or “Do Not Contact” from the old ICP. That's now a <b>target</b>, not a disqualifier — flag these for correction before prospecting.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 PERSONAS -->
+      <section id="m5">
+        <div class="eyebrow"><span class="num">05</span><span class="lbl">Persona Map</span><span class="line"></span></div>
+        <h2 class="sec display">Seven seats at the table</h2>
+        <p class="lede">Every deal is multi-threaded. Know each seat's priority, the value message that lands, the questions that open them up, the proof to bring, and the objection you'll meet.</p>
+
+        <div class="cards c2">
+          <div class="persona">
+            <div class="role">Chief Nursing Officer · CNO</div><h3 class="display">Owns experience, safety &amp; the workforce</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>HCAHPS, falls/HAPI, nurse burnout &amp; retention, consistent rounding across units.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“A workforce extender that gives nurses time back while raising experience and catching harm earlier.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>Lenox Hill 99th pct; Norton 42% burnout drop; 0.5 hr/day per nurse.</p></div>
+            <div class="obj"><b>Objection:</b> “Adds to nurse workload.” → Removes manual follow-up and post-round documentation; ambient listening keeps it off the nurse.</div>
+          </div>
+          <div class="persona">
+            <div class="role">Chief Financial Officer · CFO</div><h3 class="display">Owns margin &amp; penalty exposure</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>Readmission penalties, TCM/appointment revenue capture, cost-to-serve, ROI and payback.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“Operational efficiency is the new margin strategy — proven savings, not a cost center.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>Intermountain $15M; Community Health Network $31.1M appt revenue; the ROI calculator.</p></div>
+            <div class="obj"><b>Objection:</b> “Budget is frozen.” → This creates budget — model avoided readmissions and recovered revenue against the fee.</div>
+          </div>
+          <div class="persona">
+            <div class="role">Chief Information Officer · CIO</div><h3 class="display">Owns integration &amp; risk</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>Clean Epic data flow, minimal IT lift, security/compliance, vendor consolidation — improvements, not big changes.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“Enhances Epic with minimal lift — HITRUST/SOC 2/TX-RAMP, certified bidirectional integration.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>&lt;25 IT hours to deploy a program; one-to-many integration model; the AI governance story.</p></div>
+            <div class="obj"><b>Objection:</b> “We're Epic-first.” → 70%+ of our customers are too; we enhance, we don't compete with the system of record.</div>
+          </div>
+          <div class="persona">
+            <div class="role">Chief Nursing Informatics Officer · CNIO</div><h3 class="display">Bridges nursing &amp; IT</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>Workflow fit at the bedside, documentation burden, adoption, data that's actionable not just reported.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“Scripts and escalation paths built by frontline nurses, sequenced into the pathways your committees designed.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>Clinical programming depth; ambient listening; data that tells you what to do next.</p></div>
+            <div class="obj"><b>Objection:</b> “Another tool to adopt.” → Embedded in existing workflows; no new login; clinical SMEs co-design the rollout.</div>
+          </div>
+          <div class="persona">
+            <div class="role">Chief Medical Officer · CMO</div><h3 class="display">Owns clinical quality</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>Care-gap closure, discharge comprehension, quality measures, physician alignment, outcomes evidence.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“Evidence, not recommendations — we can show which workflow and timing moved the measure at a comparable system.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>Readmission &amp; safety outcomes; PROM capture; clinical advisory partnership.</p></div>
+            <div class="obj"><b>Objection:</b> “Physicians won't engage.” → Minimal physician lift; the workflow runs around them and surfaces only what needs a clinician.</div>
+          </div>
+          <div class="persona">
+            <div class="role">Chief Operating Officer · COO</div><h3 class="display">Owns throughput &amp; execution</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>Length of stay, throughput, service recovery speed, standardization across facilities.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“Coordination that runs like infrastructure — quietly and reliably, every shift, every unit.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>25% faster service recovery; standardized workflows; cross-facility consistency.</p></div>
+            <div class="obj"><b>Objection:</b> “We're mid-rollout on something else.” → We layer in without disruption; start where the pain is biggest.</div>
+          </div>
+          <div class="persona">
+            <div class="role">Chief Executive Officer · CEO</div><h3 class="display">Owns the strategic narrative</h3>
+            <div class="blk"><div class="micro">Cares about</div><p>System reputation, financial sustainability, the AI/operational-efficiency story, being the standard of care.</p></div>
+            <div class="blk"><div class="micro">Lands with</div><p>“The execution layer that turns clinical intent into clinical reality — at scale, across the whole system.”</p></div>
+            <div class="blk"><div class="micro">Bring</div><p>The full-continuum story; the moat (1B+ encounters); marquee peer systems.</p></div>
+            <div class="obj"><b>Objection:</b> “Why now?” → Margin pressure + the AI moment + penalty exposure converge — waiting on the roadmap has a cost.</div>
+          </div>
+          <div class="persona" style="background:var(--cream-alt)">
+            <div class="role">Multi-thread rule</div><h3 class="display">Never single-thread a deal</h3>
+            <div class="blk"><p>The clinical champion (CNO/CNIO) opens the door, the CFO funds it, the CIO de-risks it, and the CEO/COO sponsors the transformation. Map all seats early — the Strategic Deal tracker's four imperatives keep you honest on who's missing.</p></div>
+          </div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:34px 0 6px">Diagnose the seat — a question tied to a number</h3>
+        <p class="note" style="margin-bottom:16px">Open-ended questions that get each seat talking, each anchored to a metric so the cost of the status quo surfaces in their own words. The full questioning discipline lives in Strategic Discovery (01) and Challenger Selling (08).</p>
+        <div class="cards c2">
+          <div class="card"><div class="micro">CNO · retention &amp; burnout</div><p>“With turnover ~$61K per nurse and 15%+ annual losses, how many hours do experienced nurses spend on manual post-discharge calls instead of mentoring new hires?”</p></div>
+          <div class="card"><div class="micro">CIO · tech debt &amp; security</div><p>“You're running many point solutions with separate security surfaces — what's the true TCO when your EHR reaches under 30% of discharged patients?”</p></div>
+          <div class="card"><div class="micro">CFO · revenue &amp; penalties</div><p>“With HRRP penalties common and ~$15,200 per avoidable readmission, what's your annual exposure if post-discharge engagement is inconsistent?”</p></div>
+          <div class="card"><div class="micro">CMO · outcomes &amp; burnout</div><p>“How many physicians are tied up managing escalated issues that automated 48-hour outreach could have caught before they became readmissions?”</p></div>
+          <div class="card"><div class="micro">CQO · safety &amp; star ratings</div><p>“You're accountable for CMS quality metrics but lack post-discharge visibility — how do you find at-risk patients before safety events or penalties occur?”</p></div>
+          <div class="card"><div class="micro">PX Leader · HCAHPS &amp; equity</div><p>“HCAHPS care-transition scores affect VBP — if few patients get follow-up, how will you close the communication gaps and improve star ratings?”</p></div>
+        </div>
+      </section>
+
+      <!-- 06 CLINICAL -->
+      <section id="m6">
+        <div class="eyebrow"><span class="num">06</span><span class="lbl">Clinical Advisory &amp; Teams</span><span class="line"></span></div>
+        <h2 class="sec display">The clinicians behind the deal</h2>
+        <p class="lede">Our product, programs, and roadmap are shaped by working nurse, experience, and care-management executives — not a software team guessing. Two groups give you credibility in the room: the Clinical Advisory Board and the teams you can pull into a deal.</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The Clinical Advisory Board</h3>
+        <p class="note" style="margin-bottom:16px">Senior leaders at peer systems who identify trends, vet workflows and scripting, and shape what we build. When a CNO or CMO asks “who else believes this works?”, this is your answer — leaders in their exact seat helped build it. Match the member to the seat across the table.</p>
+        <div class="cards c3">
+          <div class="card"><h3 class="display"><span class="pin">Chair · Experience</span>Vanessa Mona</h3><p><b>System Director, Care Experience</b> · Henry Ford Health</p><p>23+ years; integrates the consumer-experience journey across every touchpoint at the system level.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Patient Experience</span>Tina Hunter</h3><p><b>Executive Director, Patient Experience</b> · Prisma Health</p><p>Leads PX at South Carolina's largest system (29,000+ staff, 18 hospitals); 10 years in level-1 trauma emergency care.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Equity / SDOH</span>Rani Morrison Williams</h3><p><b>Chief Diversity &amp; Community Health Equity Officer</b> · University of Illinois Health</p><p>UI Health's first CDCHEO; FACHE; Crain's Chicago Notable Women in Healthcare.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Workforce</span>Jason Coffey</h3><p><b>System Director, Employee Experience</b> · Norton Healthcare</p><p>27 years; leads recognition, retention, and employee-listening across a six-hospital system.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Hospital Medicine</span>Marisa Schwartz</h3><p><b>Sr. Medical Director, Hospital Medicine, Clinical Ops &amp; PX</b> · St. Luke's University Health Network</p><p>20+ years; leads PX across PA and western NJ; DNP in clinical leadership and an MBA.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Care Management</span>Laura Wieloch</h3><p><b>Executive Director, Ambulatory Care Management &amp; Care Transitions (Midwest)</b> · Advocate Health</p><p>Nurse of 35+ years; led heart-failure remote monitoring and IVR outreach implementations.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Transitions of Care</span>Jenny Simmonds</h3><p><b>Director of Care Management</b> · Intermountain Health</p><p>At Intermountain since 1999; specializes in Transitions of Care, access, and SDOH.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Informatics</span>Jennifer K. Stebbins</h3><p><b>VP, Health Care Application Systems</b> · Baystate Health</p><p>Doctoral-prepared nurse, 40 years; national speaker on automated early-warning systems and patient engagement.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Patient Experience</span>Janice Finder</h3><p><b>Executive Director, Patient Experience Clinical Services</b> · MD Anderson</p><p>Runs askUTMDA, the 24/7 PX call center; founded the system's Discharge Phone Call Initiative.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The CipherHealth clinicians who run it</h3>
+        <div class="cards c2">
+          <div class="card"><h3 class="display"><span class="pin">Clinical Strategy</span>Joy Avery, MSN, RN</h3><p><b>SVP, Clinical Strategy</b> · CipherHealth</p><p>36 years across clinical practice, operations, and enterprise command centers; former Chief Flight Nurse and Trauma Program Manager at North Mississippi Medical Center.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Clinical Services</span>Donna Pritchard, DNP, MSN, FNP-BC</h3><p><b>VP of Clinical Services</b> · CipherHealth</p><p>33 years in nursing and 22 in the C-suite; two-time Baldrige winner; 11 years as a Chief Nursing Executive. Bring her and Joy to the “will this work for our nurses?” conversation.</p></div>
+        </div>
+        <p class="note" style="margin-top:14px"><b>Reference discipline:</b> the board establishes that our work is shaped by senior clinicians — never offer a member as a deal reference, quote them, or imply endorsement of an opportunity without explicit clearance from your CipherHealth sponsor and the member.</p>
+
+        <h3 class="display" style="font-size:19px;margin:34px 0 12px">The cross-functional teams</h3>
+        <div class="cards c3">
+          <div class="card"><h3 class="display"><span class="pin">Bring them in to close</span>Clinical Strategy &amp; SMEs</h3><p>In-house clinical leaders (RNs/MSNs) who designed the scripts and escalation paths. Use for gap analyses, custom program design, and clinical credibility with a CNO/CMO.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Peer validation</span>Clinical Advisory Board</h3><p>The senior nurse &amp; experience executives above — a signal of how seriously we take clinical input, and a credibility anchor in any clinical conversation.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Demo &amp; technical fit</span>Solution Consulting</h3><p>Workflow specialists who run tailored demos, map current-state, and answer integration and AI-governance questions. Your partner from discovery through proof.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">De-risk the buy</span>Implementation</h3><p>Certified Epic/Cerner integration deploying in weeks, not months. Bring them in to counter “this will be a heavy lift.”</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Prove it post-sale</span>Analytics</h3><p>Ties every touchpoint to HCAHPS, readmissions, and PROMs; powers the annual outcomes review that fuels expansion.</p></div>
+          <div class="card"><h3 class="display"><span class="pin">Clear the gate</span>Security &amp; Compliance</h3><p>HITRUST CSF, SOC 2 Type 2, HIPAA, TX-RAMP Level 2; AI security review at every deployment. Bring to any CIO/CISO conversation.</p></div>
+        </div>
+        <p class="note">Rule of thumb: clinical SME for the “will this work for our nurses?” moment, SC for “show me,” Implementation for “how hard is this,” Security for the gate, Analytics for the renewal &amp; expand.</p>
+
+        <h3 class="display" style="font-size:19px;margin:34px 0 12px">Role clarity &amp; how we operate</h3>
+        <p class="note" style="margin-bottom:14px">Overlap across roles is intentional; ambiguity is not. Know who owns which part of the motion — the full Challenger role matrix is in Module 08.</p>
+        <div class="cards c3">
+          <div class="card"><div class="micro">AE</div><p>Demand shaping, executive value framing, and the commercial / outcomes translation for growth.</p></div>
+          <div class="card"><div class="micro">CSM</div><p>Outcomes stewardship, the value narrative, relationship health, and risk signals.</p></div>
+          <div class="card"><div class="micro">Clinical</div><p>Credibility anchored in real-world care delivery and best-practice alignment.</p></div>
+          <div class="card"><div class="micro">Growth Ops</div><p>Commercial governance, pricing integrity, and execution discipline.</p></div>
+          <div class="card"><div class="micro">Solution Consulting</div><p>Turning innovation into market impact via differentiated demos and positioning.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">Systems of record</div><p><b>Salesforce</b> = commercial truth · <b>ChurnZero</b> = health &amp; retention truth · <b>Slack</b> = shared visibility. The team operates off these, not memory.</p></div>
+        </div>
+      </section>
+
+      <!-- 07 ROI -->
+      <section id="m7">
+        <div class="eyebrow"><span class="num">07</span><span class="lbl">ROI Tools</span><span class="line"></span></div>
+        <h2 class="sec display">Build the value case in the room</h2>
+        <p class="lede">Lead with economics on any CFO or “Epic-is-free” conversation. Use the model below to size readmission savings and reclaimed clinical time live, then move to the full calculators and assessment.</p>
+
+        <div class="calc">
+          <div class="inputs">
+            <div class="micro" style="margin-bottom:14px">Readmission savings model</div>
+            <div class="field"><label for="dis">Annual inpatient discharges</label><input id="dis" type="number" value="20000" min="0"></div>
+            <div class="field"><label for="rate">Current 30-day readmission rate (%)</label><input id="rate" type="number" value="15" min="0" max="100" step="0.1"></div>
+            <div class="field"><label for="cost">Avg. cost per readmission ($)</label><input id="cost" type="number" value="16000" min="0" step="500"></div>
+            <div class="field"><label for="red">Readmission reduction with program (%)</label><input id="red" type="number" value="32" min="0" max="100" step="1"></div>
+          </div>
+          <div class="out">
+            <div class="micro">Estimated annual savings</div>
+            <div class="big rust" id="o_save">$15.4M</div>
+            <div class="micro" style="margin-top:6px" id="o_avoided">960 readmissions avoided / year</div>
+            <div class="row2">
+              <div><div class="v" id="o_hours">5,000</div><div class="k">Clinical hours returned / yr (250 per 1,000 discharges)</div></div>
+              <div><div class="v">2–3 hrs</div><div class="k">Returned per nurse, per shift</div></div>
+            </div>
+          </div>
+        </div>
+        <p class="note">Illustrative model using CipherHealth customer-observed benchmarks; readmission cost varies by payer mix and cohort (commonly ~$13K–$16K). Not a guarantee — use to frame, then validate on their data.</p>
+
+        <div class="cards c3" style="margin-top:6px">
+          <div class="card"><h3 class="display" style="font-size:18px">Official calculators</h3><p>The published ROI calculators &amp; readiness assessment.</p><a class="cta" href="https://www.cipherhealth.com/resources/roi-calculators" target="_blank" rel="noopener">Open ROI calculators ›</a></div>
+          <div class="card"><h3 class="display" style="font-size:18px">Readiness assessment</h3><p>“Is your care coordination keeping up?” — a personalized readiness score to open a conversation.</p><a class="cta" href="https://www.cipherhealth.com/assess" target="_blank" rel="noopener">Get the score ›</a></div>
+          <div class="card"><h3 class="display" style="font-size:18px">Benchmark shorthand</h3><p style="font-size:14px">32% readmission reduction · 250 clinical hours / 1,000 discharges · reach 96% of patients vs ~40% portal · &lt;25 IT hours to deploy.</p></div>
+        </div>
+      </section>
+
+      <!-- 08 CHALLENGER -->
+      <section id="m8">
+        <div class="eyebrow"><span class="num">08</span><span class="lbl">Challenger Selling</span><span class="line"></span></div>
+        <h2 class="sec display">The 2026 motion: teach, reframe, create urgency</h2>
+        <p class="lede">Your biggest competitor isn't a vendor — it's no decision. The average buying group is ~6.8 stakeholders with conflicting goals; left alone they default to the status quo. We win by reshaping the buyer's constraints, not absorbing them.</p>
+
+        <h3 class="display" style="font-size:19px;margin:28px 0 6px">The shift — reactive to Challenger</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">Reactive mode</div><p>Selling features &amp; modules · defending existing budget · talking to IT &amp; directors · winning on price.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">The Challenger</div><p>Selling business outcomes · creating new budget · aligning the C-suite (CNO/CFO/CMO) · winning on value &amp; ROI.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px">“Stop absorbing the buyer's constraints — start reshaping them.”</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">Chase the Mobilizer, not the Talker</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">Avoid — the Talker (false positives)</div><p><b>The Friend</b> — agreeable but avoids the conflict needed to push your agenda. <b>The Guide</b> — gives org charts and gossip, no real influence. <b>The Climber</b> — in it for personal gain; bails when the project gets risky.</p></div>
+          <div class="card"><div class="micro">Target — the Mobilizer</div><p><b>The Go-Getter</b> — champions projects and delivers. <b>The Teacher</b> — shapes the vision, loves sharing insight. <b>The Skeptic</b> — tears apart data; if they debate you, they're engaged.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px">Sell the problem first: get them to say “I never thought of it that way,” then coach them to win the internal argument with the other 5+ stakeholders.</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The five-step motion</h3>
+        <div class="cards c3">
+          <div class="card"><div class="micro">1 · Discover</div><p>“Be curious, not interrogative.”</p></div>
+          <div class="card"><div class="micro">2 · Educate</div><p>“Lead to our solution, not with it.”</p></div>
+          <div class="card"><div class="micro">3 · Diagnose</div><p>“Make them say ‘that's exactly us.’” Signals: Aha / Yeah-but / Me-too.</p></div>
+          <div class="card"><div class="micro">4 · Reframe</div><p>“Safe is actually dangerous.”</p></div>
+          <div class="card"><div class="micro">5 · Challenge</div><p>“Don't resolve the tension too soon.”</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">The one rule</div><p>Never end a meeting without teaching the customer one thing about their own business.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">Price the status quo — the cost of doing nothing</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">The breakdown</div><p>Nurse turnover <b>$4.58M</b> (75 × ~$61,110) · avoidable readmissions <b>$2.28M</b> (150 × ~$15,200) · HRRP &amp; lost VBP <b>$1.5M+</b> → <b>$8.36M+ / year</b>.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">The reframe</div><p>“You think you're saving money on manual follow-up — but the status quo silently costs your system over $8M a year. That's a risk you accept every day you delay.”</p></div>
+        </div>
+        <p class="note" style="margin-top:10px">Illustrative model — NIH readmission data · NSI Nursing Solutions 2025 · CMS HRRP FY2026. Validate on the customer's numbers. Full model in Module 07.</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">Challenger is a team sport — the role matrix</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">SDR</div><p>Map &amp; hook stakeholders with a “Why Now”; qualify the pain; hand off to the AE.</p></div>
+          <div class="card"><div class="micro">AE</div><p>Lead the insight; quantify the gap (a dollar figure on doing nothing); drive consensus for budget.</p></div>
+          <div class="card"><div class="micro">CSM</div><p>Spot expansion at QBRs; validate impact with live data; challenge them to grow at renewal.</p></div>
+          <div class="card"><div class="micro">Clinical</div><p>Validate the workflow pain; prove “do nothing” harms patients; remove clinical blockers.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px"><b>Systems of record:</b> Salesforce = commercial truth · ChurnZero = health &amp; retention truth · Slack = shared visibility.</p>
+      </section>
+
+      <!-- 09 EPIC INTEGRATION -->
+      <section id="m9">
+        <div class="eyebrow"><span class="num">09</span><span class="lbl">Epic &amp; EHR Integration</span><span class="line"></span></div>
+        <h2 class="sec display">The EHR is the system of record — not the system of action</h2>
+        <p class="lede">Integration questions show up in almost every deal, usually from a CIO or integration analyst, and often as the gate between a clinical yes and a signed contract. You don't need to be an interface engineer — you need to turn integration from a perceived risk into a differentiator. We augment the EHR; we don't replace it.</p>
+
+        <h3 class="display" style="font-size:19px;margin:28px 0 6px">Three Epic integration capabilities</h3>
+        <p class="note" style="margin-bottom:16px">A growing set of innovations delivers expanded services from one unified platform — and secures us as a pillar of the patient-engagement program, not a point tool that's easy to rip out.</p>
+        <div class="cards c3">
+          <div class="card"><div class="micro">Flowsheets · the 2026 headline</div><p>Maps outreach-response data directly to discrete Flowsheet fields in the Epic chart, in near-real-time. The only one of the three that also lets the team respond to patients faster with highly reliable deliverability.</p></div>
+          <div class="card"><div class="micro">EHR Activation Gateway</div><p>Streamlines how programs are activated and how patient data moves between CipherHealth and Epic. Lead with it when the buyer wants to consolidate vendors.</p></div>
+          <div class="card"><div class="micro">Enhanced Appt Reminders</div><p>Two-way reminders with rescheduling written back to the EHR scheduling workflow. Your access, no-show, and revenue conversation.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">What a Flowsheet is — and the before/after</h3>
+        <p class="note" style="margin-bottom:16px">A Flowsheet is one of Epic's most-used tools: a structured grid in the patient's chart where discrete data is recorded over time, manipulated, and reported on. Because results land as discrete fields — not a PDF or free-text note — clinicians can act and analysts can trend.</p>
+        <div class="cards c2">
+          <div class="card"><div class="micro">The old workflow</div><p>Care teams viewed call responses in one tool (Evolve) and everything else — meds, independent calls — in Epic. Data reached parts of the team as much as <b>24 hours later</b> via a nightly batch.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">The new workflow</div><p>Responses flow into Epic for a unified view in <b>near-real-time</b>. Inbound demographics via HL7-ADT; results written to Flowsheets within seconds. Siloed, day-late data is now in the chart the moment it's captured.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px"><b>“Near-real-time,” said precisely:</b> to the human eye it's real time — messages flow within seconds. We say near-real-time only to account for the seconds a message takes to reach the EMR. It is not a nightly batch; that was the old way.</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">How the data flows</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">Inbound — eligibility</div><p>HL7-ADT carries demographics and encounter info to enroll eligible patients; a nightly SFTP flat file is the fallback where no live ADT feed exists.</p></div>
+          <div class="card"><div class="micro">Outbound — results</div><p>HL7-ORU writes discrete results to Epic Flowsheets in near-real-time; HL7-MDM can push patient-issue documentation into the chart.</p></div>
+          <div class="card"><div class="micro">What does NOT flow to Epic</div><p>Only automated call results, in raw data format. Analytics — reach rate, site/program breakdowns, time-to-callback — stay in CipherHealth dashboards. Set this expectation early.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">Why our approach wins</div><p>Flowsheets is a bi-directional feed that's <b>configurable without deploying new code</b> — so we implement it for more clients, faster. Similar bespoke feeds (Intermountain/Cerner, Anmed/Epic) needed custom engineering; ours doesn't.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">Selling it — scope, fit, objections</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">Implementation &amp; scope</div><p>~3–8 weeks of scoping, build, and testing for a standard post-discharge program. Build size scales with the number of questions (Flowsheet rows ∝ program questions). Penn's first program took ~8 weeks; with steady resourcing they now go live every 3–4 weeks.</p></div>
+          <div class="card"><div class="micro">Where it fits</div><p><b>Best:</b> programs with yes/no or structured answer types — clean mapping to discrete rows. <b>Not a fit:</b> free-text fields. <b>Most popular:</b> post-discharge results into the EMR.</p></div>
+          <div class="card"><div class="micro">Multi-instance / Cerner</div><p>Single-program multi-Epic-instance isn't supported today (active partnership work). Flowsheets is primarily Epic; other EMRs use different integration types — submit a Product DAR to scope, don't guess in the room.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">Discovery openers</div><p>“Where does your team see post-discharge call results today — chart or separate tool?” · “How long after a patient responds does the team see it?” · “Which programs are mostly yes/no? Those are the cleanest Flowsheets candidates.”</p></div>
+        </div>
+      </section>
+
+      <!-- 10 THE 2026 PITCH -->
+      <section id="m10">
+        <div class="eyebrow"><span class="num">10</span><span class="lbl">The 2026 Pitch</span><span class="line"></span></div>
+        <h2 class="sec display">Care Coordination Infrastructure</h2>
+        <p class="lede">Clinical intelligence + AI workflow automation. This is the enablement layer for the 2026 customer pitch deck — the story, the arc, and the talk track so you can <i>deliver</i> it, not read it. We're no longer pitching “patient engagement software.” We're positioning CipherHealth as healthcare's most effective care-coordination infrastructure: the system of execution.</p>
+
+        <h3 class="display" style="font-size:19px;margin:28px 0 6px">The core frame — the system of execution</h3>
+        <div class="cards c3">
+          <div class="card"><div class="micro">System of record · the EHR</div><p>Documents clinical history and processes billing. Records what happened — doesn't do the work in between. Epic, Cerner, Meditech.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">System of execution · CipherHealth</div><p>Runs the coordination — care transitions, closing the loop, clinical action automated. <b>This is the gap we own.</b></p></div>
+          <div class="card"><div class="micro">System of insight · measurement</div><p>Surfaces outcome, experience, and quality trends after the fact. Tells you what already broke.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px">Say it like this: “Your EHR documents care. Your survey platform measures whether it worked. Neither one executes the work in between — the follow-up call, the discharge-comprehension check, the escalation to a nurse. That's the system of execution, and that's the layer we are.”</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The market frame — the care-coordination paradigm</h3>
+        <div class="statband">
+          <div><div class="v">$78B</div><div class="k">Annual cost of poor care coordination (U.S.)</div></div>
+          <div><div class="v">1 in 5</div><div class="k">Patients harmed during a care transition</div></div>
+          <div><div class="v">20%</div><div class="k">Medicare patients readmitted within 30 days</div></div>
+          <div><div class="v">30%+</div><div class="k">Of those readmissions potentially avoidable</div></div>
+        </div>
+        <p class="note" style="margin-top:12px">AHRQ: the deliberate organization of patient-care activities among two or more participants — including the patient. Three qualities to land: patient-centered, deliberate &amp; proactive, multi-participant. The status quo is none of those — it's hectic.</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The pitch arc — how to walk the deck</h3>
+        <div class="cards c3">
+          <div class="card"><div class="micro">1 · Reframe</div><p>Care coordination shouldn't be hectic. Name the three failures: stretched clinicians (2–3 hrs/shift lost), disconnected handoffs, lagging signals.</p></div>
+          <div class="card"><div class="micro">2 · Size it</div><p>$78B / 1-in-5 / 20% / 30% — and the AHRQ definition.</p></div>
+          <div class="card"><div class="micro">3 · Position the layer</div><p>The system of execution between the EHR and measurement.</p></div>
+          <div class="card"><div class="micro">4 · Show the span</div><p>One platform, every moment of care — pre-care, in-care, self-service, post-care.</p></div>
+          <div class="card"><div class="micro">5 · Prove the moat</div><p>The four differentiators, then proof points by outcome.</p></div>
+          <div class="card"><div class="micro">6 · De-risk the AI</div><p>Purpose-built, governed, secure; the three flavors give the buyer control.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">7 · Close</div><p>“AI built for healthcare, clinical programs refined over 15 years, and the outcomes data to back every recommendation. No other vendor has all three.”</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">CipherOutreach comes in three “flavors”</h3>
+        <p class="note" style="margin-bottom:16px">The AI control story — same engine, three modes — lets the buyer choose how far to go, which de-risks adoption.</p>
+        <div class="cards c3">
+          <div class="card"><div class="micro">Scripted</div><p>Deterministic, lowest cost. Proven workflows for scale, consistency, efficiency — predictable outcomes with configurable scripting.</p></div>
+          <div class="card"><div class="micro">AI Supported</div><p>Highly structured, quality-focused. Personalization, context, and natural language layered onto existing workflows while keeping oversight.</p></div>
+          <div class="card"><div class="micro">AI Native</div><p>Dynamic, fully conversational — responds to patient intent in real time, pulls system context, expands into inbound triage and billing support.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px"><b>CipherAI</b> is governance-first, EHR-integrated, human-centric, and scales coordination without adding staffing — HITRUST-rated, verified by 500+ independent hospital reviews.</p>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The proof that closes — timeliness</h3>
+        <div class="cards c3">
+          <div class="card"><div class="micro">The 2-hour window</div><p>Across 109,149 encounters at 25 providers, readmissions dropped <b>13%</b> when the team followed up within two hours. Most can't hit that manually — that's the gap.</p></div>
+          <div class="card"><div class="micro">The “golden hour”</div><p>Across 6,000+ HCAHPS respondents, service recovery within an hour lifts satisfaction in <b>8 of 10</b> domains.</p></div>
+          <div class="card"><div class="micro">Reach is the precondition</div><p><b>90%+</b> patient reach vs. ~50% industry average. If you can't reach the patient, nothing else matters.</p></div>
+        </div>
+        <p class="note" style="margin-top:10px">For the full outcome library, use Module 02 (Customer Stories) — lead each with the outcome the seat in front of you owns.</p>
+      </section>
+
+      <!-- 11 COMPETING WITH EPIC -->
+      <section id="m11">
+        <div class="eyebrow"><span class="num">11</span><span class="lbl">Competing with Epic</span><span class="line"></span></div>
+        <h2 class="sec display">Epic is the system of record. We're the system of action.</h2>
+        <p class="lede">“Why not just use Epic?” shows up in most deals. This is your battlecard — the competitive companion to Module 09 (how we plug into Epic). Lead with the structural argument, not a feature fight, then prove it with labor economics. Epic documents and bills; it's a passive worklist that still needs a nurse to act. We're the active agent that secures the contact, runs the check-in, and escalates only when a human is needed.</p>
+
+        <h3 class="display" style="font-size:19px;margin:28px 0 6px">Why this fight matters in 2026 — the labor-vs-leakage paradox</h3>
+        <p class="note" style="margin-bottom:16px">To capture the revenue they're owed and avoid the penalties they now face, systems would have to hire people they don't have. Epic-native worklists add manual work; we automate it. Name the paradox, then show the math.</p>
+        <div class="cards c3">
+          <div class="card"><div class="micro">TCM</div><p>~$259 per eligible patient ($220 moderate / $298 high) across 10M+ Medicare discharges — and most systems miss 30–60%. A missed 48-hour contact ≈ <b>$250K lost per 1,000 discharges</b>.</p></div>
+          <div class="card"><div class="micro">TEAM</div><p>Mandatory for ~741 hospitals, no opt-out; an unplanned readmission costs <b>~$14K–$30K</b>. Epic logs the surgery but doesn't catch the Day-3 red flag.</p></div>
+          <div class="card"><div class="micro">Post-ED</div><p>A ~<b>$38B</b> annual drain; ~20% return within 30 days at $1,200–$2,500 each. Epic records the return after the patient is back.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The program teardown — passive vs. active</h3>
+        <div class="cards c3">
+          <div class="card"><div class="micro">TCM</div><p><b>Epic:</b> manual worklist — no answer, no revenue. <b>Cipher:</b> automates the CMS interactive contact, documents to the flowsheet, secures the ~$298 manual workflows miss.</p></div>
+          <div class="card"><div class="micro">TEAM</div><p><b>Epic:</b> logs the surgery; doesn't prevent the complication. <b>Cipher:</b> a digital safety net — automated symptom checks catch red flags around Day 3, before a ~$30K readmission.</p></div>
+          <div class="card"><div class="micro">ED</div><p><b>Epic:</b> records the return after arrival. <b>Cipher:</b> a virtual triage — spots medication confusion and routes to pharmacy before they return.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">The proof — labor arbitrage at Advocate Health</h3>
+        <div class="cards c2">
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">The labor-reduction engine</div><p>Advocate runs its outreach program with <b>17 FTEs vs. ~41</b> manually — a 59% staffing reduction. Roughly $3.08M → $1.28M: about <b>$1.8M saved a year</b> and ~2.4× ROI on staffing alone.</p></div>
+          <div class="card"><div class="micro">The CFO reframe</div><p>We don't add a tool — we remove labor you can't hire for. When a buyer assumes Epic-native is cheaper “because it's already paid for,” the license is sunk but the labor to run a passive worklist is not — and that labor is the scarce resource.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">Epic vs. CipherHealth — the structural comparison</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">Epic — System of Record</div><p>Holds clinical data for documentation and billing · portal-based, MyChart-login reach · limited, manual triage · rigid, IT-heavy to change · no published post-discharge outcomes.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">CipherHealth — System of Action</div><p>Condition-specific interaction that drives outcomes · digital-first, no login, hard-to-reach populations · automated triage at population scale · fast, low-IT deployment · dozens of peer-reviewed published outcomes.</p></div>
+        </div>
+
+        <h3 class="display" style="font-size:19px;margin:30px 0 6px">Objection handling</h3>
+        <div class="cards c2">
+          <div class="card"><div class="micro">“Epic can already do this.”</div><p>Epic can record it; it can't run it. It's a passive worklist that still needs a nurse on every call. Same program: 17 FTEs with us vs. ~41 manually.</p></div>
+          <div class="card"><div class="micro">“It's free — we own Epic.”</div><p>The license is sunk; the labor isn't — and that's the scarce resource. Manual TCM failure alone loses ~$250K per 1,000 discharges in unbilled revenue.</p></div>
+          <div class="card"><div class="micro">“We'll just use MyChart.”</div><p>Portal reach depends on a login most post-discharge patients never complete. We're digital-first, no login, in their language and channel — which is how reach gets high enough to protect reimbursement.</p></div>
+          <div class="card" style="background:var(--cream-alt)"><div class="micro">Reference discipline</div><p>Several large systems that moved to Epic-native saw lower engagement and came back — powerful but <b>confidential</b> intel. Don't name a system as an “Epic failure” to a prospect without sponsor clearance. Lead with the structural argument and the Advocate proof.</p></div>
+        </div>
+      </section>
+
+      <!-- COURSE -->
+      <section id="course">
+        <div class="eyebrow"><span class="num">▶</span><span class="lbl">The AE Ramp · flexible</span><span class="line"></span></div>
+        <h2 class="sec display">The ramp is flexible</h2>
+        <p class="lede">Your first weeks also include HR orientation, IT and systems setup, meeting the team, and general product training — scheduled by People Ops. So the AE-specific track runs as flexible phases, not a fixed calendar: run the phases in order and slot them into whatever days orientation leaves open. Compress to about two focused weeks, or stretch to three or four. The full course is a separate Seismic-ready document.</p>
+
+        <div class="week" style="background:var(--cream-alt)">
+          <h3 class="display">Phase 0 — Company onboarding (People Ops owns this)</h3>
+          <p class="wsub">Not the AE track, but it takes real time: HR &amp; compliance · IT setup and access to Salesforce, ChurnZero, Slack &amp; Seismic · meet your manager, CS counterpart &amp; clinical SMEs · the general CipherOutreach + CipherRounds product overview. <b>Two items gate the AE track</b> — systems access and the product overview. Start Phase 1 once both are done.</p>
+        </div>
+
+        <div class="week">
+          <h3 class="display">The AE phases — run in order, interleave around the fixed pieces</h3>
+          <p class="wsub">A focused new hire finishes in about two weeks; if orientation is heavy, plan for three to four. Phases 1–2 come before any live calls; Phase 5 certification is the gate to “ramped.”</p>
+          <div class="daygrid">
+            <div class="day"><div class="d">Phase 1</div><div class="th">Foundation</div><ul><li>Who we are, the position, the buyer</li><li><b>Modules:</b> 00 · 04 · 05</li><li><b>~Time:</b> ½–1 day</li></ul></div>
+            <div class="day"><div class="d">Phase 2</div><div class="th">The method</div><ul><li>Discovery + Challenger: five-step, Mobilizer, diagnostic Qs, cost of inaction</li><li><b>Modules:</b> 01 · 08</li><li><b>~Time:</b> ~1 day</li></ul></div>
+            <div class="day"><div class="d">Phase 3</div><div class="th">Proof, solutions &amp; integration</div><ul><li>Proof, plays, the three 2026 programs (TCM / TEAM / ED PDO), value case, Epic integration, and competing with Epic</li><li><b>Modules:</b> 02 · 03 · 07 · 09 · 11</li><li><b>~Time:</b> ~2 days</li></ul></div>
+            <div class="day"><div class="d">Phase 4</div><div class="th">Team &amp; operating model</div><ul><li>Clinical Advisory Board, support teams, role matrix, systems of record</li><li><b>Modules:</b> 06 · 08</li><li><b>~Time:</b> ½ day</li></ul></div>
+            <div class="day"><div class="d">Phase 5</div><div class="th">Apply &amp; certify</div><ul><li>Deliver the 2026 pitch (Care Coordination Infrastructure), workshops (Reframe Challenge · build-your-own-Margaret · diagnose-by-asking), shadow calls, mock-pitch certification</li><li><b>Modules:</b> 10 · All</li><li><b>~Time:</b> 1–2 days</li></ul></div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="foot wrap">
+        <p><b>CipherHealth · Internal &amp; Confidential.</b> AE onboarding library. Built on the 2026 positioning template and refreshed brand system. Outcomes shown are de-identified, marketing-approved customer results — no PHI, no contract or pricing terms. Reference named customers only when cleared.</p>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+// proof filter
+(function(){
+  var btns=document.querySelectorAll('.fbtn');
+  var items=document.querySelectorAll('#prooflist .proof');
+  btns.forEach(function(b){
+    b.addEventListener('click',function(){
+      btns.forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      var f=b.getAttribute('data-f');
+      items.forEach(function(it){
+        it.style.display=(f==='all'||it.getAttribute('data-c')===f)?'flex':'none';
+      });
+    });
+  });
+})();
+
+// ROI calculator
+(function(){
+  var dis=document.getElementById('dis'),rate=document.getElementById('rate'),
+      cost=document.getElementById('cost'),red=document.getElementById('red');
+  var oSave=document.getElementById('o_save'),oAv=document.getElementById('o_avoided'),oHrs=document.getElementById('o_hours');
+  function money(n){
+    if(n>=1e6) return '$'+(n/1e6).toFixed(1)+'M';
+    if(n>=1e3) return '$'+Math.round(n/1e3)+'K';
+    return '$'+Math.round(n);
+  }
+  function calc(){
+    var d=+dis.value||0, r=(+rate.value||0)/100, c=+cost.value||0, rd=(+red.value||0)/100;
+    var current=d*r, avoided=current*rd, save=avoided*c, hours=(d/1000)*250;
+    oSave.textContent=money(save);
+    oAv.textContent=Math.round(avoided).toLocaleString()+' readmissions avoided / year';
+    oHrs.textContent=Math.round(hours).toLocaleString();
+  }
+  [dis,rate,cost,red].forEach(function(el){el.addEventListener('input',calc)});
+  calc();
+})();
+
+// active nav on scroll
+(function(){
+  var links=document.querySelectorAll('.sidenav a');
+  var map={};
+  links.forEach(function(l){var id=l.getAttribute('href').slice(1); map[id]=l;});
+  var secs=document.querySelectorAll('section[id]');
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        links.forEach(function(l){l.classList.remove('is-active')});
+        if(map[e.target.id]) map[e.target.id].classList.add('is-active');
+      }
+    });
+  },{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(function(s){obs.observe(s)});
+})();
+</script>
+</body>
+</html>
