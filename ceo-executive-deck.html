@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CipherHealth — CEO Executive Briefing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Merriweather:ital,opsz,wght@0,18..144,400;0,18..144,500;1,18..144,400;1,18..144,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F2F1F9; --cream-alt:#E9E7F5; --cream-deep:#DEDAF0; --paper:#FFFFFF;
+  --ink:#2D2660; --ink-2:#3A3450; --ink-3:#4A4458; --ink-4:#8580A0;
+  --aubergine:#5B4FB5; --aubergine-dim:#6E63C0; --rust:#00B4A4; --teal:#00B4A4;
+  --chartreuse:#B5CC2E; --violet:#5B4FB5; --anchor:#2D2660;
+  --hairline:#E0DCF0; --hairline-soft:#ECEAF7;
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--cream);color:var(--ink);font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.display{font-family:'Inter',system-ui,sans-serif;letter-spacing:-0.015em;line-height:1.08}
+.micro{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-4)}
+.micro.rust{color:var(--rust)}
+h1,h2,h3,p{margin:0}
+a{color:var(--aubergine)}
+
+/* chrome */
+.chrome{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px;background:rgba(242,241,249,0.94);backdrop-filter:saturate(150%) blur(10px);border-bottom:1px solid var(--hairline-soft)}
+.brand{display:flex;align-items:center;gap:10px}
+.mark{width:24px;height:24px;border-radius:6px;background:var(--aubergine);color:#fff;display:grid;place-items:center;font-weight:600;font-size:14px}
+.brand b{font-size:16px;font-weight:600}
+.brand span{font-size:12px;color:var(--ink-4);border-left:1px solid var(--hairline);padding-left:10px;margin-left:2px}
+.controls{display:flex;align-items:center;gap:12px}
+.ctrl{background:var(--paper);border:1px solid var(--hairline);border-radius:8px;padding:7px 12px;font-size:13px;color:var(--ink-3);cursor:pointer}
+.ctrl:hover{border-color:var(--aubergine-dim);color:var(--aubergine)}
+.ctrl.on{background:var(--aubergine);color:#fff;border-color:var(--aubergine)}
+.pager{font-family:'Inter',system-ui,sans-serif;font-size:13px;color:var(--ink-4);min-width:72px;text-align:center}
+.tag{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--rust);border:1px solid var(--rust);border-radius:100px;padding:4px 10px}
+
+/* deck */
+.deck{height:100vh;padding-top:56px;display:flex;flex-direction:column}
+.stage{flex:1;display:grid;place-items:center;padding:28px 32px 12px;min-height:0}
+.slide{display:none;width:min(1080px,100%);height:min(600px,calc(100vh - 200px));background:var(--paper);border:1px solid var(--hairline);border-radius:18px;padding:48px 52px;overflow:hidden;position:relative;box-shadow:0 18px 50px rgba(45,38,96,0.06)}
+.slide.is-active{display:flex;flex-direction:column}
+.slide .foot{position:absolute;bottom:22px;left:52px;right:52px;display:flex;justify-content:space-between;font-size:11px;color:var(--ink-4)}
+.slide-num{font-family:'Inter',system-ui,sans-serif;color:var(--rust)}
+
+/* slide types */
+.slide-title{justify-content:center;background:linear-gradient(145deg,var(--ink) 0%,#3d3578 100%);color:var(--cream);border:none}
+.slide-title .kicker{color:var(--teal);font-size:12px;letter-spacing:0.2em;text-transform:uppercase;margin-bottom:20px}
+.slide-title h1{font-size:clamp(36px,5vw,54px);font-weight:600;margin-bottom:14px;max-width:16ch}
+.slide-title h1 em{font-family:'Merriweather',Georgia,serif;font-style:italic;font-weight:500;color:#c9c0f0}
+.slide-title .sub{font-size:20px;color:#d8d4f0;max-width:48ch;margin-bottom:28px}
+.slide-title .meta{display:flex;flex-wrap:wrap;gap:10px}
+.slide-title .chip{font-size:13px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);border-radius:100px;padding:7px 14px;color:#e8e4ff}
+.slide-title .chip b{color:var(--teal)}
+
+.eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.eyebrow .lbl{font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-4)}
+.eyebrow .line{height:1px;background:var(--hairline);flex:1}
+h2.sl{font-size:34px;font-weight:500;margin-bottom:12px;max-width:22ch}
+.lede{font-size:18px;color:var(--ink-2);max-width:58ch;margin-bottom:22px}
+
+.statband{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--hairline);border-radius:12px;overflow:hidden;margin:10px 0}
+.statband div{padding:18px 16px;border-right:1px solid var(--hairline-soft);background:var(--cream-alt)}
+.statband div:last-child{border-right:none}
+.statband .v{font-size:28px;color:var(--aubergine);line-height:1}
+.statband .k{font-size:12.5px;color:var(--ink-3);margin-top:6px}
+
+.cards{display:grid;gap:14px;flex:1;min-height:0}
+.c2{grid-template-columns:1fr 1fr}
+.c3{grid-template-columns:repeat(3,1fr)}
+.card{background:var(--cream-alt);border:1px solid var(--hairline);border-radius:12px;padding:18px 20px}
+.card.dark{background:var(--ink);color:var(--cream);border:none}
+.card.dark .micro{color:#b9b2e0}
+.card.dark p{color:#e8e4ff}
+.card h3{font-size:17px;font-weight:500;margin-bottom:6px}
+.card p{font-size:14px;color:var(--ink-2);line-height:1.45}
+.card ul{margin:8px 0 0;padding-left:16px}
+.card li{font-size:13.5px;color:var(--ink-2);margin-bottom:4px}
+.card .pin{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--rust);display:block;margin-bottom:4px}
+
+.quote{background:var(--ink);color:var(--cream);border-radius:12px;padding:20px 22px;margin-top:12px}
+.quote p{font-family:'Merriweather',Georgia,serif;font-size:17px;font-style:italic;line-height:1.45;color:#f0edff}
+.quote .who{font-family:'Inter',system-ui,sans-serif;font-size:12px;font-style:normal;color:#b9b2e0;margin-top:10px}
+
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--hairline);border-radius:12px;overflow:hidden;flex:1}
+.phase{padding:20px 22px;border-right:1px solid var(--hairline-soft);background:var(--paper)}
+.phase:last-child{border-right:none}
+.phase .when{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+.phase h3{font-size:16px;font-weight:500;margin-bottom:8px}
+.phase p{font-size:13px;color:var(--ink-2);margin-bottom:10px}
+.phase ul{margin:0;padding-left:15px}
+.phase li{font-size:12.5px;color:var(--ink-3);margin-bottom:4px}
+
+.innov-badge{display:inline-block;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;background:var(--aubergine);color:#fff;border-radius:100px;padding:4px 10px;margin-bottom:10px}
+
+/* speaker notes */
+.notes-panel{flex:none;max-height:0;overflow:hidden;transition:max-height .25s ease;background:var(--ink);color:var(--cream);border-top:1px solid rgba(255,255,255,0.08)}
+.notes-panel.open{max-height:220px;overflow-y:auto}
+.notes-inner{padding:16px 32px 20px;max-width:1080px;margin:0 auto}
+.notes-inner .micro{color:#b9b2e0;margin-bottom:6px}
+.notes-inner p{font-size:14px;color:#e8e4ff;line-height:1.5;margin-bottom:8px}
+.notes-inner p b{color:var(--chartreuse);font-weight:500}
+.notes-inner .tip{font-size:13px;color:#c9bcd6;border-left:2px solid var(--teal);padding-left:12px;margin-top:6px}
+
+@media(max-width:900px){
+  .slide{padding:32px 28px;height:auto;min-height:480px}
+  .c2,.c3,.statband,.timeline{grid-template-columns:1fr}
+  .statband div,.phase{border-right:none;border-bottom:1px solid var(--hairline-soft)}
+  .chrome .tag{display:none}
+}
+@media print{
+  .chrome,.notes-panel{display:none}
+  .deck{padding:0}
+  .slide{display:flex!important;page-break-after:always;height:auto;box-shadow:none;margin:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="chrome">
+  <div class="brand">
+    <span class="mark">C</span>
+    <b>CipherHealth</b>
+    <span>CEO Executive Briefing</span>
+  </div>
+  <div class="controls">
+    <span class="tag">Zach · Exec Connections</span>
+    <button class="ctrl" id="prev" aria-label="Previous slide">←</button>
+    <span class="pager" id="pager">1 / 10</span>
+    <button class="ctrl" id="next" aria-label="Next slide">→</button>
+    <button class="ctrl" id="notes-toggle">Speaker notes</button>
+  </div>
+</div>
+
+<div class="deck">
+  <div class="stage" id="stage">
+
+    <!-- SLIDE 1: TITLE -->
+    <section class="slide slide-title is-active" data-slide="1">
+      <div class="kicker">CEO-led · Executive connections · 2026</div>
+      <h1 class="display">Care coordination is the next <em>infrastructure</em> layer.</h1>
+      <p class="sub">A 10-minute briefing on market reality, our 18–24 month strategy for health systems, patients, and clinicians — and the innovation roadmap that makes CipherHealth the system of execution.</p>
+      <div class="meta">
+        <span class="chip"><b>Zach Silverzweig</b> · CEO &amp; Co-Founder</span>
+        <span class="chip">16 years · 1B+ encounters · HITRUST</span>
+      </div>
+      <div class="foot"><span>CipherHealth · Confidential</span><span class="slide-num">01</span></div>
+    </section>
+
+    <!-- SLIDE 2: MARKET + REGULATION -->
+    <section class="slide" data-slide="2">
+      <div class="eyebrow"><span class="lbl">The moment</span><span class="line"></span></div>
+      <h2 class="sl display">Margin pressure and regulation are converging on the same gap.</h2>
+      <p class="lede">Health systems documented care for a decade. Now CMS and the P&amp;L demand they <b>execute</b> it — at population scale, with fewer people.</p>
+      <div class="statband">
+        <div><div class="v">$78B</div><div class="k">Annual U.S. cost of poor coordination</div></div>
+        <div><div class="v">741</div><div class="k">Hospitals in mandatory TEAM (2026–2030)</div></div>
+        <div><div class="v">1%</div><div class="k">Medicare cut — HAC worst quartile</div></div>
+        <div><div class="v">15%+</div><div class="k">Nurse turnover · ~$61K per replacement</div></div>
+      </div>
+      <div class="cards c2" style="margin-top:14px">
+        <div class="card"><span class="pin">Poor market conditions</span><h3>The labor–leakage paradox</h3><p>To capture TCM revenue and avoid TEAM penalties, systems would need to hire staff they cannot find. Manual worklists don't scale; margins can't absorb another point solution.</p></div>
+        <div class="card"><span class="pin">Heavy regulation</span><h3>Accountability without execution</h3><p>TCM (2-day contact), TEAM (30-day episode), HRRP, HAC, VBP — each requires documented, timely patient contact. The EHR records the obligation; it doesn't run the workflow.</p></div>
+      </div>
+      <div class="foot"><span>Market frame · AHRQ · CMS FY2026</span><span class="slide-num">02</span></div>
+    </section>
+
+    <!-- SLIDE 3: STRUCTURAL GAP -->
+    <section class="slide" data-slide="3">
+      <div class="eyebrow"><span class="lbl">The reframe</span><span class="line"></span></div>
+      <h2 class="sl display">Your EHR documents care. We execute it.</h2>
+      <p class="lede">Three systems, three jobs. The gap between clinical intent and clinical reality is where patients fall through — and where CipherHealth has operated for 16 years.</p>
+      <div class="cards c3">
+        <div class="card"><span class="pin">System of record</span><h3>The EHR</h3><p>Documents history, processes billing, holds the chart. Epic, Cerner, Meditech. <b>Passive.</b></p></div>
+        <div class="card dark"><span class="pin">System of execution</span><h3>CipherHealth</h3><p>Runs coordination — follow-up, escalation, rounding, transitions. Condition-specific, population-scale. <b>This is the layer we own.</b></p></div>
+        <div class="card"><span class="pin">System of insight</span><h3>Measurement</h3><p>HCAHPS, dashboards, surveys. Tells you what already broke. <b>After the fact.</b></p></div>
+      </div>
+      <div class="quote">
+        <p>"Hospitals know what workflows matter. The real challenge is ensuring those workflows scale consistently across the enterprise without adding more burden to already stretched teams."</p>
+        <div class="who">— Zach Silverzweig, CEO</div>
+      </div>
+      <div class="foot"><span>Position: care coordination infrastructure</span><span class="slide-num">03</span></div>
+    </section>
+
+    <!-- SLIDE 4: 18-24 MONTH STRATEGY -->
+    <section class="slide" data-slide="4">
+      <div class="eyebrow"><span class="lbl">18–24 month strategy</span><span class="line"></span></div>
+      <h2 class="sl display">One platform. Three constituencies. Measurable outcomes.</h2>
+      <p class="lede">We are not selling features — we are becoming the operational infrastructure health systems depend on for coordination, compliance, and margin recovery.</p>
+      <div class="timeline">
+        <div class="phase">
+          <div class="when">Health systems</div>
+          <h3>Land on regulation, expand on proof</h3>
+          <p>Lead with TCM, TEAM, and ED follow-up — clear ROI, 4–8 week deploy, minimal IT lift.</p>
+          <ul>
+            <li>Consolidate vendor sprawl → one coordination layer</li>
+            <li>Epic Flowsheets: near-real-time chart integration</li>
+            <li>ACO / CIN entry for attributed populations</li>
+            <li>Land ~$75K → expand to $250–400K enterprise</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="when">Patients</div>
+          <h3>Reach first, then protect</h3>
+          <p>90%+ reach vs. ~40% portal — digital-first, multi-channel, multi-language. No login required.</p>
+          <ul>
+            <li>2-hour follow-up window → 13% readmission drop</li>
+            <li>72-hour ED safety net (the Margaret story)</li>
+            <li>SDOH screening embedded in every touch</li>
+            <li>Live nurse transfer when urgency is detected</li>
+          </ul>
+        </div>
+        <div class="phase">
+          <div class="when">Clinicians</div>
+          <h3>Workforce extender, not another tool</h3>
+          <p>Designed by nurses, governed for CIOs. Removes manual call-down and post-round documentation.</p>
+          <ul>
+            <li>250 clinical hours back per 1,000 discharges</li>
+            <li>Ambient listening · service recovery in &lt;1 hr</li>
+            <li>17 FTEs vs. ~41 manual (Advocate proof)</li>
+            <li>Clinical Advisory Board shapes every program</li>
+          </ul>
+        </div>
+      </div>
+      <div class="foot"><span>Strategy horizon: H2 2026 – H1 2028</span><span class="slide-num">04</span></div>
+    </section>
+
+    <!-- SLIDE 5: INNOVATION 1 — CipherAI -->
+    <section class="slide" data-slide="5">
+      <span class="innov-badge">Innovation 1 of 5</span>
+      <div class="eyebrow"><span class="lbl">CipherAI</span><span class="line"></span></div>
+      <h2 class="sl display">AI embedded in workflows — not layered on top.</h2>
+      <p class="lede">Governance-first, EHR-integrated, human-centric. Three modes so every health system chooses its risk tolerance.</p>
+      <div class="cards c3">
+        <div class="card"><span class="pin">Scripted</span><h3>Deterministic scale</h3><p>Proven clinical pathways. Lowest cost, highest consistency. TCM, TEAM, high-risk cohorts.</p></div>
+        <div class="card"><span class="pin">AI supported</span><h3>Structured personalization</h3><p>Natural language on top of nurse-designed scripts. Context-aware, human oversight retained.</p></div>
+        <div class="card dark"><span class="pin">AI native</span><h3>Conversational coordination</h3><p>Dynamic triage, inbound support, billing questions. Live transfer when clinical judgment is needed.</p></div>
+      </div>
+      <div class="cards c2" style="margin-top:12px">
+        <div class="card"><span class="pin">Governance</span><p>HITRUST · SOC 2 Type 2 · HIPAA · TX-RAMP · no secondary training on customer data · CMEK · 500+ hospital security reviews</p></div>
+        <div class="card"><span class="pin">CEO line</span><p>"AI delivers the greatest value when it's grounded in real operational workflow data — intelligence inside the workflows you already rely on."</p></div>
+      </div>
+      <div class="foot"><span>CipherAI · three flavors</span><span class="slide-num">05</span></div>
+    </section>
+
+    <!-- SLIDE 6: INNOVATION 2 — EPIC INTEGRATION -->
+    <section class="slide" data-slide="6">
+      <span class="innov-badge">Innovation 2 of 5</span>
+      <div class="eyebrow"><span class="lbl">EHR integration</span><span class="line"></span></div>
+      <h2 class="sl display">From siloed tool to chart-native infrastructure.</h2>
+      <p class="lede">70%+ of our customers run Epic. We enhance the system of record — we don't compete with it.</p>
+      <div class="cards c3">
+        <div class="card dark"><span class="pin">2026 headline</span><h3>Epic Flowsheets</h3><p>Outreach responses land as discrete Flowsheet fields in near-real-time — seconds, not a nightly batch. Clinicians act; analysts trend.</p></div>
+        <div class="card"><span class="pin">Activation gateway</span><h3>EHR Activation Gateway</h3><p>Streamlines program activation and patient data movement. Lead when buyers want vendor consolidation.</p></div>
+        <div class="card"><span class="pin">Access</span><h3>Enhanced Appt Reminders</h3><p>Two-way reminders with rescheduling written back to Epic scheduling. Revenue recovery play.</p></div>
+      </div>
+      <div class="cards c2" style="margin-top:12px">
+        <div class="card"><span class="pin">Deploy speed</span><p>&lt;25 IT hours for a new outreach program · 3–8 weeks standard post-discharge · configurable without custom code</p></div>
+        <div class="card"><span class="pin">Why it matters</span><p>Makes CipherHealth a pillar of the patient-engagement program — embedded in the chart, not a tab nurses ignore.</p></div>
+      </div>
+      <div class="foot"><span>Epic · Cerner · Meditech</span><span class="slide-num">06</span></div>
+    </section>
+
+    <!-- SLIDE 7: INNOVATION 3 — REGULATORY PLAYS -->
+    <section class="slide" data-slide="7">
+      <span class="innov-badge">Innovation 3 of 5</span>
+      <div class="eyebrow"><span class="lbl">Regulatory execution</span><span class="line"></span></div>
+      <h2 class="sl display">Turn CMS mandates into automated workflows.</h2>
+      <p class="lede">Three 2026 lead programs — each clears the bar: clear economic value, proven outcomes, minimal lift, strong differentiation vs. the EHR.</p>
+      <div class="cards c3">
+        <div class="card"><span class="pin">TCM</span><h3>Transitional Care Management</h3><p>Automates 2-business-day interactive contact + med rec. Secures ~$298/patient manual workflows miss. Intermountain: 41% readmission drop, $15M saved.</p></div>
+        <div class="card dark"><span class="pin">TEAM</span><h3>Episode accountability</h3><p>Mandatory 2026–2030 for ~741 hospitals. 30-day surgical follow-up, SNF transition, PCP connection. Catches Day-3 red flags before ~$30K readmission.</p></div>
+        <div class="card"><span class="pin">ED follow-up</span><h3>Post-discharge ED outreach</h3><p>24–72 hr automated triage. ~$2/call vs. ~$82 manual. Prevents bounce-backs; routes high-risk to live nurse. Prisma: +35 pt LTR at largest ED.</p></div>
+      </div>
+      <div class="foot"><span>Day 2 / 9 / 16 &amp; 23 / 30 cadence · HL7 integration</span><span class="slide-num">07</span></div>
+    </section>
+
+    <!-- SLIDE 8: INNOVATION 4 — PLATFORM -->
+    <section class="slide" data-slide="8">
+      <span class="innov-badge">Innovation 4 of 5</span>
+      <div class="eyebrow"><span class="lbl">Platform continuum</span><span class="line"></span></div>
+      <h2 class="sl display">One coordination layer across the full journey.</h2>
+      <p class="lede">No other vendor holds outreach, rounding, and transition data across all three phases of care.</p>
+      <div class="cards c2">
+        <div class="card"><span class="pin">CipherOutreach</span><h3>Pre- through post-encounter</h3><ul><li>Appointment prep · care-gap closure · post-discharge follow-up</li><li>Population programs · Conversational AI · live nurse transfer</li><li>Multi-channel, multi-language, no patient login</li></ul></div>
+        <div class="card"><span class="pin">CipherRounds</span><h3>In-care intelligence</h3><ul><li>Digital patient, staff, and location rounding</li><li>Real-time service recovery · safety capture · staff recognition</li><li>Ambient listening — documentation off the nurse</li></ul></div>
+      </div>
+      <div class="cards c3" style="margin-top:12px">
+        <div class="card"><span class="pin">Quality &amp; safety</span><p>HAC, falls, HAPI — digital rounding routes risk in minutes. ChristianaCare: 41% HAI reduction.</p></div>
+        <div class="card"><span class="pin">Experience</span><p>HCAHPS-mapped rounding. Lenox Hill: 99th percentile. Golden hour recovery lifts 8 of 10 domains.</p></div>
+        <div class="card dark"><span class="pin">Consolidation</span><p>One security posture · one analytics hub · one integration model. Rip-and-replace is not required — land and expand.</p></div>
+      </div>
+      <div class="foot"><span>CipherOutreach + CipherRounds + Platform</span><span class="slide-num">08</span></div>
+    </section>
+
+    <!-- SLIDE 9: INNOVATION 5 — DATA MOAT -->
+    <section class="slide" data-slide="9">
+      <span class="innov-badge">Innovation 5 of 5</span>
+      <div class="eyebrow"><span class="lbl">The moat</span><span class="line"></span></div>
+      <h2 class="sl display">You cannot buy 16 years of outcomes data.</h2>
+      <p class="lede">1B+ encounters power a replicable playbook — not recommendations, evidence. This is the flywheel that makes every AI deployment smarter.</p>
+      <div class="statband">
+        <div><div class="v">1B+</div><div class="k">Patient encounters</div></div>
+        <div><div class="v">200M+</div><div class="k">Interactions tracked start→resolution</div></div>
+        <div><div class="v">17M</div><div class="k">Documented patient saves</div></div>
+        <div><div class="v">16+</div><div class="k">Years of outcomes data</div></div>
+      </div>
+      <div class="cards c2" style="margin-top:14px">
+        <div class="card"><span class="pin">Four attributes — the hierarchy</span><ul><li><b>AI purpose-built for healthcare</b> — door opener</li><li><b>Clinical program depth</b> — credibility / closer</li><li><b>Data no one else has</b> — defensible moat</li><li><b>Full continuum of care</b> — no one else sees this</li></ul></div>
+        <div class="card dark"><span class="pin">Clinical governance</span><p>Clinical Advisory Board: Henry Ford, Prisma, Intermountain, Norton, MD Anderson, Advocate. In-house: Joy Avery (SVP Clinical Strategy), Donna Pritchard (VP Clinical Services). Programs shaped by nurses — not a software team guessing.</p></div>
+      </div>
+      <div class="foot"><span>Evidence · not recommendations</span><span class="slide-num">09</span></div>
+    </section>
+
+    <!-- SLIDE 10: CLOSE -->
+    <section class="slide" data-slide="10">
+      <div class="eyebrow"><span class="lbl">The partnership</span><span class="line"></span></div>
+      <h2 class="sl display">Let's operationalize coordination — together.</h2>
+      <p class="lede">Leave the room with one sentence: <b>AI built for healthcare, clinical programs refined over 16 years, and the outcomes data to back every recommendation. No other vendor has all three.</b></p>
+      <div class="cards c3">
+        <div class="card"><span class="pin">Proof to bring</span><ul><li>Intermountain: $15M · 41% readmissions</li><li>Advocate: 59% staffing reduction</li><li>UCSF: $82→$2 per call</li><li>Lenox Hill: 99th pct HCAHPS</li></ul></div>
+        <div class="card"><span class="pin">The CEO question</span><p style="font-family:'Merriweather',Georgia,serif;font-style:italic;font-size:15px;color:var(--ink)">"Three years out, what has to be true about how this system coordinates care — and what's blocking it now?"</p></div>
+        <div class="card dark"><span class="pin">Suggested next step</span><ul><li>30-min executive working session with CNO + CFO</li><li>Readiness assessment on their coordination gap</li><li>Peer reference (when cleared) matched to their pressure</li><li>Pilot on highest-urgency program: TCM, TEAM, or ED</li></ul></div>
+      </div>
+      <div class="quote" style="margin-top:14px">
+        <p>"The next chapter of healthcare performance will be defined by how well organizations operationalize coordination across the patient journey."</p>
+        <div class="who">— Zach Silverzweig, CEO · cipherhealth.com</div>
+      </div>
+      <div class="foot"><span>cipherhealth.com/assess · ROI calculators</span><span class="slide-num">10</span></div>
+    </section>
+
+  </div>
+
+  <!-- SPEAKER NOTES -->
+  <div class="notes-panel open" id="notes-panel">
+    <div class="notes-inner" id="notes-content">
+      <div class="micro rust">Speaker notes · Slide 1</div>
+      <p><b>Open personal, then pivot to market.</b> "I co-founded CipherHealth after my own cancer journey at Columbia — I saw world-class clinicians inside systems where coordination still broke down. That gap is now a board-level crisis, and it's why I'm back as CEO."</p>
+      <p class="tip">Don't pitch product in the first 60 seconds. Establish credibility and urgency. Let them nod before you show a single stat.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var cur = 0;
+  var pager = document.getElementById('pager');
+  var notesPanel = document.getElementById('notes-panel');
+  var notesContent = document.getElementById('notes-content');
+  var notesOpen = true;
+
+  var speakerNotes = [
+    '<div class="micro rust">Speaker notes · Slide 1 — Title</div>' +
+    '<p><b>Open personal, then pivot to market.</b> "I co-founded CipherHealth after my own cancer journey at Columbia — I saw world-class clinicians inside systems where coordination still broke down. That gap is now a board-level crisis, and it\'s why I\'m back as CEO."</p>' +
+    '<p class="tip">Don\'t pitch product in the first 60 seconds. Establish credibility and urgency. Let them nod before you show a single stat.</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 2 — Market</div>' +
+    '<p><b>Name the paradox.</b> "You\'re being asked to do more with less — capture TCM dollars, survive TEAM episodes, avoid HAC penalties — but you can\'t hire the nurses to run manual worklists. That\'s not a technology problem. It\'s an execution problem."</p>' +
+    '<p><b>Land one number.</b> Pick the stat that matches their seat: CFO → $78B or TCM leakage; CNO → 15% turnover; COO → TEAM mandatory cohort.</p>' +
+    '<p class="tip">Pause after the stat band. Ask: "Which of these is on your board deck this quarter?"</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 3 — Reframe</div>' +
+    '<p><b>Teach, don\'t tell.</b> "Your Epic investment was right — it\'s the system of record. But documentation isn\'t execution. The follow-up call, the discharge check, the escalation to a nurse — that work happens outside the chart unless you operationalize it."</p>' +
+    '<p><b>Use the quote.</b> Read it slowly. It\'s your voice — it lands because it\'s operational, not aspirational.</p>' +
+    '<p class="tip">If they\'re Epic-first: "70% of our customers are too. We make Epic work harder, not compete with it."</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 4 — Strategy</div>' +
+    '<p><b>Three audiences, one platform.</b> Walk left to right: "For your system — we land where regulation creates budget, expand where proof creates consensus. For your patients — reach is the precondition; if you can\'t contact them, nothing else matters. For your clinicians — we give time back, not another login."</p>' +
+    '<p><b>18–24 months:</b> "Our roadmap is not a feature list. It\'s making coordination infrastructure as standard as the EHR — starting with the program that hurts most today."</p>' +
+    '<p class="tip">Ask the CEO question here if the room is warm: "Three years out, what has to be true about coordination — and what\'s blocking it?"</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 5 — CipherAI</div>' +
+    '<p><b>De-risk AI.</b> "Every health system has an AI mandate and an AI skeptic — usually the same CIO. Three flavors let you choose: scripted for scale, supported for personalization, native for conversational triage. Same governance underneath."</p>' +
+    '<p><b>Governance line:</b> "We don\'t train on your data. HITRUST isn\'t a badge — it\'s how we\'ve earned 500+ hospital security reviews."</p>' +
+    '<p class="tip">Never say "AI replaces nurses." Say "AI handles the 80% so nurses handle the 20% that needs a human."</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 6 — Epic</div>' +
+    '<p><b>Flowsheets is the headline.</b> "Your nurses used to see call results in one tool and the chart in Epic — sometimes 24 hours later. Now it\'s in the Flowsheet in seconds. That\'s what makes this infrastructure, not a sidecar."</p>' +
+    '<p><b>IT de-risk:</b> "&lt;25 IT hours. We\'ve done this at Penn — first program in 8 weeks, now every 3–4 weeks."</p>' +
+    '<p class="tip">If CIO is skeptical: offer Implementation + Security for a 15-min technical follow-up. You don\'t need to be the engineer.</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 7 — Regulatory</div>' +
+    '<p><b>Pick one program.</b> Don\'t explain all three equally. TCM for readmission + revenue CFOs. TEAM if they\'re in a mandatory CBSA. ED if their front door is the pain.</p>' +
+    '<p><b>Margaret story (ED):</b> "72-year-old, three prescriptions, back in two days — couldn\'t afford two of them. That\'s your bounce-back population. One automated touch catches it."</p>' +
+    '<p class="tip">Structural beat: "Epic records the return. We prevent it."</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 8 — Platform</div>' +
+    '<p><b>Continuum story.</b> "Pre-care, in-care, post-care — we hold data across all three. That\'s why consolidation works: one vendor, one security review, one analytics layer."</p>' +
+    '<p><b>Rounding for CNOs:</b> "Service recovery in the golden hour lifts satisfaction in 8 of 10 HCAHPS domains. Surveys tell you what happened; rounding lets you fix it at the bedside."</p>' +
+    '<p class="tip">Cross-sell frame: Outreach-only customers are prime Rounds expansion — and vice versa.</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 9 — Moat</div>' +
+    '<p><b>The close on differentiation.</b> "Point solutions can add AI tomorrow. They cannot add 16 years of encounter data, nurse-designed escalation paths, and published outcomes. That\'s what makes our AI operational — not experimental."</p>' +
+    '<p><b>Clinical board:</b> Name one member that matches their geography or seat — but never imply endorsement without clearance.</p>' +
+    '<p class="tip">Repeat the four-attribute hierarchy once, in order. It\'s the memorize line for every AE — it works for a CEO too.</p>',
+
+    '<div class="micro rust">Speaker notes · Slide 10 — Close</div>' +
+    '<p><b>One sentence, then silence.</b> Deliver the memorize line. Stop talking. Let them respond.</p>' +
+    '<p><b>Ask for a specific next step.</b> "Would it make sense to run the readiness assessment on your system and bring your CNO into a 30-minute working session?"</p>' +
+    '<p><b>Personal close:</b> "I\'m back because I believe coordination is the next infrastructure layer — and your system deserves a partner who\'s been doing this for 16 years, not a pilot that disappears in 90 days."</p>' +
+    '<p class="tip">Bring Joy Avery or Donna Pritchard to the follow-up for clinical credibility. You open the relationship; they close the "will this work for our nurses?" objection.</p>'
+  ];
+
+  function show(i){
+    if(i<0)i=0; if(i>=total)i=total-1;
+    cur=i;
+    slides.forEach(function(s,idx){s.classList.toggle('is-active',idx===cur)});
+    pager.textContent=(cur+1)+' / '+total;
+    notesContent.innerHTML=speakerNotes[cur]||'';
+    history.replaceState(null,'','#slide-'+(cur+1));
+  }
+
+  document.getElementById('prev').addEventListener('click',function(){show(cur-1)});
+  document.getElementById('next').addEventListener('click',function(){show(cur+1)});
+  document.getElementById('notes-toggle').addEventListener('click',function(){
+    notesOpen=!notesOpen;
+    notesPanel.classList.toggle('open',notesOpen);
+    this.classList.toggle('on',notesOpen);
+    this.textContent=notesOpen?'Speaker notes':'Show notes';
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key===' '){e.preventDefault();show(cur+1)}
+    if(e.key==='ArrowLeft'){e.preventDefault();show(cur-1)}
+    if(e.key==='n'){document.getElementById('notes-toggle').click()}
+  });
+
+  var hash=location.hash.match(/slide-(\d+)/);
+  if(hash)show(parseInt(hash[1],10)-1);
+  else show(0);
+})();
+</script>
+</body>
+</html>
