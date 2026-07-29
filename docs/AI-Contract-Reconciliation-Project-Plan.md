@@ -37,15 +37,18 @@ gantt
     section Phase 2 — Automation
     Renewal calendar & workflow eval     :p2a, after p1c, 14d
     Cross-functional automation design   :p2b, after p2a, 14d
-    section Phase 3 — Billing Integration
-    Invoice-to-SOW linkage (Chris)       :p3a, after p2b, 21d
+    section Invoice Integration
+    Invoice-to-SOW linkage (Chris)       :inv, after p2b, 21d
+    section Phase 3 — Security Review
+    Security assessment incorporation    :p3a, after inv, 14d
 ```
 
 | Phase | Focus | Gate to Proceed |
 |-------|-------|-----------------|
 | **Phase 1** | Foundational data — repository, MSA summaries, SOW inventory | Clean, trusted, searchable dataset complete |
 | **Phase 2** | AI-driven automation evaluation (renewals, notifications, orchestration) | Phase 1 complete; cross-functional teams engaged |
-| **Phase 3** | Invoice integration — contracted vs. deployed vs. billed | Phase 2 automation scope defined |
+| **Invoice Integration** | Connect invoice details to active SOWs — contracted vs. deployed vs. billed (Chris) | Phase 2 automation scope defined |
+| **Phase 3** | Incorporate last security review — assessment currency, risk visibility (Kenny & Tyler) | Invoice integration complete |
 
 > **Important:** Cross-functional automation discussions begin **after** Phase 1 foundational work is complete — not before. Establish a clean, trusted data set first, then automate from there.
 
@@ -85,6 +88,7 @@ Leverage AI to automate a weekly update to the project team and SLT. Each update
 - [ ] Parent-organization hierarchy documented
 - [ ] Storage location and naming convention documented (runbook)
 - [ ] Documents indexed for search and AI ingestion
+- [ ] Version control: current executed versions clearly distinguished from superseded documents
 
 **Success criteria:** Any team member can locate any customer agreement by parent org, entity, or contract type within minutes.
 
@@ -93,6 +97,8 @@ Leverage AI to automate a weekly update to the project team and SLT. Each update
 ### 1.3 MSA Summary — Per Customer
 
 **Tooling:** Cursor / AI-assisted extraction with human verification
+
+**Version control requirement:** AI must only read **current, executed versions** of MSAs — not documents passed during redlines, and not versions that have been replaced or updated. The repository must flag and exclude draft, redline, and superseded documents from AI ingestion.
 
 Generate a standardized summary for each customer:
 
@@ -106,14 +112,16 @@ Generate a standardized summary for each customer:
 | Order of precedence | Conflict resolution across agreements |
 | Contract term | Duration and obligations |
 | Renewal date and renewal language | Renewal planning (including agreements that remain active while an SOW is active) |
-| Notable commercial, legal, or operational provisions | Account strategy impact |
+| Notable commercial, legal, or operational provisions | Account strategy impact — including **restrictions such as logo usage** (AI can scan and flag these) |
 
 **Deliverables:**
 - [ ] Standardized MSA summary template
-- [ ] MSA summary for each customer in the repository
+- [ ] Document version policy (executed vs. redline vs. superseded) documented and enforced
+- [ ] MSA summary for each customer in the repository (current versions only)
 - [ ] Flagged items requiring Legal or Finance review
+- [ ] Logo usage and similar restrictions captured per account
 
-**Success criteria:** Sales and CS can use MSA summaries for strategic account planning without opening source PDFs.
+**Success criteria:** Sales and CS can use MSA summaries for strategic account planning without opening source PDFs. No summaries derived from non-authoritative document versions.
 
 ---
 
@@ -167,7 +175,7 @@ Once the initial repository and summaries are complete, evaluate where AI-driven
 
 ---
 
-## Phase 3 — Invoice Integration
+## Invoice Integration — Contracted, Deployed, and Billed
 
 **Owner:** Chris  
 **Prerequisite:** Phase 2 automation scope defined
@@ -189,12 +197,37 @@ Connect the latest invoice details to each active SOW to achieve a complete view
 
 ---
 
+## Phase 3 — Security Review Incorporation
+
+**Prerequisite:** Invoice integration complete  
+**Stakeholders to inform:** Kenny and Tyler
+
+Incorporate findings from the last security review into the contract intelligence repository. Dated or expired security assessments create measurable business risk:
+
+| Risk Area | Impact |
+|-----------|--------|
+| **Open opportunities** | Security posture gaps can stall or derail active deals |
+| **Revenue attainment** | Assessment currency affects close rates and expansion timing |
+| **Customer churn** | Outdated assessments erode trust and increase retention risk |
+
+**Deliverables:**
+- [ ] Security assessment status linked to each customer account in the repository
+- [ ] Assessment currency tracked (last review date, expiration, renewal due)
+- [ ] Kenny and Tyler briefed on integration approach and ongoing visibility
+- [ ] Alerts or flags for accounts with dated/expired security assessments
+- [ ] Cross-reference between security status and renewal / expansion pipeline
+
+**Success criteria:** Sales, CS, and Security have shared visibility into assessment currency alongside contract data — reducing surprise risk on open opportunities and renewals.
+
+---
+
 ## Stakeholders & Roles
 
 | Role | Name | Responsibility |
 |------|------|----------------|
 | **Project Lead** | Jason | Overall delivery, weekly reporting, Phase 1 & 2 |
-| **Billing Integration** | Chris | Phase 3 — invoice-to-SOW linkage |
+| **Billing Integration** | Chris | Invoice-to-SOW linkage |
+| **Security Review** | Kenny, Tyler | Phase 3 — security assessment incorporation and ongoing governance |
 | **Executive Sponsor** | — | Priority setting, cross-functional escalation |
 | **SLT** | — | Weekly progress visibility |
 | **Sales, Finance, Legal, CS, Product** | — | Phase 2 cross-functional input; trust-but-verify on outputs |
@@ -206,9 +239,11 @@ Connect the latest invoice details to each active SOW to achieve a complete view
 | Risk | Impact | Mitigation |
 |------|--------|------------|
 | Incomplete or missing contracts | Gaps in repository | Audit against CRM/account list; escalate missing docs to Legal |
+| AI reads wrong document version (redlines, superseded) | Incorrect summaries | Enforce version policy; exclude non-executed docs from AI ingestion |
 | AI extraction errors | Incorrect summaries | Trust-but-verify workflow; Legal/Finance review for flagged items |
 | Non-standard amendments overlooked | Commercial surprises | Dedicated exception log; separate flagging in SOW inventory |
 | Scope creep into automation before data is clean | Rework, low trust | Enforce Phase 1 gate before Phase 2 cross-functional sessions |
+| Dated security assessments | Open opp risk, rev attainment impact, churn | Phase 3 integration; proactive alerts for expired assessments |
 | Resource constraints on Jason | Timeline slip | AI acceleration for extraction; clear prioritization of 77 contracts |
 
 ---
@@ -218,10 +253,12 @@ Connect the latest invoice details to each active SOW to achieve a complete view
 | Decision | Owner | Timing |
 |----------|-------|--------|
 | Long-term storage location and naming convention | Jason + IT/Legal | Phase 1 kickoff |
+| Document version policy (executed vs. redline vs. superseded) | Jason + Legal | Phase 1 kickoff |
 | MSA/SOW summary template approval | Jason + Legal | Before bulk extraction |
 | Exception/amendment handling process | Jason + Legal | Phase 1 |
 | Automation priority ranking | Leadership + Jason | Phase 2 kickoff |
-| Invoice data source and mapping rules | Chris + Finance | Phase 3 kickoff |
+| Invoice data source and mapping rules | Chris + Finance | Invoice integration kickoff |
+| Security assessment data source and alert thresholds | Kenny + Tyler + Jason | Phase 3 kickoff |
 
 ---
 
@@ -229,21 +266,24 @@ Connect the latest invoice details to each active SOW to achieve a complete view
 
 The initiative is complete when:
 
-1. All 77 contracts are centralized, searchable, and AI-ready
-2. Every customer has a verified MSA summary
+1. All 77 contracts are centralized, searchable, and AI-ready (current executed versions only)
+2. Every customer has a verified MSA summary — including logo usage and similar restrictions
 3. Every active SOW has a complete inventory record with exceptions flagged
 4. Weekly AI-assisted progress reporting is operational
 5. A rolling 12-month renewal calendar and automation roadmap are approved
-6. Invoice details are linked to active SOWs (Phase 3)
-7. The repository functions as an **AI-powered contract intelligence platform** — not a passive document library
+6. Invoice details are linked to active SOWs (contracted, deployed, billed view)
+7. Security assessment currency is integrated and visible per account (Kenny & Tyler informed)
+8. The repository functions as an **AI-powered contract intelligence platform** — not a passive document library
 
 ---
 
 ## Appendix — Document Templates (To Be Created)
 
 - [ ] Contract naming convention runbook
+- [ ] Document version control policy (executed vs. redline vs. superseded)
 - [ ] MSA summary template
 - [ ] Active SOW inventory template
 - [ ] Non-standard amendment / exception log
 - [ ] Weekly progress report template
 - [ ] Renewal calendar template
+- [ ] Security assessment status tracker
