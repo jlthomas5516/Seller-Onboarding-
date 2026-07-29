@@ -3,7 +3,7 @@
 
 **Strategic Initiative** — links to and enables other executive team projects (see [Strategic Initiative Linkage](#strategic-initiative-linkage))
 
-**Owner:** Jason Yuhas, SVP Strategic Accounts  
+**Owner:** Jason Yuhas, VP of Commercial Operations  
 **Executive Sponsors:** Jen Thomas (CSO) · Chris Jones (CFO)  
 **Contributing:** Finance (as directed by Chris Jones) — invoice/billing reconciliation phase  
 **Start date:** June 1, 2026  
@@ -18,9 +18,9 @@
 | Milestone | Target | Notes |
 |---|---|---|
 | **W1–W4 initial assessment** | **Friday, Aug 1, 2026** | Summary of progress across W1–W4. Missing data is **not punitive** — the goal is to see where we have holes and gaps. Gaps are expected outputs, not failures. |
-| **W5 kickoff** | **This week (week of Jul 29)** | Must start now. First focus: **system selection and unique identifiers** for invoice-to-SOW linkage. W1–W4 assessment gates full W5 execution, not W5 setup. |
+| **W5 kickoff** | **This week (week of Jul 29)** | Must start now. First focus: **unique identifiers** for invoice-to-SOW linkage. W1–W4 assessment gates full W5 execution, not W5 setup. |
 
-> **Phase 2 objective:** Complete foundational contract intelligence (W2–W4) with an honest gap assessment by Friday, while standing up W5 infrastructure (system + unique IDs) in parallel.
+> **Phase 2 objective:** Complete foundational contract intelligence (W2–W4) with an honest gap assessment by Friday, while standing up W5 identifier schema in parallel.
 
 ---
 
@@ -48,7 +48,7 @@ The end state is an **AI-powered contract intelligence repository**, not a docum
 | **AI RevOps Maturity** | Sales · Finance · RevOps | Foundational contract intelligence layer for AI-assisted account planning, forecasting, and workflow automation across the revenue org. | AI RevOps **enabled by** full initiative |
 | **Billing & Revenue Integrity** | Finance (Chris Jones) | Contracted vs. deployed vs. billed view (W5). Surfaces change orders, adds, price increases, and billing exposure. Supports revenue recognition and audit readiness. | Finance **depends on** W5 |
 | **Security & Compliance Posture** | Legal · Security | Contract metadata, assessment currency, and commercial restriction visibility (logo/marketing/reference). Dated assessments create pipeline and churn risk. | Security **inherits from** W3 metadata |
-| **Salesforce System of Record** | Sales · RevOps | Parent-child account hierarchy, contracted entitlements, and renewal data aligned to CRM. Informs CLM evaluation criteria at W6. | CRM hygiene **depends on** W2–W4/W5 IDs |
+| **CRM & Account Hierarchy** | Sales · RevOps | Parent-child account hierarchy, contracted entitlements, and renewal data aligned to account records. | Account hygiene **depends on** W2–W4/W5 IDs |
 | **Legal / Commercial Operations** | Legal | MSA summaries, order of precedence, non-standard amendment flags. Trust-but-verify drafts — strategic planning, not legal interpretation. | Legal **consumes** W3/W4 outputs |
 | **Customer Success / Deployment Alignment** | CS · Professional Services | Contracted vs. deployed comparison — programs, workflows, use cases, volumes. Identifies entitlement gaps and expansion whitespace. | CS **depends on** W4; validated in W5 |
 
@@ -60,7 +60,7 @@ The end state is an **AI-powered contract intelligence repository**, not a docum
 |---|---|---|---|
 | **Phase 1 — Kickoff** | Jun 1 – Jun 30 | W1 stood up, W2 begins | **Complete** |
 | **Phase 2 — Foundation** | Jul 1 – Aug 15 | W2, W3, W4 in parallel; W1 reporting ongoing | **In progress** — W1–W4 assessment due Aug 1 |
-| **Phase 3 — Reconciliation** | Starting Jul 29 (W5 setup); full execution after Aug 1 assessment | W5 begins — system + unique identifiers this week | **Starting this week** |
+| **Phase 3 — Reconciliation** | Starting Jul 29 (W5 setup); full execution after Aug 1 assessment | W5 begins — unique identifiers this week | **Starting this week** |
 | **Phase 4 — Automation eval** | Aug 15+ | W6 — cross-functional discussion | Not started |
 
 > Cross-functional automation discussions (W6) begin **after** the foundational data set is clean — not before.
@@ -147,8 +147,7 @@ Per active SOW:
 
 Connect latest invoice detail to each active SOW so we have one view of **contracted vs. deployed vs. billed**. Cross-functional touchpoints with Finance.
 
-**This week (W5 kickoff) — system & unique identifiers:**
-- [ ] Define the **system of record** for invoice-to-SOW linkage (billing system, Salesforce, repository crosswalk)
+**This week (W5 kickoff) — unique identifiers:**
 - [ ] Establish **unique identifiers** that tie invoice line items → SOW → parent account → MSA
 - [ ] Document identifier schema and mapping rules (Finance + Jason)
 
@@ -173,18 +172,7 @@ Evaluate where AI automation adds value — renewal notifications, workflow orch
 
 **Interim (W2–W5):** Google Drive. Parent-org folder structure with disciplined naming, documented as part of W2. Already in use, no procurement cycle, plays cleanly with Cursor and existing AI tooling. Sufficient to support the repository, MSA/SOW summarization, and invoice reconciliation phases.
 
-**Long-term evaluation trigger:** W6 kickoff — not before. Rationale: we should not shop for a CLM while still discovering what "good" contract metadata looks like for CipherHealth. The MSA and SOW summarization work will reveal the actual field set that matters — *that* becomes the CLM requirements doc.
-
-**CLM evaluation criteria (when triggered):**
-- Native AI-assisted metadata extraction (not bolted on)
-- API access for downstream integration — Salesforce, billing, renewal workflows
-- "Contracted vs. deployed vs. billed" reporting inherited from W5
-- Rolling renewal calendar and notification workflows for W6
-- Parent-child organizational hierarchy support
-- Cost modeled at 77-contract scale + projected growth
-- Salesforce-native path worth evaluating (Files Connect, AppExchange CLM) given Salesforce is our system of record
-
-**Candidates worth benchmarking:** Ironclad, LinkSquares, Agiloft, Icertis.
+**Long-term platform evaluation:** Deferred to W6 kickoff — not before. Rationale: we should not evaluate long-term contract management platforms while still discovering what "good" contract metadata looks like for CipherHealth. The MSA and SOW summarization work will reveal the actual field set that matters — *that* becomes the requirements doc.
 
 ---
 
@@ -237,7 +225,7 @@ One page. Standalone-readable — an SLT member viewing any single week should u
 
 | Role | Name | Responsibility |
 |---|---|---|
-| **Owner** | Jason Yuhas | Overall delivery, W1–W4, W6 coordination |
+| **Owner** | Jason Yuhas, VP of Commercial Operations | Overall delivery, W1–W4, W6 coordination |
 | **Executive Sponsor** | Jen Thomas (CSO) | Priority setting, Sales/RevOps alignment, cross-functional escalation |
 | **Executive Co-Sponsor** | Chris Jones (CFO) | Finance alignment, W5 sponsorship, billing integrity |
 | **Finance Support** | Finance (as directed by Chris Jones) | W5 — invoice-to-SOW linkage, unique identifier schema |
@@ -251,7 +239,6 @@ One page. Standalone-readable — an SLT member viewing any single week should u
 - ~~Final choice of repository location~~ — *interim: Google Drive (decided)*
 - Cursor/AI tooling setup and access for Jason's team
 - Definition of "active" for SOW inventory (W4) — treatment of expired-but-still-invoicing agreements
-- **W5 system of record** — which billing/CRM system anchors unique identifiers (this week)
 - **Unique identifier schema** — invoice line → SOW → account → MSA crosswalk (this week)
 
 ---
@@ -264,7 +251,7 @@ One page. Standalone-readable — an SLT member viewing any single week should u
 4. Weekly AI-assisted exec slide operational and delivering business intelligence (including gap inventory)
 5. Invoice details linked to active SOWs via unique identifiers with documented variance explanations
 6. Linked strategic initiatives (Product Naming, Pricing & Packaging, GRR, Billing Integrity) have a trusted baseline dataset
-7. CLM evaluation criteria defined from discovered metadata requirements (W6 trigger)
+7. Long-term platform requirements defined from discovered metadata (W6 trigger)
 8. Repository functions as an **AI-powered contract intelligence platform** — not a passive document library
 
 ---
