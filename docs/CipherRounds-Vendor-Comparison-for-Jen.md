@@ -43,7 +43,9 @@ Best,
 
 ### Scope
 
-This comparison covers **inpatient digital rounding** — structured leader/nurse/patient/location rounds with real-time issue capture, routing, and reporting. It does **not** fully compare:
+This comparison covers **inpatient digital rounding** — structured leader/nurse/patient/location rounds with real-time issue capture, routing, and reporting. For **Penn**, it also addresses how Cipher compares to **Press Ganey**, **Huron/Studer**, and **point-solution rounding tools** against priorities: HRO/harm prevention, complaint reduction, and LTR across six entities.
+
+It does **not** fully compare:
 
 - Post-discharge outreach (CipherOutreach is noted only where it affects total platform footprint)
 - In-room bedside entertainment/education platforms (GetWell Inpatient, Oneview) except where they integrate with rounding
@@ -332,6 +334,158 @@ This comparison covers **inpatient digital rounding** — structured leader/nurs
 
 ---
 
+## Where Cipher wins — and why the alternatives do not compare (Penn)
+
+*Use this section with Penn stakeholders when the conversation is about **HRO and harm prevention**, **complaint reduction**, and **Likelihood to Recommend (LTR)** across **all six entities** — not a generic rounding bake-off.*
+
+### Penn’s priorities vs. what each category actually delivers
+
+If Penn’s priorities are advancing **High Reliability Organization (HRO) principles and harm prevention**, **reducing complaints and grievances**, and **improving Likelihood to Recommend**, this is **not a comparison of equivalent platforms**.
+
+Press Ganey, Huron/Studer, and point-solution rounding tools each address **a portion** of the challenge. **None** provides Cipher’s integrated, real-time infrastructure for:
+
+1. **Identifying** risk  
+2. **Driving** intervention  
+3. **Verifying** resolution  
+4. **Measuring** the outcome  
+
+…across all six entities on one platform.
+
+| Penn priority | What Cipher delivers | Press Ganey | Huron/Studer | Point solutions (Nobl, MyRounding, etc.) |
+|---|---|---|---|---|
+| **HRO / harm prevention** | ● Real-time safety tracers (falls, HAPI, CAUTI/CLABSI, environment); location + patient rounding; auditability | ○ Post-hoc survey signals | ◐ Methodology & training | ◐ Document the round only |
+| **Reduce complaints / grievances** | ● In-stay service recovery with named ownership, SLA routing, verified closure | ○ Identifies dissatisfaction after discharge | ◐ Teaches recovery behavior | ◐ Alert or record — closure varies |
+| **Improve LTR / HCAHPS** | ● Fix experience **before** discharge; analytics tie intervention → LTR domains | ● Benchmarks **after** the stay | ◐ Rounding habits via consulting | ◐ Leader-round documentation |
+| **Enterprise consistency (6 entities)** | ● One platform, one routing model, one analytics layer, Epic-integrated | ◐ System-level benchmarks | ◐ Engagement-dependent | ○ Per-site tools & reports |
+| **Closed-loop accountability** | ● Concern → owned action → verified resolution → measurable outcome | ○ Awareness only | ○ Expectations, not enforcement | ◐ Task created ≠ resolved |
+| **Post-discharge continuity** | ● CipherOutreach confirms resolution & captures post-discharge signal | ● Surveys | ○ | ○ Separate product required |
+
+---
+
+### Press Ganey: Measures what happened; it does not change what is happening
+
+**What Press Ganey is built for:** Post-discharge surveys, benchmarking, and retrospective analytics.
+
+**What it does not provide:** Bedside workflows, real-time routing, accountable ownership, and verified resolution needed to intervene **while the patient is still in Penn’s care**.
+
+| Capability | Press Ganey | Cipher |
+|---|---|---|
+| Tell Penn where dissatisfaction occurred | ● Strong | ● Also captures in-stay signals |
+| Intervene at the bedside before discharge | ○ | ● |
+| Route issue to named owner with SLA | ○ | ● Enterprise routing by issue, severity, location, department |
+| Verify the issue was resolved — not just referred | ○ | ● Closed-loop completion |
+| Connect intervention to complaint/LTR improvement | ◐ Retrospective correlation | ● Longitudinal: round → action → resolution → outcome |
+| Quality & safety tracers (HAC, falls, lines) | ○ | ● Built-in |
+| Epic-integrated operational workflow | ○ | ● Near-real-time Flowsheet write-back |
+
+**Why it matters for Penn:** A complaint identified **after discharge** is a missed opportunity for service recovery. Penn does not need more **awareness** of its scores — it needs the ability to **change the patient experience before that experience becomes a complaint or a low LTR rating**.
+
+> **Distinction:** Press Ganey is the **system of insight** (what already broke). Cipher is the **system of execution** (what happens next).
+
+---
+
+### Huron/Studer: Provides the methodology, but not the enterprise execution infrastructure
+
+**What Huron/Studer is built for:** Respected consulting, training, and rounding **methodology**.
+
+**What it does not compare with:** Cipher’s technology depth — intelligent patient prioritization, ambient capture, AI-generated summaries, enterprise escalation routing, Epic-integrated workflows, comprehensive auditability, and closed-loop issue resolution.
+
+| Capability | Huron/Studer | Cipher |
+|---|---|---|
+| Establish rounding expectations & leader behaviors | ● Consulting & training | ● Clinical programs + in-house nurse SMEs |
+| Reinforce expectations daily across 6 entities | ○ Depends on local discipline post-engagement | ● Embedded workflows, automation, measurement |
+| Intelligent patient prioritization | ○ | ● Smart prioritization + context-aware workflows |
+| Ambient capture / AI-generated summaries | ○ | ● Reduces documentation burden on nurses |
+| Enterprise escalation routing with SLAs | ○ | ● Dynamic triggers, alerts, next-best-action |
+| Epic-integrated, auditable workflows | ○ | ● Certified integration; feeds largely in place at Penn |
+| Verified closed-loop resolution | ○ | ● Not task creation — resolution confirmed |
+| Sustained outcomes after consulting ends | ◐ Variable | ● CSM, analytics, Clinical Advisory Board |
+
+**Why it matters for Penn:** Training can establish expectations, but Penn needs a **system that reinforces those expectations every day** across six entities. Without embedded workflows, ownership, automation, and measurement, **consistency declines after the consulting engagement ends**.
+
+> **Distinction:** Huron/Studer **teaches the methodology**. Cipher **operationalizes it in real time** — every shift, every unit, every entity.
+
+---
+
+### Point-solution tools: Digitize a round; they do not coordinate the full response
+
+**Examples:** Nobl (now NRC Health), MyRounding, iRound, and similar tools.
+
+**What they do:** Document nurse-leader or patient rounds.
+
+**What they do not compare with:** Cipher’s broader capabilities across quality and safety tracers, real-time service recovery, intelligent workflow automation, discharge outreach, and longitudinal outcome measurement.
+
+| Capability | Point solutions | Cipher |
+|---|---|---|
+| Document a leader/patient round | ● | ● |
+| Quality & safety tracers (HAC program, environment, lines) | ◐ Limited or add-on | ● Native |
+| Real-time service recovery with enterprise routing | ◐ Basic alerts | ● By issue, severity, location, department, SLA |
+| Intelligent workflow automation | ○ | ● Triggers, dynamic questions, next-best-action |
+| Ambient capture + AI summaries | ◐ NRC/Nobl adds this post-acquisition | ● |
+| Post-discharge follow-up / confirmation | ○ Separate vendor | ● CipherOutreach on same platform |
+| Connect bedside concern → post-discharge outcome | ○ | ● Longitudinal on one platform |
+| Enterprise integration (Epic, APIs) | ◐ Interface per tool | ● Certified; Penn feeds largely configured |
+| Implementation + workflow design + adoption services | ◐ Varies | ● Clinical Strategy, Implementation, CSM |
+| Single accountability model across 6 entities | ○ Fragmented | ● One platform, one analytics hub |
+
+**Why it matters for Penn:** Penn would likely need **multiple products, integrations, and reporting structures** to approximate what Cipher provides natively. That creates **fragmented accountability** and makes it harder to determine whether an issue was merely **recorded**, **referred to someone**, or **actually resolved**.
+
+> **Distinction:** Point solutions **document an isolated workflow**. Cipher **coordinates the full response** — identify, intervene, verify, measure.
+
+---
+
+### Cipher: Built for the priorities Penn is trying to advance
+
+Cipher uniquely brings together:
+
+- **Real-time identification** of patient, safety, and service concerns  
+- **Smart patient prioritization** and context-aware rounding workflows  
+- **Ambient capture** and AI-generated summaries  
+- **Dynamic questions, triggers, alerts**, and next-best-action guidance  
+- **Epic integration** and flexible APIs — with **most data feeds already configured at Penn**  
+- **Enterprise routing** by issue, severity, location, department, and SLA  
+- **Quality and safety tracers** with comprehensive auditability  
+- **Named ownership and escalation** across all six entities  
+- **Verified, closed-loop completion** — not simply task creation or referral  
+- **Post-discharge confirmation** through CipherOutreach  
+- **Analytics** connecting rounding, intervention, complaints, outcomes, and LTR  
+- **Implementation, integration, workflow design, adoption, and optimization** services — led by in-house clinical leaders, not generic project managers  
+
+#### Side-by-side: the full loop Penn needs
+
+| Stage | Press Ganey | Huron/Studer | Point solutions | **Cipher** |
+|---|---|---|---|---|
+| **1. Identify risk** | After discharge (survey) | During consulting engagement | At round (manual) | ● Real-time, in-stay, prioritized |
+| **2. Drive intervention** | ○ | ◐ Trained behavior | ◐ Alert/record | ● Routed action with owner + SLA |
+| **3. Verify resolution** | ○ | ○ | ◐ Unclear | ● Closed-loop confirmation |
+| **4. Measure outcome** | ● Benchmarks | ◐ Post-project review | ◐ Tool reports | ● LTR, complaints, safety, HCAHPS tied to intervention |
+| **5. Sustain across 6 entities** | ◐ Benchmark only | ◐ Fades post-engagement | ○ Fragmented | ● One enterprise platform |
+
+---
+
+### The fundamental distinction
+
+The alternatives do not compare in the areas most critical to Penn because they were built for **different purposes**:
+
+| Category | Built to… | Gap for Penn |
+|---|---|---|
+| **Press Ganey** | Measure the experience **after** it occurs | Cannot change what is happening at the bedside |
+| **Huron/Studer** | Teach the **methodology** | Cannot enforce it daily across six entities without embedded technology |
+| **Point solutions** | **Document** an isolated workflow | Cannot coordinate identification → intervention → verification → measurement |
+| **Cipher** | **Operationalize the entire process in real time** | — |
+
+**For Penn, that distinction matters.** Harm prevention and service recovery depend on **what happens next** — not simply what is measured, taught, or documented.
+
+Cipher ensures that:
+
+1. A **concern** becomes an **owned action**  
+2. The action becomes a **verified resolution**  
+3. The resolution connects to **measurable improvements** in complaints, safety, and LTR  
+
+…across all six entities, on infrastructure Penn has largely already built.
+
+---
+
 ## Detailed notes (by vendor)
 
 ### CipherRounds (CipherHealth)
@@ -366,16 +520,17 @@ This comparison covers **inpatient digital rounding** — structured leader/nurs
 
 ---
 
-## Questions for Jen’s internal working group
+## Questions for Penn’s internal working group
 
-These help tailor the comparison to their environment:
+These help tailor the comparison to Penn’s six-entity environment:
 
-1. **Scope:** Patient-only rounding, or also leader, staff, and location/safety rounding?
-2. **EHR:** Epic (which integration — Flowsheets, Rover, both)? Cerner/Meditech?
-3. **Existing vendors:** NRC, GetWell, or Press Ganey/Qualtrics already in-house?
-4. **Success metrics:** HCAHPS domains, HAC/safety, staff retention, grievances — which is the board-level priority?
-5. **Operational constraint:** Is the blocker nursing FTE, IT queue, or vendor budget?
-6. **Post-discharge:** Is rounding evaluation separate from TCM/TEAM/post-discharge outreach?
+1. **Scope:** Patient-only rounding, or also leader, staff, location/safety, and quality tracers across all entities?
+2. **EHR:** Epic Flowsheet integration status — what is live vs. still to map for rounding-specific rows?
+3. **Existing vendors:** Press Ganey (surveys/benchmarks), Huron/Studer (methodology), Nobl/NRC, or other point tools already in use?
+4. **Success metrics:** HRO/harm events, complaints/grievances, LTR — which is the board-level priority per entity?
+5. **Operational constraint:** Is the blocker nursing FTE, IT queue, funding, or cross-entity alignment?
+6. **Accountability model:** Today, can Penn confirm an issue was **resolved** — not just recorded or referred — across all six entities?
+7. **Post-discharge:** Should bedside concerns connect to CipherOutreach follow-up on the same platform?
 
 ---
 
