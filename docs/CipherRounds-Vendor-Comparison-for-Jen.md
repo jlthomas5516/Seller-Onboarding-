@@ -65,137 +65,147 @@ This comparison covers **inpatient digital rounding** — structured leader/nurs
 
 ---
 
-## Executive summary (one page)
+## Master side-by-side (shareable)
 
-| Dimension | CipherRounds | NRC Health Rounding | GetWell Rounds+ | Epic-native rounding | Paper / manual |
+**Vendors:** CipherRounds · NRC Health Rounding · GetWell Rounds+ · Epic-native · Paper/manual  
+**Legend:** ● Core · ◐ Partial / config-dependent · ○ Not primary · — Not applicable
+
+### At a glance
+
+| | **CipherRounds** | **NRC Health** | **GetWell Rounds+** | **Epic-native** | **Paper / manual** |
 |---|---|---|---|---|---|
-| **Primary purpose** | Operational rounding + service recovery + safety capture across patient, staff, and location rounds | Experience + employee listening with AI-assisted documentation | Digital data collection for rounding, audits, and checklists; strongest when paired with GetWell Inpatient | Document rounds inside Epic; leverage existing EHR investment | Low software cost; high variability |
-| **Best fit when…** | You want one rounding platform tied to HCAHPS domains, safety programs, and (optionally) the same vendor for post-discharge outreach | PX/HR analytics and “Human Understanding” program are already central; ambient AI documentation is a priority | You already run or plan GetWell Inpatient; want rounding tied to in-room engagement | “Use what we own” is the mandate; incremental Epic module cost is acceptable | Budget is zero; consistency and real-time recovery are not strategic priorities |
-| **Typical implementation** | Weeks (certified HL7/Epic integration); often 4–8 weeks for combined programs | Unverified — typically multi-phase with analytics/HRIS integrations | Standalone can be fast; full value often requires GetWell Inpatient + EHR interface project | Depends on Epic module + build; often IT-heavy configuration | None |
-| **Typical IT lift (CipherHealth customers)** | **<25 IT hours** to deploy a new program (internal benchmark); bidirectional Epic/Cerner/Meditech | Unverified | EHR interface + device management; broader if Inpatient deployed | Internal Epic team + possible Vendor Services validation | None |
-| **Clinical ownership required** | Nursing/PX program lead + unit champions; CipherClinical supports design | PX + HR for employee rounding; analytics admin | Nursing ops + GetWell admin; stronger change mgmt if Inpatient bundled | Nursing + Epic analyst | Unit managers only |
-| **Real-time service recovery** | ● | ● | ● | ◐ (workflow-dependent) | ○ |
-| **Safety / HAC-focused rounding** | ● (location + patient rounding) | ◐ (more PX-weighted in public materials) | ◐ (100+ use cases; safety is one) | ◐ | ○ |
-| **Post-discharge on same platform** | ● (CipherOutreach) | ○ (PX/survey core business) | ◐ (GetWell Navigate — separate product) | ◐ (Epic outreach/worklists) | ○ |
-
-**Bottom line for internal stakeholders:** The products are not interchangeable. NRC and GetWell skew toward experience analytics and, in GetWell’s case, a broader inpatient engagement suite. Epic-native options minimize incremental vendor spend but typically shift burden to internal IT and clinical staff to configure workflows and close the loop. CipherRounds is purpose-built for rounding + recovery + safety capture, with a path to combine inpatient rounding and post-discharge outreach on one coordination layer.
+| **What it is** | Purpose-built digital rounding for patient, staff, and location rounds with closed-loop recovery | Mobile-first rounding + PX/employee analytics (Nobl acquisition, 2024) | Configurable digital rounding/survey platform; part of broader GetWell suite | EHR modules + internal workflow build (Rover = clinical bedside, not PX rounding) | Clipboards, spreadsheets, memory |
+| **Vendor category** | Care coordination / rounding specialist | Experience measurement + rounding | Inpatient engagement + rounding | System of record | None |
+| **Typical buyer** | CNO, PX, CQO | CNO, PX, HR | CNO, COO (often existing GetWell shop) | CIO + CNO (“use Epic”) | Unit managers |
+| **Incremental license cost** | Yes — enterprise SaaS | Yes — enterprise SaaS | Yes — enterprise SaaS | Often perceived as “free” (Epic already licensed) | None |
+| **Hidden cost** | Low IT lift if certified integration | Analytics/HRIS integration + quarterly consulting cadence | Larger if GetWell Inpatient bundled; interface work | **High** internal Epic analyst + nursing ops time | Nurse/leader time, inconsistency, late recovery |
 
 ---
 
-## Detailed comparison
-
-### 1. Capabilities
+### Capabilities
 
 | Capability | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
 |---|---|---|---|---|---|
-| **Patient experience rounding** | ● Structured scripts mapped to HCAHPS domains; real-time routing | ● Mobile-first; heatmaps and PX analytics | ● Real-time surveys and alerts | ◐ Rover / workflows vary by build | ◐ Inconsistent |
-| **Leader / nurse-leader rounding** | ● | ● | ● | ◐ | ◐ |
-| **Staff / employee rounding** | ● Recognition + staff listening | ● Strong employee voice focus | ● Supported | ○ | ◐ |
-| **Location / environmental rounding** | ● Safety, CLABSI/CAUTI checks, environment audits | ◐ | ● (audit/checklist use cases) | ◐ | ◐ |
-| **Service recovery routing** | ● Issue → owner in minutes; tracked start→resolution | ● Real-time recovery | ● Automated alerts to departments | ◐ Requires Epic workflow build | ○ |
-| **Ambient listening / AI documentation** | ● Reduces post-round documentation | ● Agentic AI summaries (public positioning) | ○ Not primary in Rounds+ materials | ○ | ○ |
-| **Predictive prioritization (who to visit first)** | ◐ Analytics + program rules | ● “Predictable Experience” heatmaps | ◐ Stronger with GetWell Inpatient data | ◐ | ○ |
-| **Multi-language support** | ● | Unverified | Unverified | ◐ | ◐ |
-| **EHR write-back (discrete data)** | ● Near-real-time Flowsheet write-back (Epic); HL7-ORU/MDM | ● EMR integrations listed publicly | ● Epic, Cerner, Meditech + others (AVIA) | ● Native | ○ |
-| **Combined inpatient + post-discharge data** | ● Single platform (Outreach + Rounds) | ○ | ◐ Separate products | ◐ | ○ |
-| **Published clinical outcomes** | ● 15+ years; HCAHPS, HAI, turnover case studies | ● Benchmark-oriented analytics | ◐ Primarily workflow/PX improvement stories | ○ Limited for rounding-specific outcomes | ○ |
-| **Security certifications (verify current)** | HITRUST CSF, SOC 2 Type II, HIPAA, TX-RAMP Level 2 | Unverified — confirm in RFP | TLS 1.2+, cloud/GovCloud options (AVIA) | Epic org controls | N/A |
-
-**Capability notes**
-
-- **CipherRounds:** Patient, staff, and location rounding in one system; ambient listening to reduce documentation burden; analytics tie interactions to HCAHPS, safety, and staff metrics. Differentiator vs. survey-first tools: fix issues **during** the stay, not after discharge.
-- **NRC Health:** Strongest when the buyer already invests in NRC for surveys/benchmarks and wants rounding + employee listening + AI documentation in the same vendor relationship.
-- **GetWell Rounds+:** Flexible forms/surveys (100+ use cases per vendor materials). Full “patient engagement loop” typically assumes **GetWell Inpatient** (bedside tablets/TVs) feeding requests into Rounds+.
-- **Epic-native:** Epic excels as system of record. Rounding modules/workflows can document rounds but generally require internal build for escalation, cross-department routing, and analytics comparable to a purpose-built rounding platform.
-- **Paper/manual:** Zero license cost; highest variability in coverage, documentation burden, and time-to-resolution.
+| **Patient experience rounding** | ● Scripts mapped to HCAHPS domains; real-time routing | ● Leader rounding on patients + environment | ● Real-time surveys + dashboards | ◐ Custom Flowsheets/forms; no native PX rounding product | ◐ Varies by unit |
+| **Leader / nurse-leader rounding** | ● | ● | ● | ◐ Build your own | ◐ |
+| **Staff / employee rounding** | ● Recognition + staff listening | ● **Core strength** — employee voice, HRIS integrations | ● Employee experience use cases | ○ | ◐ |
+| **Location / environmental / safety rounding** | ● CAUTI, CLABSI, falls, HAPI, environment checks | ● Listed as quality & safety use case | ● Quality, safety, regulatory checklists (100+ use cases) | ◐ Safety checks via custom build | ◐ |
+| **Real-time service recovery** | ● Issue → owner in minutes; 200M+ interactions tracked start→resolution (platform) | ● Auto-alerts; vendor cites seamless resolution | ● Alerts, reminders, escalations to departments | ◐ Requires Epic workflow/In Basket build | ○ |
+| **Ambient listening / AI documentation** | ● Keeps documentation off the nurse | ● Agentic AI summaries + sentiment/themes (2026 positioning) | ○ Not a primary Rounds+ feature | ○ | ○ |
+| **Predictive “who to round on first”** | ◐ Program rules + analytics | ● **Core strength** — Predictable Experience heatmaps + predictive scores | ◐ Stronger if GetWell Inpatient data present | ◐ Manual prioritization or custom build | ○ |
+| **Historical PX context at bedside** | ◐ Via EHR + platform data | ● **Core strength** — past HCAHPS/survey/round data in context | ◐ With Inpatient + EHR pre-population | ◐ If built into Epic workflow | ○ |
+| **Surveys-by-text / batch outreach** | ◐ (CipherOutreach for outbound) | ◐ Real-time feedback focus | ● Text/email batch surveys to patients/staff | ◐ MyChart / SMS if configured | ○ |
+| **HCAHPS domain mapping** | ● Built into round scripts | ● Analytics + benchmark comparison | ◐ Configurable forms | ◐ DIY | ○ |
+| **Multi-language** | ● | ◐ Confirm in demo | ◐ Pediatric: parent/caregiver rounding | ◐ MyChart language support | ◐ |
+| **EHR write-back (discrete fields)** | ● Near-real-time Epic Flowsheets (HL7-ORU); MDM for issues | ● EMR integrations (vendor-stated) | ● Epic, Cerner, Meditech + 6 others; ADT | ● Native chart | ○ |
+| **Data latency to EHR** | Seconds (near-real-time) | Vendor-stated real-time | Real-time alerts; interface-dependent | Native — but recovery loop is separate | — |
+| **Inpatient + post-discharge same vendor** | ● CipherOutreach on one platform | ○ Surveys/measurement core; not execution layer | ◐ GetWell Navigate (separate product) | ◐ Epic worklists / MyChart | ○ |
+| **In-room bedside engagement (TV/tablet)** | ○ Not required | ○ | ● **GetWell Inpatient** — routes requests into Rounds+ | ○ | ○ |
+| **Industry benchmarks in product** | ◐ Outcomes library + customer analytics | ● **Core strength** — NRC benchmarks, quarterly reviews | ◐ Embedded reporting | ○ | ○ |
+| **Peer-reviewed / published outcomes** | ● 15+ years customer outcomes (HCAHPS, HAI, turnover) | ◐ Vendor-cited: +22 HCAHPS percentile pts, 30% call lights, 40% falls | ◐ Primarily workflow/PX improvement | ○ Limited for rounding | ○ |
 
 ---
 
-### 2. Implementation requirements
+### Implementation
 
 | Requirement | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
 |---|---|---|---|---|---|
-| **EHR integration method** | HL7 ADT in; ORU/MDM/Flowsheet out; certified Epic integration | EMR + HRIS + warehouse integrations (public) | HL7/interface + optional GetWell product integrations | Native | None |
-| **Epic-specific** | Flowsheets (configurable without custom code per internal playbooks); EHR Activation Gateway for program activation | Unverified | Epic in supported EMR list; interface project typical | Module/workflow configuration | None |
-| **Hardware** | Mobile devices (BYOD or hospital-issued); no in-room TV required | Mobile devices | Mobile devices; value increases with GetWell Inpatient hardware | Mobile or workstation | Paper/clipboards |
-| **Network / security** | SaaS; BAA; SSO options | SaaS | SaaS; TLS 1.2+ | Internal | None |
-| **Typical timeline** | **4–8 weeks** for integrated program (internal benchmark for 2026 programs) | Unverified — often phased | Standalone: weeks; full suite: months | Highly variable (months common for net-new workflow) | Immediate |
-| **IT hours (buyer side)** | **<25 hours** to deploy new program (CipherHealth benchmark) | Unverified | Interface + device + content admin | Often **highest** — Epic analyst + interface team | Minimal |
-| **Custom code required?** | No for standard Flowsheet mapping (internal) | Unverified | Usually interface configuration | Often workflow builds | No |
-| **Dependencies** | ADT feed, rounding program design, unit champions | Analytics/HRIS if employee rounding | Strong dependency on GetWell ecosystem for full ROI | Epic module licensing, internal prioritization | None |
-
-**Implementation notes**
-
-- **Phased rollout** is common for all digital platforms: pilot unit → refine scripts/routing → scale. CipherHealth typically starts with highest-HCAHPS-pressure or highest-variance units.
-- **Epic “free” rounding** still consumes Epic analyst time, nursing workflow design, and often produces **passive documentation** without the closed-loop recovery a purpose-built tool provides.
-- **GetWell** implementations should be scoped as **Rounds+ only** vs. **Inpatient + Rounds+** — the latter is a materially larger project.
+| **Integration method** | HL7 ADT in; ORU/MDM/Flowsheet out; certified Epic | EMR + HRIS + recognition + data warehouse | HL7/ADT + EMR interface; optional GetWell product feeds | Native + possible Vendor Services for third-party | — |
+| **Epic Flowsheet mapping** | ● Configurable **without custom code** (internal) | ● Vendor-stated EMR integration | ● Epic supported; interface project typical | ● Native | — |
+| **Hardware required** | Mobile (BYOD or hospital device) | Mobile | Mobile/tablet; **Inpatient adds bedside TVs/tablets** | Mobile (Rover) or workstation | Paper |
+| **In-room infrastructure** | None | None | Optional — significant if Inpatient | None | None |
+| **Typical go-live timeline** | **4–8 weeks** (integrated program); 3–8 weeks scoping/build per program type | Phased — confirm in SOW | Rounds+ standalone: weeks; **Inpatient + Rounds+: months** | **Months** common for net-new workflow | Immediate |
+| **Buyer IT hours (order of magnitude)** | **<25 hours** (CipherHealth benchmark) | Medium — EMR + analytics stack | Medium–high | **Highest** — Epic analyst, interfaces, testing | Minimal |
+| **Custom code required** | No for standard Flowsheet programs | Confirm in SOW | Interface configuration typical | Often yes — workflows, reports, routing | No |
+| **Certifications / security** | HITRUST CSF, SOC 2 Type II, HIPAA, TX-RAMP L2 | Confirm in RFP | HIPAA BAA, TLS 1.2+, ~99.95% SLA (AVIA) | Epic org security model | N/A |
+| **Key dependencies** | ADT feed, program design, unit champions | Often existing NRC survey relationship; HRIS for employee rounding | Scope **Rounds+ only vs. full GetWell stack** | Epic module priority, internal build capacity | None |
 
 ---
 
-### 3. Support model
+### Support model
 
-| Support element | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
+| Element | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
 |---|---|---|---|---|---|
-| **Implementation partner** | CipherHealth Implementation (certified EHR integrations) | NRC implementation / customer success | Get Well professional services | Internal IT + Epic team | Internal only |
-| **Clinical program design** | CipherClinical Strategy + SMEs (RNs/MSNs); Clinical Advisory Board | NRC consulting / best practices | Get Well training resources | Internal nursing leadership | Internal |
-| **Ongoing customer success** | CSM + outcomes reviews | Customer success (typical enterprise SaaS) | Customer success + training | Internal | None |
-| **Analytics / outcomes reporting** | CipherHealth dashboards + annual outcomes review; EHR for clinical view | NRC analytics + benchmarks | Rounds+ dashboards; richer if Inpatient integrated | Epic reporting / SlicerDicer builds | Manual spreadsheets |
-| **Escalation / support hours** | Enterprise support (confirm SLA in contract) | Unverified | Unverified | Internal IT ticket queue | N/A |
-| **Security / compliance support** | Dedicated security reviews; HITRUST/SOC 2 artifacts | Confirm in RFP | Security pack on AVIA | Epic org process | N/A |
-| **Expansion / new units** | CSM + Implementation for new units/programs | Unverified | Additional config + training | Epic project queue | Local decision |
-
-**CipherHealth support model (detail for prospect)**
-
-| Team | Role in rounding deployment |
-|---|---|
-| **Clinical Strategy & SMEs** | Gap analysis, script/escalation design, CNO credibility |
-| **Solution Consulting** | Workflow mapping, demo, integration fit |
-| **Implementation** | HL7/interface, testing, go-live |
-| **CSM** | Adoption, outcomes stewardship, expansion |
-| **Analytics** | HCAHPS/safety/staff metric tie-back |
-| **Security & Compliance** | BAA, AI governance, audit artifacts |
+| **Implementation owner** | CipherHealth Implementation (certified EHR) | NRC professional services | Get Well PS + training | Internal IT + Epic team | Internal |
+| **Clinical program design** | CipherClinical (RNs/MSNs) + Clinical Advisory Board | NRC clinical/consulting; quarterly benchmark reviews | Get Well training + config | Internal nursing/PX leadership | Informal |
+| **Post-go-live owner** | CSM + outcomes reviews | Customer success + quarterly data reviews | Customer success | Internal — no vendor CSM | None |
+| **Analytics** | Cipher dashboards + annual outcomes review | **Benchmark-centric** reports + NRC analyst meetings | Rounds+ dashboards; richer with Inpatient | Epic SlicerDicer/report builds | Manual |
+| **Expansion (new units)** | CSM + Implementation | NRC CS | Config + training | Epic project queue | Local |
+| **Security / AI governance** | Dedicated security reviews; AI governance per deployment | Confirm in RFP | Standard SaaS security pack | Internal | — |
 
 ---
 
-### 4. Resource needs (operational)
-
-Estimates below are **order-of-magnitude planning ranges** for a mid-size hospital or multi-hospital system. Actuals depend on bed count, units in scope, and program maturity. Validate in discovery.
+### Resource needs (operational)
 
 | Resource | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
 |---|---|---|---|---|---|
-| **Executive sponsor** | CNO or PX executive | CNO + often HR for employee rounding | CNO / COO | CNO + CIO | Unit manager |
-| **Program owner (FTE)** | 0.25–0.5 FTE PX/nursing program lead | 0.25–0.5 FTE | 0.25–0.5 FTE (+ Inpatient admin if bundled) | 0.25–0.5 FTE + Epic analyst time | 0.1 FTE |
-| **Unit champions** | 1 per pilot unit (nurse manager or charge) | Similar | Similar | Similar | Informal |
-| **Frontline time per round** | ~2–5 min documented (digital); ambient listening reduces after-round documentation | Similar; AI summary may reduce admin | Similar | Often **higher** documentation burden | 5–10+ min + manual entry |
-| **IT during implementation** | Low (<25 hours internal benchmark) | Medium | Medium–high | High | None |
-| **IT ongoing** | Low (SaaS) | Low–medium | Medium (devices + interfaces) | Medium (Epic maintenance) | None |
-| **Training burden** | Moderate — one-time + new hire | Moderate | Moderate; higher if Inpatient | High — Epic workflow training | Low |
-| **Analytics staff** | Optional — Cipher dashboards + EHR | Often uses NRC analyst | Rounds+ admin | Epic report builders | Manual |
-
-**Documented CipherHealth customer outcomes (rounding-adjacent — for context, not a guarantee)**
-
-| Metric | Example result | Source type |
-|---|---|---|
-| HCAHPS / experience | 99th percentile key domains; +389% RN responsiveness | Lenox Hill (Northwell) — marketing-approved |
-| Leader rounding | +36% top-box scores | Providence |
-| HAI | 30%+ drop in CAUTI/CLABSI | Northern VA Trauma Center |
-| Staff turnover | 9.2% vs 15% with >90% rounding | Regional Medical Center |
-| Nurse time | ~0.5 hr/day saved via rounding workflows | Site-wide benchmark |
-| Burnout | 42% drop; 30,000 leader rounds/year | Norton Healthcare |
+| **Executive sponsor** | CNO or PX exec | CNO + **often HR** (employee rounding) | CNO / COO | CNO + CIO | Nurse manager |
+| **Program owner** | 0.25–0.5 FTE PX/nursing lead | 0.25–0.5 FTE PX + analytics admin | 0.25–0.5 FTE (+ Inpatient admin if bundled) | 0.25–0.5 FTE + **Epic analyst allocation** | ~0.1 FTE |
+| **Unit champions** | 1 per pilot unit | 1 per pilot unit | 1 per pilot unit | 1 per pilot unit | Informal |
+| **Frontline time per round** | ~2–5 min capture; ambient listening cuts after-round admin | Similar; AI summary reduces documentation | Similar | Often **higher** — manual charting | 5–10+ min |
+| **IT — implementation** | Low | Medium | Medium–high | **High** | None |
+| **IT — ongoing** | Low (SaaS) | Low–medium | Medium (devices + interfaces if Inpatient) | Medium (Epic maintenance) | None |
+| **Change management** | Moderate | Moderate | **Higher** if Inpatient deployed | **High** — workflow redesign | Low |
+| **Nursing FTE impact** | Designed to **reduce** admin (0.5 hr/day saved — site benchmark) | Vendor cites call-light reduction, fall reduction | Reduces documentation vs. paper | Often **adds** workflow steps unless carefully built | High variability |
 
 ---
 
-## When each option wins (neutral framing)
+### Documented outcomes (examples — not guarantees)
 
-Use this section in internal discussions without disparaging competitors.
+| Outcome area | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
+|---|---|---|---|---|---|
+| **HCAHPS / experience** | 99th percentile key domains; +389% RN responsiveness (Lenox Hill); +36% top-box (Providence) | Vendor-cited: **+22 percentile points** across domains | Workflow/PX improvement stories | Limited rounding-specific data | Unmeasured / variable |
+| **Safety (HAI, falls)** | 30%+ CAUTI/CLABSI drop; 78%/85% falls reduction | Vendor-cited: **40% fall reduction** year 1 | Safety checklist use cases | Depends on internal program | Unmeasured |
+| **Staff / retention** | 9.2% vs 15% turnover at >90% rounding; 42% burnout drop (Norton) | Vendor-cited: employee voice → retention | Employee rounding use cases | — | — |
+| **Operational** | 0.5 hr/day saved per nurse; 57% complaint/grievance reduction (platform) | Vendor-cited: **30% call-light reduction** | Real-time recovery alerts | — | — |
 
-| If the hospital’s primary goal is… | Likely best fit |
+---
+
+### When each option wins (neutral)
+
+| Primary goal | Best fit |
 |---|---|
-| Standardize leader/patient/location rounding with closed-loop recovery and optional post-discharge on one platform | **CipherRounds** (+ CipherOutreach if transitions matter) |
-| Double down on PX + employee listening with AI documentation and benchmark analytics | **NRC Health** |
-| Build a full in-room engagement strategy (education, requests, entertainment) with rounding as one module | **GetWell Inpatient + Rounds+** |
-| Minimize new vendors; accept internal Epic build and staffing load | **Epic-native workflows** |
-| No capital or alignment for digital rounding this cycle | **Paper/manual** (status quo) |
+| Standardize patient + leader + location/safety rounding with closed-loop recovery; optionally combine with post-discharge on one platform | **CipherRounds** (+ CipherOutreach if transitions matter) |
+| PX/employee listening, predictive prioritization, benchmark analytics; already an NRC survey customer | **NRC Health** |
+| Full in-room engagement (education, requests, entertainment) with rounding as one module | **GetWell Inpatient + Rounds+** |
+| Minimize new vendors; willing to spend internal Epic + nursing ops capacity | **Epic-native build** |
+| No budget or alignment this cycle | **Paper/manual** |
+
+**Bottom line:** These are not interchangeable. NRC leads on **measurement, prediction, and benchmarks**. GetWell leads when **in-room engagement** is already in scope. Epic-native minimizes **vendor spend** but shifts cost to **internal build and staffing**. CipherRounds is built for **operational rounding + recovery + safety** with a path to **post-discharge on the same coordination layer**.
+
+---
+
+## Detailed notes (by vendor)
+
+### CipherRounds (CipherHealth)
+
+- **Core job:** Execute rounding — patient, leader, staff, location — and close the loop before discharge.
+- **Differentiators vs. others:** Same platform as CipherOutreach (pre-admission through post-discharge); ambient listening; safety rounding tied to HAC/VBP; near-real-time Flowsheet write-back without custom code; clinical SMEs co-design programs.
+- **Implementation (internal benchmarks):** 4–8 weeks; <25 IT hours; HL7 ADT in / ORU+MDM out; 70%+ of customers on Epic (350+ hospitals).
+- **Support:** Clinical Strategy, Solution Consulting, Implementation, CSM, Analytics, Security.
+
+### NRC Health Rounding
+
+- **Core job:** Make rounding intentional with **predictive prioritization**, **benchmark analytics**, and **employee + patient voice** in one relationship — especially if NRC already runs your HCAHPS/survey program.
+- **Differentiators vs. others:** Predictable Experience (predicted in-stay experience scores); deep historical PX context at bedside; quarterly benchmark reviews with NRC analysts; Nobl acquisition (2024) for real-time rounding; HRIS integrations for employee rounding.
+- **Tradeoffs:** Measurement and PX intelligence are the center of gravity; post-discharge **execution** (TCM calls, automated follow-up) is not the core product. Validate integration depth and timeline in SOW.
+
+### GetWell Rounds+
+
+- **Core job:** Flexible digital data collection — PX rounding, employee rounding, safety/regulatory audits, discharge data — on one configurable platform.
+- **Differentiators vs. others:** 100+ use cases; surveys-by-text/email for batch reach; unlimited users/devices; **deepest value when GetWell Inpatient is deployed** (in-room requests route into Rounds+ for recovery).
+- **Tradeoffs:** Scope creep risk — Rounds+ alone vs. Inpatient + Rounds+ is a very different project size. GetWell Navigate is a separate product for outpatient/post-discharge AI texting. No ambient listening as a headline capability.
+
+### Epic-native (build inside Epic)
+
+- **Core job:** Keep everything in the EHR; avoid incremental vendor spend.
+- **Reality check:** Epic Rover is a **clinical bedside** tool (BCMA, vitals, specimen collection) — **not** a leader/PX rounding platform. PX rounding in Epic typically means custom Flowsheets, reports, and In Basket routing built by your Epic team.
+- **Tradeoffs:** License may be “free,” but **labor is not** — Epic analyst time, workflow design, and ongoing maintenance. Passive documentation without purpose-built recovery/routing. Internal playbooks note Epic-native outreach reaches ~40% of patients vs. ~96% digital-first; data can lag 24 hours if batch-based.
+
+### Paper / manual
+
+- **Core job:** Zero software cost.
+- **Tradeoffs:** Inconsistent coverage, issues surface after discharge, no closed-loop tracking, highest documentation burden, no cross-unit analytics. Status quo bias is the main “competitor” in stalled deals.
 
 ---
 
