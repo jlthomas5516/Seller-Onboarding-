@@ -24,7 +24,9 @@ In the meantime, attached is an objective comparison of CipherRounds against the
 - Support model (who does what after go-live)
 - Resource needs (clinical, operational, and IT FTE expectations)
 
-We pulled this together from our implementation playbooks, published vendor documentation, and third-party market summaries — not from sales decks. Where a row reflects CipherHealth-specific delivery (for example, typical IT hours or clinical partnership structure), we’ve labeled it clearly. Where we could not verify a competitor claim from public sources, we’ve marked it **Unverified** rather than guess.
+It also includes a dedicated section on **CipherHealth-specific value** — clinical best practices, in-house clinical support, integration/interoperability, and the fact that **most of your data feeds are already configured**, which materially reduces the operational and IT lift relative to standing up a new vendor from scratch.
+
+We pulled this together from our implementation playbooks, published vendor documentation, and third-party market summaries — not from sales decks.
 
 If it would help your internal stakeholders, we can also walk through the comparison on a 30-minute call and tailor the “resource needs” section to your unit count and current rounding model.
 
@@ -172,6 +174,161 @@ This comparison covers **inpatient digital rounding** — structured leader/nurs
 | No budget or alignment this cycle | **Paper/manual** |
 
 **Bottom line:** These are not interchangeable. NRC leads on **measurement, prediction, and benchmarks**. GetWell leads when **in-room engagement** is already in scope. Epic-native minimizes **vendor spend** but shifts cost to **internal build and staffing**. CipherRounds is built for **operational rounding + recovery + safety** with a path to **post-discharge on the same coordination layer**.
+
+---
+
+## CipherHealth differentiated value
+
+*This section answers: “Why CipherRounds specifically — beyond a feature checklist?” Use it with Jen’s CNOs, CIO, and operational sponsors.*
+
+### Headline for internal conversations
+
+> **CipherHealth is not a rounding app — it is 15+ years of clinically validated best practices, delivered with in-house nursing leadership, on an integration footprint you have largely already built.**
+
+---
+
+### 1. Clinical best practices (not templates)
+
+| Dimension | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
+|---|---|---|---|---|---|
+| **Program origin** | ● 15+ years of scripts & escalation paths built by frontline nurses | ◐ Best-practice consulting + benchmarks | ◐ Configurable forms (100+ use cases) | ◐ Internal design | ◐ Unit-by-unit habit |
+| **HCAHPS domain mapping** | ● Built into standard round scripts | ● Analytics overlay | ◐ Form configuration | ◐ DIY | ○ |
+| **Safety program library (HAC, falls, HAPI, lines)** | ● Standardized patient + location rounding checklists | ◐ PX-weighted; safety listed | ◐ Checklist use cases | ◐ Build required | ◐ |
+| **Service recovery playbooks** | ● Route negative signal → owner in minutes; tracked start→resolution | ● Real-time alerts | ● Alert/escalation engine | ◐ Workflow build | ○ |
+| **Evidence base** | ● 1B+ encounters; outcomes tied to HCAHPS, HAI, turnover | ● Benchmark library | ◐ Workflow improvement | ○ | ○ |
+| **Continuous refinement** | ● Clinical Advisory Board + customer outcomes feed roadmap | ● Quarterly benchmark reviews | ◐ Product updates | ◐ Internal only | ○ |
+| **“What to do next” guidance** | ● Actionable analytics — not just what happened | ◐ Predictive prioritization | ◐ Dashboards | ◐ Reports | ○ |
+
+**What this means in practice**
+
+- Rounding scripts, escalation paths, and safety checklists are **clinical programs refined across hundreds of health systems** — not blank forms your nurses have to design from scratch.
+- Every round maps to a **specific HCAHPS domain or safety objective**, so leaders can tie daily work to board-level metrics (VBP, HAC Reduction Program, Leapfrog).
+- Competitors offer **configuration** or **measurement**; CipherHealth offers **proven workflows** that CNOs at peer systems (Henry Ford, Prisma, Norton, Intermountain, MD Anderson, and others on the Clinical Advisory Board) have helped shape.
+
+---
+
+### 2. Clinical support (partnership, not a services upsell)
+
+| Support element | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
+|---|---|---|---|---|---|
+| **In-house clinical leadership** | ● SVP Clinical Strategy (Joy Avery, MSN, RN) + VP Clinical Services (Donna Pritchard, DNP, FNP-BC) — both former CNO/C-suite operators | ◐ Consulting & benchmark analysts | ◐ Training & implementation | ○ Internal only | ○ |
+| **Clinical Advisory Board** | ● 9 senior nurse/PX/care-management executives at peer systems vet workflows & roadmap | ○ | ○ | ○ | ○ |
+| **Program design support** | ● Gap analysis, custom script design, escalation mapping — led by RNs/MSNs | ● Quarterly data reviews | ◐ Config assistance | ◐ Internal nursing | ○ |
+| **“Will this work for our nurses?”** | ● Bring Clinical Strategy to CNO/CMO conversations | ◐ PX consulting | ◐ Training | ◐ Internal | ○ |
+| **Post-go-live clinical stewardship** | ● CSM + annual outcomes review + Analytics tie-back | ● CS + benchmark sessions | ● CS | ○ | ○ |
+| **Safety / quality alignment** | ● CQO-ready: HAC, falls, HAPI programs built in | ◐ | ◐ | ◐ | ○ |
+
+**CipherHealth clinical teams available on deals**
+
+| Team | What they do |
+|---|---|
+| **Clinical Strategy & SMEs** | Designed the scripts and escalation paths; run gap analyses and custom program design |
+| **Clinical Advisory Board** | Peer CNO/PX leaders who validate that workflows reflect real-world nursing operations |
+| **Solution Consulting** | Workflow mapping, integration fit, tailored demos |
+| **Implementation** | Certified Epic/Cerner/Meditech go-live |
+| **CSM + Analytics** | Adoption, outcomes stewardship, HCAHPS/safety/staff metric reviews |
+
+**Objection this answers:** *“This adds to nurse workload.”* → Clinical SMEs co-design the rollout; ambient listening removes post-round documentation; customer benchmarks show ~0.5 hr/day returned per nurse and 42% burnout reduction (Norton, 30,000 leader rounds/year).
+
+---
+
+### 3. Integration & interoperability
+
+| Dimension | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper / manual |
+|---|---|---|---|---|---|
+| **EHR strategy** | ● Augments EHR as **system of action**; EHR stays system of record | ● EMR + HRIS + warehouse | ● EMR + optional GetWell product feeds | ● EHR-only | — |
+| **Epic certification** | ● Certified integration; 70%+ of customers / 350+ hospitals on Epic | ● Vendor-stated EMR integrations | ● Epic in supported EMR list | ● Native | — |
+| **Inbound feeds** | ● HL7-ADT (demographics, encounter); SFTP flat-file fallback | ● EMR integrations | ● ADT + EMR pre-population | ● Native | — |
+| **Outbound write-back** | ● HL7-ORU → discrete Epic Flowsheets (seconds); HL7-MDM for issue documentation | ● Vendor-stated | ● Interface-dependent | ● Native | — |
+| **Flowsheet configurability** | ● **No custom code** for standard programs — configurable mapping | Confirm in SOW | Interface project typical | ◐ Analyst build | — |
+| **EHR Activation Gateway** | ● Streamlines program activation & patient data movement with Epic | ○ | ○ | ○ | — |
+| **Data latency** | ● Near-real-time (seconds, not nightly batch) | Vendor-stated real-time | Real-time alerts; varies | Native chart; recovery loop separate | — |
+| **Multi-EHR support** | ● Epic, Cerner, Meditech (bidirectional) | ● EMR + HRIS + warehouse | ● 9+ EMRs listed | Single EHR | — |
+| **One-to-many integration model** | ● One integration footprint serves Outreach + Rounds + Access | ◐ | ◐ | ○ | — |
+| **Platform consolidation** | ● Single vendor, single security posture, single analytics hub | ◐ PX/HR focus | ◐ Broader if Inpatient added | ◐ | ○ |
+| **Security / compliance** | ● HITRUST CSF, SOC 2 Type II, HIPAA, TX-RAMP Level 2 | Confirm in RFP | HIPAA BAA, TLS 1.2+ | Epic org controls | — |
+
+**Interoperability in plain language**
+
+- **Inbound:** ADT tells CipherHealth who is on which unit — patients appear on rounding lists automatically.
+- **Outbound:** Round responses land as **discrete Flowsheet rows in Epic within seconds**, so nurses and leaders act from the chart, not a separate silo.
+- **What stays in CipherHealth:** Operational analytics (reach, coverage, time-to-resolution, unit trends) — set this expectation early with CIO.
+- **Why this matters vs. competitors:** Many tools store rounding data in a standalone repository. CipherHealth writes structured results **into the workflow clinicians already use**, without a custom interface build for each program.
+
+---
+
+### 4. Your integration footprint — feeds largely in place
+
+**For your organization:** Through the work already completed in this evaluation (slide-deck discovery, integration scoping, and/or existing CipherHealth connectivity), **most of the core data feeds required for CipherRounds are already configured or mapped**. Rounding is not a greenfield interface project.
+
+| Feed / capability | Typical status | Rounding impact |
+|---|---|---|
+| **HL7-ADT (patient eligibility / census)** | ● Already established or scoped | Patients auto-populate on unit rounding lists — no manual census |
+| **Epic Flowsheet outbound (HL7-ORU)** | ● Already established or mapped | Round responses visible in chart in near-real-time |
+| **Issue documentation (HL7-MDM)** | ◐ Confirm final mapping | Service-recovery notes can flow into Epic |
+| **EHR Activation Gateway** | ◐ Available if on Epic | Faster program activation; less IT re-work per new unit |
+| **Security / BAA / SSO** | ● Already in place or in progress | No new vendor security review cycle from scratch |
+
+**What is still needed (order of magnitude)**
+
+| Workstream | Owner | Lift |
+|---|---|---|
+| Rounding-specific Flowsheet row mapping | Cipher Implementation + Epic analyst | Low — mostly configuration, not custom code |
+| Round scripts & escalation paths | CipherClinical + your PX/nursing lead | Moderate — clinical design, not IT |
+| Unit champion training & pilot | Your nursing ops + Cipher CSM | Moderate — change management |
+| Net-new IT interface work | Your IT team | **Minimal** — majority of feeds already done |
+
+**Compare to alternatives**
+
+| Scenario | Typical IT lift |
+|---|---|
+| **CipherRounds at your org (feeds in place)** | **<25 hours** remaining (internal benchmark) |
+| New vendor — stand up ADT + EMR write-back from zero | 80–200+ hours |
+| Epic-native — build workflows, reports, routing | 100–300+ hours (Epic analyst queue) |
+| GetWell Inpatient + Rounds+ (if not already deployed) | Months + device + interface work |
+
+**Message for the CIO:** *“You are not buying another integration project. You are activating a clinical program on infrastructure that is largely already built.”*
+
+---
+
+### 5. Additional value (beyond rounding)
+
+| Value | CipherHealth | Competitors (typical) |
+|---|---|---|
+| **Full care continuum on one platform** | ● Pre-admission → inpatient rounding → post-discharge outreach (CipherOutreach) — one coordination layer | ◐ Rounding-only, survey-only, or in-room-only |
+| **Longitudinal patient data** | ● 1B+ encounters; 200M+ interactions tracked start→resolution; 17M documented patient saves | ◐ Siloed to PX or single workflow |
+| **Workforce extension** | ● Ambient listening + automation give nurses time back; not “another login” | ◐ Often adds documentation or survey admin |
+| **AI governance** | ● Purpose-built for healthcare; no secondary training on customer data; security-reviewed deployments | Varies — validate in RFP |
+| **Enterprise pricing model** | ● No per-message/per-call charges — programs optimized for reach, not metered usage | Varies |
+| **Outcomes accountability** | ● Published customer results across HCAHPS, readmissions, HAI, staff retention | ◐ Benchmark or workflow stories |
+| **Vendor consolidation** | ● Replace or avoid point solutions for rounding + outreach + recovery | ◐ Often requires multiple products |
+| **TCM / TEAM / HAC readiness (2026)** | ● Same platform runs CMS-aligned post-discharge programs with shared integration | ◐ Not core for NRC/GetWell rounding |
+| **Reference depth** | ● 350+ hospitals; 70%+ Epic; named outcomes (Lenox Hill, Providence, Norton, Intermountain, etc.) | Varies |
+
+**Platform proof points (marketing-approved — use with reference discipline)**
+
+| Metric | Result | Context |
+|---|---|---|
+| Patient reach (post-discharge) | 96% vs ~40% portal | Digital-first vs. MyChart-dependent |
+| IT deployment | <25 hours for new program | CipherHealth benchmark |
+| Readmission reduction | Up to 41% (Intermountain) | Outreach + coordination |
+| HCAHPS | 99th percentile key domains (Lenox Hill) | After rounding program redesign |
+| Staff turnover | 9.2% vs 15% at >90% rounding | Regional Medical Center |
+| Nurse time returned | 0.5 hr/day | Rounding workflows |
+| Complaints & grievances | 57% reduction | Platform benchmark |
+
+---
+
+### Side-by-side: “soft” factors that drive adoption
+
+| Factor | CipherRounds | NRC Health | GetWell Rounds+ | Epic-native | Paper |
+|---|---|---|---|---|---|
+| **Clinical credibility in the room** | ● CNO-grade clinical team + Advisory Board | ● PX/HR analytics credibility | ◐ Implementation/training | ◐ Internal champions only | ○ |
+| **Time to value (your org)** | ● **Weeks** — feeds largely done | Phased | Weeks–months | Months | — |
+| **Nurse adoption friction** | ● No new login; embedded workflow; ambient listening | ● Mobile-first | ● App-based | ◐ Epic workflow training | Low initially |
+| **CIO risk** | ● Certified, HITRUST; minimal net-new interfaces | Medium | Medium–high | High internal queue | None |
+| **CFO story** | ● Workforce + penalty avoidance + consolidation | ◐ Benchmark ROI | ◐ Varies by scope | ◐ “Free” license, hidden labor | None |
+| **Expand path** | ● Add units, safety programs, Outreach on same platform | ◐ Add PX modules | ◐ Add Inpatient, Navigate | ◐ Epic roadmap | — |
 
 ---
 
