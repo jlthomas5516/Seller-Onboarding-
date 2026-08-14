@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CipherHealth — ACO Activation Sell Sheet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Merriweather:ital,opsz,wght@0,18..144,400;0,18..144,500;1,18..144,400;1,18..144,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F2F1F9; --cream-alt:#E9E7F5; --cream-deep:#DEDAF0; --paper:#FFFFFF;
+  --ink:#2D2660; --ink-2:#3A3450; --ink-3:#4A4458; --ink-4:#8580A0;
+  --aubergine:#5B4FB5; --aubergine-dim:#6E63C0; --teal:#00B4A4; --chartreuse:#B5CC2E;
+  --amber:#E8A020; --hairline:#E0DCF0; --hairline-soft:#ECEAF7;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+body{margin:0; background:#d8d4e8; color:var(--ink); font-family:'Inter',system-ui,sans-serif; font-size:11.5px; line-height:1.5}
+.sheet{width:8.5in; min-height:11in; margin:20px auto; background:var(--paper); box-shadow:0 8px 40px rgba(45,38,96,.12); overflow:hidden; page-break-after:always; position:relative}
+.sheet:last-child{page-break-after:auto}
+.micro{font-size:8.5px; letter-spacing:.18em; text-transform:uppercase; font-weight:500}
+.display{font-family:'Inter',system-ui,sans-serif; letter-spacing:-.02em; line-height:1.08}
+em.brand{font-family:'Merriweather',Georgia,serif; font-style:italic; font-weight:500; color:var(--aubergine)}
+
+/* page chrome */
+.hdr{display:flex; align-items:center; justify-content:space-between; padding:22px 36px 14px}
+.logo{display:flex; align-items:center; gap:10px}
+.mark{width:24px; height:24px; border-radius:5px; background:var(--aubergine); color:#fff; display:grid; place-items:center; font-weight:600; font-size:14px}
+.logo b{font-size:15px; font-weight:600; letter-spacing:-.01em}
+.audience{font-size:9px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-4)}
+.conf{position:absolute; bottom:14px; right:36px; font-size:8px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-4)}
+.pad{padding:0 36px}
+.pad-b{padding-bottom:28px}
+
+/* page 1 */
+.hero-dark{background:var(--ink); color:var(--cream); padding:28px 36px 24px; margin-bottom:0}
+.hero-dark h1{font-size:28px; font-weight:600; margin:10px 0 14px; max-width:16ch}
+.hero-dark p{font-size:12px; color:#c9c4e8; max-width:52ch; margin:0 0 16px}
+.pills{display:flex; flex-wrap:wrap; gap:8px}
+.pill{font-size:9px; letter-spacing:.06em; text-transform:uppercase; border:1px solid rgba(255,255,255,.22); border-radius:100px; padding:6px 12px; color:#fff}
+.pill b{color:var(--chartreuse)}
+
+.reframe{padding:24px 36px 18px}
+.reframe h2{font-size:22px; font-weight:600; margin:8px 0 12px; max-width:28ch}
+.reframe p{font-size:11.5px; color:var(--ink-2); max-width:68ch; margin:0 0 16px}
+.statrow{display:grid; grid-template-columns:repeat(3,1fr); gap:0; border:1px solid var(--hairline); border-radius:12px; overflow:hidden; margin:14px 0}
+.statrow div{padding:16px 18px; border-right:1px solid var(--hairline-soft); background:var(--cream)}
+.statrow div:last-child{border-right:none}
+.statrow .v{font-size:22px; font-weight:600; color:var(--aubergine); line-height:1}
+.statrow .k{font-size:10.5px; color:var(--ink-3); margin-top:6px}
+.formula{background:var(--cream-alt); border-radius:10px; padding:14px 16px; font-size:10.5px; color:var(--ink-2); margin:12px 0 18px}
+.formula b{color:var(--ink)}
+
+.bridge{background:var(--cream); padding:20px 36px; border-top:1px solid var(--hairline-soft)}
+.bridge h3{font-size:17px; font-weight:600; margin:0 0 14px}
+.stack{display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px}
+.stack .box{background:var(--paper); border:1px solid var(--hairline); border-radius:10px; padding:14px}
+.stack .box.action{background:var(--ink); color:var(--cream); border-color:var(--ink)}
+.stack .box .lbl{font-size:8px; letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:6px}
+.stack .box.action .lbl{color:var(--chartreuse)}
+.stack .box h4{font-size:13px; font-weight:600; margin:0 0 6px}
+.stack .box p{font-size:10px; color:var(--ink-3); margin:0}
+.stack .box.action p{color:#c9c4e8}
+
+.gap-band{background:var(--ink); color:var(--cream); padding:22px 36px; display:grid; grid-template-columns:1fr 1.2fr; gap:24px; align-items:center}
+.gap-band h2{font-size:24px; font-weight:600; margin:8px 0 0}
+.gap-band p{font-size:11px; color:#c9c4e8; margin:0}
+.gap-band .close{font-size:12px; color:#fff; margin-top:10px}
+.gap-band .close b{color:var(--teal)}
+.footnote{display:flex; justify-content:space-between; padding:12px 36px 20px; font-size:9px; color:var(--ink-4)}
+.footnote span b{color:var(--aubergine)}
+
+/* page 2 */
+.lede-bar{background:var(--cream-alt); padding:16px 36px; font-size:11.5px; color:var(--ink-2); border-bottom:1px solid var(--hairline-soft)}
+.section{padding:22px 36px 10px}
+.section h2{font-size:20px; font-weight:600; margin:8px 0 10px}
+.section .intro{font-size:11px; color:var(--ink-2); max-width:68ch; margin-bottom:16px}
+.lever{display:grid; grid-template-columns:110px 1fr; gap:14px; padding:14px 0; border-top:1px solid var(--hairline-soft)}
+.lever:first-of-type{border-top:none}
+.lever .cat .micro{color:var(--aubergine-dim)}
+.lever .tag{font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--amber); margin-top:4px}
+.lever h3{font-size:13px; font-weight:600; margin:0 0 4px}
+.lever p{font-size:10.5px; color:var(--ink-2); margin:0}
+.caprow{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:8px 36px 20px}
+.cap{background:var(--cream); border:1px solid var(--hairline); border-radius:10px; padding:14px}
+.cap h4{font-size:11px; font-weight:600; margin:0 0 5px}
+.cap p{font-size:9.5px; color:var(--ink-3); margin:0}
+.banner{background:var(--aubergine); color:#fff; text-align:center; padding:12px 36px; font-size:9px; letter-spacing:.16em; text-transform:uppercase; font-weight:500}
+
+/* page 3 */
+.proof{padding:28px 36px 20px; display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:start}
+.proof .big{font-size:56px; font-weight:600; color:var(--teal); line-height:1}
+.proof h2{font-size:18px; font-weight:600; margin:0 0 6px}
+.proof .sub{font-size:10px; color:var(--ink-4); margin-top:8px}
+.trust{background:var(--cream-alt); padding:18px 36px}
+.trust h3{font-size:14px; font-weight:600; margin:0 0 8px}
+.trust p{font-size:10.5px; color:var(--ink-2); margin:0}
+.bullets{padding:16px 36px; display:grid; gap:10px}
+.bullet{display:flex; gap:10px; align-items:baseline; font-size:10.5px; color:var(--ink-2)}
+.bullet::before{content:''; width:6px; height:6px; border-radius:50%; background:var(--teal); flex:none; margin-top:4px}
+.why{background:var(--cream); padding:20px 36px; border-top:1px solid var(--hairline-soft)}
+.why h3{font-size:16px; font-weight:600; margin:8px 0 14px}
+.timeline{display:grid; gap:10px}
+.tl{display:grid; grid-template-columns:88px 1fr; gap:12px; align-items:baseline}
+.tl .dt{font-size:10px; font-weight:600; color:var(--aubergine)}
+.tl p{font-size:10.5px; color:var(--ink-2); margin:0}
+.cta{padding:22px 36px 0}
+.cta h3{font-size:18px; font-weight:600; margin:0 0 8px}
+.cta p{font-size:11px; color:var(--ink-2); max-width:52ch; margin:0 0 14px}
+.sig .name{font-size:12px; font-weight:600}
+.sig .title{font-size:10px; color:var(--ink-3)}
+.sig .contact{font-size:10px; color:var(--aubergine); margin-top:4px}
+.footer{background:var(--ink); color:#c9c4e8; padding:16px 36px 22px; margin-top:22px}
+.footer .logo-foot{display:flex; align-items:center; gap:8px; color:#fff; margin-bottom:6px}
+.footer .logo-foot b{font-size:13px}
+.footer p{font-size:8.5px; margin:0; line-height:1.45}
+
+@media print{
+  body{background:#fff}
+  .sheet{margin:0; box-shadow:none; width:100%; min-height:11in}
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="sheet">
+  <header class="hdr">
+    <div class="logo"><span class="mark">C</span><b>CipherHealth</b></div>
+    <span class="audience">For Accountable Care Leadership</span>
+  </header>
+
+  <div class="hero-dark">
+    <div class="micro" style="color:var(--teal)">The insight-to-action gap</div>
+    <h1 class="display">You carry risk on every attributed life. You earn savings on the ones you <em class="brand">actually reach</em>.</h1>
+    <p>Your benchmark is set on 100% of the panel. Your shared savings are earned on the fraction you engage and change. In a downside-risk contract, that gap isn't an operational nuisance — it's margin leaking out the back door.</p>
+    <div class="pills">
+      <span class="pill">Attribution <b>≠</b> engagement</span>
+      <span class="pill">Proven intelligence — not general-purpose AI</span>
+    </div>
+  </div>
+
+  <div class="reframe">
+    <div class="micro" style="color:var(--teal)">The reframe</div>
+    <h2 class="display">Sharper risk stratification won't move your P&amp;L. Reaching the panel will.</h2>
+    <p>Most ACOs answer a flattening savings curve by buying better analytics — a more precise list of who will cost money. But a better list doesn't change the number. In value-based care, insight you can't act on is just a more accurate way to watch savings evaporate. The constraint was never knowing who. It's reaching and changing them — at panel scale, across the affiliated and IPA lives who aren't on your EHR, in the windows that decide cost: post-discharge, rising-risk, open gaps.</p>
+
+    <div class="statrow">
+      <div><div class="v">~40–60%</div><div class="k">of attributed lives are actively engaged today. The unreached skew toward the rising-risk, non-EHR patients who decide the contract.</div></div>
+      <div><div class="v">2 levers</div><div class="k">quality score × (benchmark − spend) sets your check. Both are earned patient-by-patient — through reach.</div></div>
+      <div><div class="v">1 team</div><div class="k">closing the loop by phone, on the patients they can find, in the EHR they can see. The hardest-to-reach cost the most.</div></div>
+    </div>
+
+    <div class="formula"><b>The margin on the table:</b> annual discharges × 30-day readmit rate × reduction × cost/readmit ($13K–$16K) = retained savings — earned only on the lives you actually reach.</div>
+  </div>
+
+  <div class="bridge">
+    <h3 class="display">Insight names the risk. Action retires it.</h3>
+    <div class="stack">
+      <div class="box">
+        <div class="lbl">System of record</div>
+        <h4>Your EHR</h4>
+        <p>Epic holds the chart, the attribution, the orders.</p>
+      </div>
+      <div class="box">
+        <div class="lbl">System of insight</div>
+        <h4>Your analytics</h4>
+        <p>Your pop-health / risk platform names who will cost you.</p>
+      </div>
+      <div class="box action">
+        <div class="lbl">System of action</div>
+        <h4>CipherHealth</h4>
+        <p>Reaches those lives, closes the gap, writes the result back — and books it on the contract.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="gap-band">
+    <div>
+      <div class="micro" style="color:var(--teal)">CipherHealth is the activation layer</div>
+      <p class="close"><b>Care coordination infrastructure</b> that closes the insight-to-action gap — at panel scale, EHR-agnostic, with live clinical handoff the moment a real need surfaces.</p>
+    </div>
+    <div>
+      <h2 class="display">The gap between who is at risk and who actually got reached is where your margin lives.</h2>
+    </div>
+  </div>
+
+  <div class="footnote">
+    <span>CipherHealth · <b>Care Coordination Infrastructure</b></span>
+    <span>Confidential · Customer-facing</span>
+  </div>
+  <div class="conf">CipherHealth confidential</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="sheet">
+  <header class="hdr">
+    <div class="logo"><span class="mark">C</span><b>CipherHealth</b></div>
+    <span class="audience">ACO Activation</span>
+  </header>
+
+  <div class="lede-bar">Not a platform swap. Not another dashboard. The gap between "who's at risk" and "who actually got reached" is where your contract is won or lost.</div>
+
+  <div class="section">
+    <div class="micro" style="color:var(--teal)">How we move the contract</div>
+    <h2 class="display">We operate the reach behind both levers of your shared-savings check.</h2>
+    <p class="intro">Quality score sets your share of savings; spend against benchmark sets the pool. Every measure below is earned patient-by-patient — reached, screened, followed through. That reach is what we run — at panel scale, EHR-agnostic, including the affiliated and IPA lives your analytics can see but can't touch, in the patient's own language, with live clinical handoff the moment a real need surfaces.</p>
+
+    <div class="lever">
+      <div class="cat"><div class="micro">Readmissions</div><div class="tag">Spend lever</div></div>
+      <div><h3>All-cause &amp; unplanned admissions</h3><p>Condition-specific post-discharge pathways with real-time escalation surface the patient who's "feeling worse" before the ED does. Fewer readmissions = lower spend against benchmark = retained savings in your downside track.</p></div>
+    </div>
+    <div class="lever">
+      <div class="cat"><div class="micro">Utilization</div><div class="tag">Spend lever</div></div>
+      <div><h3>Avoidable ED &amp; admissions · days at home</h3><p>High-risk cohort management at scale puts scarce clinician time on the patients who move total cost of care — the rest are reached automatically, not dropped.</p></div>
+    </div>
+    <div class="lever">
+      <div class="cat"><div class="micro">Prevention</div><div class="tag">Quality lever</div></div>
+      <div><h3>AWV · cancer screening · BP · diabetes</h3><p>Gap-closure outreach finds patients overdue before it's urgent and drives the visit where the measure is actually met — and where care-gap capture funds the year.</p></div>
+    </div>
+    <div class="lever">
+      <div class="cat"><div class="micro">SDoH</div><div class="tag">Quality lever</div></div>
+      <div><h3>Social-driver screening &amp; closed-loop referral</h3><p>Outreach surfaces transportation, medication-affordability, and access barriers and routes them to your CHWs — HRSN screening at panel scale, tied to quality and equity, documented for the measure.</p></div>
+    </div>
+    <div class="lever">
+      <div class="cat"><div class="micro">Behavioral</div><div class="tag">Quality lever</div></div>
+      <div><h3>Depression screening &amp; follow-up</h3><p>Automated screening with built-in escalation, so no positive screen sits unactioned and the follow-up plan is documented where the measure gets credited.</p></div>
+    </div>
+    <div class="lever">
+      <div class="cat"><div class="micro">CAHPS</div><div class="tag">Quality lever</div></div>
+      <div><h3>Patient experience</h3><p>Closed-loop follow-up captured in the patient's own words and routed to the right team in real time — moving the experience domains that weight your score, not just measuring them.</p></div>
+    </div>
+  </div>
+
+  <div class="caprow">
+    <div class="cap"><h4>Panel-wide &amp; EHR-agnostic</h4><p>Reaches employed, affiliated, and IPA lives — including the ones not on your EHR that native tools can't touch.</p></div>
+    <div class="cap"><h4>Sits on your analytics</h4><p>Coexists with Lightbeam, Healthy Planet, Epic — the action layer on top of your risk model, never a rip-and-replace.</p></div>
+    <div class="cap"><h4>Measured on your contract</h4><p>Reported in gap closure, readmissions avoided, and total cost of care — not "engagement." &lt;25 IT hours to deploy.</p></div>
+  </div>
+
+  <div class="banner">Proven in accountable care</div>
+  <div class="conf">CipherHealth confidential</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="sheet">
+  <header class="hdr">
+    <div class="logo"><span class="mark">C</span><b>CipherHealth</b></div>
+    <span class="audience">ACO Activation</span>
+  </header>
+
+  <div class="proof">
+    <div class="big">16.3%</div>
+    <div>
+      <h2 class="display">Penn Medicine — an MSSP ACO health system on CipherHealth</h2>
+      <p>Readmissions reduced in a targeted high-risk population through automated post-discharge outreach.</p>
+      <p class="sub">Penn Medicine Home Care, targeted population.</p>
+    </div>
+  </div>
+
+  <div class="trust">
+    <div class="micro" style="color:var(--aubergine-dim)">Trusted across accountable care · Land &amp; expand</div>
+    <h3>If you run more than one region, there's a good chance CipherHealth is already live in one of your markets</h3>
+    <p>A working internal reference, one call away.</p>
+  </div>
+
+  <div class="bullets">
+    <div class="bullet">2.9-point lower 30-day readmissions among clinically-reached patients — 8.4% → 5.5%, across 26 provider organizations and 45,000 patients (2022–2025).</div>
+    <div class="bullet">+26% TCM billing capture, zero denials — value-based revenue most ACOs leave uncollected without activation.</div>
+    <div class="bullet">MSSP, Next Generation &amp; Enhanced-track ACO systems run CipherHealth today — peer references on request.</div>
+    <div class="bullet">15+ years of clinically-backed outreach pathways, sequenced the way your committees already work.</div>
+  </div>
+
+  <div class="why">
+    <div class="micro" style="color:var(--teal)">Why now</div>
+    <h3 class="display">The funding math just changed in your favor.</h3>
+    <div class="timeline">
+      <div class="tl"><div class="dt">CY2025 PFS</div><p>Prepaid shared savings lets Enhanced-track ACOs draw advances to fund care-coordination staffing and infrastructure — for the first time.</p></div>
+      <div class="tl"><div class="dt">12 / 31 / 2026</div><p>ACO REACH sunsets. Care-management capacity built for REACH lives needs a home in the next model.</p></div>
+      <div class="tl"><div class="dt">01 / 01 / 2027</div><p>The LEAD model begins. The teams that stand up activation capacity now carry it straight into it.</p></div>
+    </div>
+    <p style="margin:14px 0 0; font-size:11px; color:var(--ink-2)"><b>Fund the build while the funding exists</b> — and buy the reach you can't hire your way to.</p>
+  </div>
+
+  <div class="cta">
+    <h3 class="display">Let's compare notes.</h3>
+    <p>A 30-minute working session — no demo theater — on the gap between your attributed panel and the lives you're actually engaging, and what closing it is worth on this year's contract.</p>
+    <div class="sig">
+      <div class="name">Jennifer Thomas</div>
+      <div class="title">Chief Sales &amp; Marketing Officer · CipherHealth</div>
+      <div class="contact">[ your email ] · [ your direct line ]</div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="logo-foot"><span class="mark" style="width:20px;height:20px;font-size:12px">C</span><b>CipherHealth</b></div>
+    <p>Care coordination infrastructure for value-based care · Bidirectional Epic, Cerner &amp; Meditech integration · Independently attested security</p>
+  </footer>
+  <div class="conf">CipherHealth confidential</div>
+</section>
+
+</body>
+</html>
